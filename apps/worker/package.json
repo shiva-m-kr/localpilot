@@ -1,0 +1,23 @@
+{
+  "name": "@localpilot/worker",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@localpilot/config": "*",
+    "@localpilot/contracts": "*",
+    "@localpilot/domain": "*",
+    "@localpilot/db": "*",
+    "@localpilot/integrations": "*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.1"
+  }
+}

@@ -1,0 +1,2566 @@
+========================================================================================
+READ THIS FIRST
+========================================================================================
+
+LOCALPILOT: COMPLETE LOCAL SEO PLATFORM BUILD HANDOFF
+Updated 28 October 2026
+
+This is the self-contained build brief and ordered 100-prompt sequence requested
+for Antigravity. It is a planning artifact, not an implemented product.
+
+USE IN THIS ORDER
+1. Create a new project/repository for this platform.
+2. Load this entire TXT as project context. Ask the agent to save the requirements
+   in docs/plan and keep concise progress/architecture records in the repository.
+3. Execute PROMPT 001 through PROMPT 100 one at a time. Only the numbered sequence
+   in PART C is the current implementation order. Do not try all 100 at once.
+4. Require implementation evidence before marking each ticket verified.
+5. Keep blocked API actions disabled and continue independent work honestly.
+
+PART A contains the original product, architecture, UI, phased roadmap, cost
+assumptions and evidence boundaries. PART B adds local SEO intelligence,
+competitor analysis, review workflows and controlled auto replies. PART C has
+exactly 100 implementation prompts. The older shorter prompt sequence is omitted.
+
+The 27 October cost references are planning inputs, not freshly quoted purchase
+prices. Recheck prices, policies, API versions and provider approvals before use.
+The expanded intelligence/reputation scope can add 3-6 focused engineering weeks
+beyond the basic beta; external eligibility/approval delays remain separate.
+
+All product naming is provisional. Outrank's public UI was inspected; its private
+dashboard and internal systems were not. Orange dashboard details are proposed.
+Local paths/Markdown links in the embedded brief refer to the optional companion
+blueprint folder; the core written requirements below do not depend on those files.
+
+
+========================================================================================
+PART A / 01-PRODUCT-AND-RESEARCH.md
+========================================================================================
+
+# Product definition and Outrank analysis
+
+## 1. What to build
+
+LocalPilot is a multi-tenant SaaS that takes a local business from fragmented online accounts to a consistent, measurable marketing workflow. An owner supplies a URL or business details, confirms facts, connects accounts, chooses a goal and spend limit, reviews a month of planned activity, and approves an automation policy. The product then generates, schedules, publishes, checks outcomes, and proposes improvements.
+
+The main product outcome is **qualified enquiries and a maintained local presence**. Published-content counts and internal health scores are operational metrics. They must not be represented as proof of ranking improvements.
+
+Initial assumptions: India-first; English first, Hindi after quality validation; one location per starter subscription; agencies later; existing WordPress sites plus a template-based hosted site. Preserve country, currency, IANA timezone, language, address format, phone format, and tax configuration in the model from the start.
+
+The cheapest useful product is not daily AI articles plus unlimited integrations. It is one accurate business record, a useful calendar, reliable publication to a small number of channels, weekly visibility measurement, and clear owner actions when automation is blocked.
+
+## 2. What was verified about Outrank
+
+These are advertised/publicly documented capabilities, not independent validation of SEO outcomes.
+
+| Area | Public evidence | LocalPilot adaptation |
+|---|---|---|
+| Research and planning | Niche/competitor keyword discovery and calendar planning | Service × locality × intent clusters; confirmed service coverage |
+| Content | Articles, brand voice, AI images, editing and previews | Local expertise, real photos, service FAQs, seasonal offers |
+| Scheduling | Configurable publishing cadence | Separate blog, GBP, Instagram, Facebook cadence |
+| Authority | Advertised backlink placements | Citation consistency and genuine local opportunities first |
+| Team operations | Multiple sites and collaborators | Organization → business → location hierarchy |
+| AI visibility | Public marketing around citations in AI answers | Optional sampled experiments later; no guaranteed AI recommendations |
+
+Source: [Outrank public homepage](https://www.outrank.so/). Its outcome claims and testimonials are vendor claims.
+
+| Additional area | Verified detail | Build implication |
+|---|---|---|
+| Pricing | Core plan advertised at $99/month or $999/year, with 30 articles and publishing; add-ons exist | Do not copy an unlimited cost structure; use explicit local quotas |
+| CMS coverage | WordPress, Ghost, Webflow, Notion, Wix, Shopify, WordPress.com, webhook, Framer, Next.js | Start with WordPress and hosted renderer; standard adapter contract for expansion |
+| Improvements | Uses GSC to find rewrite opportunities; review or automatic republishing | Preserve external IDs, revisions, links, slugs, and owner edits |
+| Hosted blogs | Public free-blog offering with own-domain support and server-rendered content | Offer a hosted starter site; domain ownership and hosting are separate |
+| Agent API | Organization-scoped bearer keys; products, keywords and articles | Defer external agent API until internal permissions and quotas are proven |
+
+Sources: [pricing](https://www.outrank.so/pricing), [integrations](https://www.outrank.so/integrations), [improvements](https://www.outrank.so/docs/improvements), [hosted blogs](https://www.outrank.so/free-blog), [REST API](https://www.outrank.so/docs/api).
+
+### What cannot be claimed from this research
+
+- Complete private navigation, dashboard table behavior, settings, and billing flows were not inspected.
+- Outrank's database, AI vendors, queues, prompts, and infrastructure were not verified.
+- Its marketing performance claims do not establish what another product will achieve.
+- The public pages reviewed do not establish a complete native GBP/local-grid/social/citation product. Those are proposed additions here, not verified missing features across its private product.
+
+## 3. Local SEO requires a different product model
+
+Keep four measurements separate:
+
+1. **Website search performance:** GSC clicks, impressions, CTR, average position by available query/page/device/country. This is observed search analytics, not an exact coordinate-based local rank.
+2. **Google Maps visibility:** a sampled rank for a keyword at a defined coordinate, language, device, time, and result depth. There is no single universal business rank.
+3. **Business Profile performance:** the metrics exposed by the current GBP Performance API. A website click or call-button interaction is not automatically a verified lead or completed call.
+4. **Conversions:** hosted-form enquiries, owner-confirmed leads, and optionally analytics events. Do not add clicks, directions, and enquiries into a misleading total.
+
+Google describes local ranking through relevance, distance, and prominence/popularity; a product cannot purchase or guarantee a better local rank. Show the factors the software can influence and the measurements it actually has. [Google local ranking guidance](https://support.google.com/business/answer/7091?hl=en).
+
+## 4. Automation feasibility and boundaries
+
+| Task | Practical automation | Boundary and product behavior |
+|---|---|---|
+| Import business facts | Crawl authorized public site and import user data | Owner confirms conflicts before facts become authoritative |
+| Build website | Generate structured sections from confirmed facts | Owner supplies domain/DNS access and publishes first version |
+| Connect GBP | OAuth + list authorized locations | API project approval, owner access, and eligibility required |
+| Create/verify GBP | Guided setup and supported API steps where available | Owner action required; no automatic bypass of verification |
+| GBP posts | Queue supported post types for eligible locations | Respect category restrictions, express consent, API availability |
+| GBP identity edits | Generate before/after proposal | Explicit approval per sensitive change; no automatic name stuffing |
+| GBP review replies | Draft from current authorized data | Consent required; negative/sensitive replies always reviewed |
+| Instagram publishing | Supported professional-account media via approved integration | Personal accounts unsupported; conversion/reconnect guidance |
+| Facebook publishing | Authorized business Pages | Personal-profile posting is outside the scope |
+| Blog publishing | WordPress connector or hosted renderer | CMS permissions and ownership required |
+| robots.txt fixes | Full control on hosted sites; signed plugin support on WordPress | External CMS may only allow recommendations or export |
+| Citation submissions | Directory API/partner where available; prepared submission packets elsewhere | Directory ownership, OTP, moderation, and payment can need owner work |
+| Rankings | Paid SERP provider and geo-grid sampling | Meter usage; disclose freshness, depth, failed points |
+| Indexing | Sitemap, internal linking, indexing diagnostics | No guaranteed Google inclusion or instant index button |
+| AI visibility | Repeatable sampled prompts through named providers | API responses are not identical to consumer app recommendations |
+
+GBP API access is an early launch dependency: Google's current prerequisites include an active, verified profile managed for 60+ days and a representing website. Start the access request before building the whole integration. [GBP prerequisites](https://developers.google.com/my-business/content/prereqs).
+
+GBP-specific consent, storage and downstream access rules shape implementation: do not expose the platform's Google project as a generic scripting proxy; preserve specific express consent; make disconnection easy; build a source-specific retention policy. Treat ambiguity about recurring action consent or data retention as a release gate for that feature. [GBP API policies](https://developers.google.com/my-business/content/policies).
+
+Instagram has distinct Instagram Login and Facebook Login products. The Facebook Login route requires a linked Page; the Instagram Login route must be validated separately. Select one route per adapter and never mix its scope names or tokens. Public SaaS access depends on the permissions approved for that app. [Meta-maintained Instagram collection](https://www.postman.com/meta/instagram/documentation/6yqw8pt/instagram-api). Direct Meta documentation was rate-limited during research, so exact permission/version checks remain a Phase 0 task.
+
+## 5. Product modules and requirements
+
+### 5.1 Business setup and source of truth
+
+Required fields: legal/display business name, category, services, country, public or hidden address mode, service area, phone, website, hours, timezone, booking/contact destination, owner contact. Optional fields: pricing bands, credentials, team, languages, brand voice, approved offers, real photos, service exclusions and prohibited claims.
+
+Each fact needs a provenance record: source type, URL or user input, captured time, confidence, verification status, owner confirmation time, and applicable location. Example conflict: site says 9am opening, GBP says 10am. Show both and ask the owner to resolve it; do not silently overwrite GBP.
+
+Maintain versions. A new phone number invalidates future content variants containing the old number. Content already published is placed in a reviewable correction queue. A business with a hidden service-area address must not have its private address inserted into generated pages or public structured data.
+
+### 5.2 Onboarding flow
+
+1. Google/email sign-in and organization creation.
+2. Choose existing website, existing GBP, or starting from scratch.
+3. Import optional website details and connect accounts independently.
+4. Select one business/location; avoid accidentally connecting every location in an account.
+5. Confirm facts, photos, target area, services, voice and conversion goal.
+6. Show initial site audit and a rank scan estimate before spending credits.
+7. Generate a 30-day proposed plan; let the owner remove topics and offers.
+8. Configure review-first mode; offer channel-specific automation after first successful publication.
+9. Start baseline jobs asynchronously and show resumable progress.
+
+Each integration can be skipped. A GBP-only business can still use planning and GBP publication while creating a website. A website-only business can use blogs and GSC. Show which capabilities are available, blocked, unapproved, disconnected, and unsupported.
+
+Activation target: confirmed facts, one connected or hosted destination, baseline requested, one content item approved, and automation policy selected. Measure actual time; target under 15 minutes excluding verification/DNS wait.
+
+### 5.3 Local keyword research and strategy
+
+Inputs: services, accepted locations, seasonality, customer questions, existing pages, actual GSC queries, and measured competitor samples. Distinguish provider-supplied volume from AI-suggested topics. Never invent volume or difficulty values.
+
+Cluster by intent: immediate service demand, service comparison, price explanation, maintenance/advice, local proof, and booking FAQs. Map each cluster to an existing or proposed canonical URL. Detect cannibalization before creating a new blog or service page.
+
+Use a transparent prioritization heuristic: relevance 35%, conversion fit 25%, current visibility gap 20%, competition opportunity 10%, seasonality 10%. This is an internal planning score, not a Google metric. Label missing inputs and renormalize only after explaining which fields are excluded.
+
+Initial cadence: 4–8 useful blogs/month and 8–12 campaign ideas; derive channel variants from those ideas plus genuine business updates. Adjust to the business; do not generate 30 thin articles merely to fill dates.
+
+### 5.4 Content studio
+
+Pipeline: brief → outline → draft → facts/claims validation → assets → channel variants → deterministic checks → review/approval → scheduled publication → reconciliation.
+
+Editor must support headings, links, images, alt text, lists, excerpts, title/meta, canonical URL, slug, channel preview, revision history and restore. An AI edit creates a new revision and shows a diff. Publishing freezes a revision; later edits invalidate its approval until reviewed or covered by an eligible policy.
+
+Content model: one campaign idea can produce a blog, a concise GBP update, an Instagram image/caption, and a Facebook post. Each is independently editable and independently succeeds/fails. A campaign does not need a blog to exist. For a blog-derived campaign, wait for the verified published URL before finalizing link variants.
+
+Quality rules: grounded service availability and hours; no invented local projects, reviews, staff or certifications; no fabricated pricing; no unsupported superiority claims; no fake before/after images. AI-generated graphics can illustrate a topic, while real-business portfolio posts use approved real photos.
+
+### 5.5 Calendar and automation center
+
+Month/week/list calendar; filters for location, channel, status and owner. Drag/reschedule changes due time and recalculates approvals if payload changes. Local timezone shown prominently. Include blackout dates, holidays, quiet periods, duplicate-topic detection, collision checks, quotas, and an immediate pause button.
+
+Automation policies are versioned per location/channel/action. Example: publish approved seasonal maintenance tips twice weekly, at most eight monthly, using approved services/photos and a set spend cap. Policy excludes offers with new prices and sensitive claims. Record scope, cadence, allowed categories, approving user, consent text, timestamps and revocation.
+
+Do not treat one generic signup checkbox as permission for all account edits. Default recurring GBP behavior to review until the integration owner verifies that the implemented consent flow meets Google's current requirements.
+
+### 5.6 Rankings and competitors
+
+Start with five keywords, a 3×3 grid, weekly scans, top-20 display depth, and provider configuration verified in a technical spike. A point stores coordinate, request parameters, status, observed rank or not-found-within-depth, timestamp and source.
+
+Competitors are recognized by stable identifiers where provided, rather than name alone. Owner confirms ambiguous target matches. Keep business listings from competitor/SERP providers separated from owner-authorized GBP account data.
+
+Show grid, top-3 coverage, per-keyword history, and competitor share across the same successful points. Definitions and censoring are in the architecture document. Do not compare scans with different grid footprints as if they were equivalent.
+
+### 5.7 Technical website SEO
+
+Audit HTML status, indexability, canonical links, robots, sitemap contents, title/meta, headings, broken links, internal links, mobile usability, structured data, image size, and performance samples. An internal score must have inspectable weighted checks, not an unexplained AI number.
+
+Hosted sites can receive validated automatic fixes within policy. External sites receive a patch proposal, plugin-supported change, or manual instructions. Preview → approval → snapshot → publish → verify → rollback is mandatory for robots, redirects, canonical and site-wide indexing changes.
+
+robots.txt controls crawler access; it is not a reliable removal mechanism or security boundary. Google does not support `noindex` inside robots.txt. Use supported tags/headers and allow crawlers to read them where appropriate. [robots guidance](https://developers.google.com/search/docs/crawling-indexing/robots/intro), [noindex guidance](https://developers.google.com/search/docs/crawling-indexing/block-indexing).
+
+Ordinary blogs/service pages should use sitemaps and useful internal links. Google's Indexing API is restricted to supported job-posting/live-stream pages. [Indexing API scope](https://developers.google.com/search/apis/indexing-api/v3/using-api).
+
+### 5.8 Website creation
+
+Three templates initially: service professional, appointment business, and local storefront. Structured blocks: hero, services, service detail, about, team, gallery, verified testimonials, FAQs, contact, hours, location/service area, booking link, blog, privacy/contact disclosures.
+
+Owner can edit text, reorder permitted blocks, choose approved imagery and theme, and preview mobile. Hosting supports platform subdomain first, then verified custom domain and managed HTTPS. A domain is bought from a registrar; 'custom domain included' means connection support unless domain registration is explicitly sold.
+
+Avoid a freeform page builder, ecommerce, complex booking engine, or arbitrary tenant JavaScript in the first release. Link existing booking tools. Contact forms need abuse limits, honeypots, optional challenge, delivery status and lead export.
+
+### 5.9 Citations and reputation
+
+Separate a citation (business listing/name-address-phone mention) from a backlink and from an AI citation. Use an authoritative NAP record, country/category-specific directory catalog, claimed status, field comparison, evidence URL, last checked time and owner task.
+
+Statuses: discovered → mismatch/missing → prepared → owner verification → submitted → live verified → update required/rejected. Submitted never means live. Verification checks business identity and fields, with uncertain matches assigned for review.
+
+Begin with 10–20 relevant directories for the target country/vertical, not '100 guaranteed submissions'. Each directory records supported method, permitted automation, fee, credentials/ownership requirements, and update/delete process. Directory APIs or a fulfillment partner come later; do not build CAPTCHA bypasses.
+
+Review features: unified current inbox, AI drafts, owner approval, reply status, neutral review-request link/QR, opt-out handling. Do not generate customer reviews or selectively request reviews only from happy customers. Customer outreach by email/SMS requires a separate product consent and legal review for the launch market.
+
+### 5.10 Reporting, billing, and agency expansion
+
+Owner dashboard shows completed work, pending actions, actual measured visibility, enquiries, and cost/usage. Reports compare matched periods, use source-specific dates, show missing data, and distinguish correlation from attribution.
+
+Pricing is per active location with included quotas. Billing includes subscription state, grace period, credit ledger, prepaid overages, invoices and cancellation. Cancellation pauses future paid actions, preserves agreed read/export access, and does not delete an owner website without a clear hosting policy and notice.
+
+Agency release adds location groups, delegated roles, approval ownership, white-label report styling, bulk actions with per-location results, and account isolation. The tenancy model supports this from day one; the agency interface is deferred.
+
+## 6. Priorities
+
+| Release | Include |
+|---|---|
+| Prototype | Orange UI, onboarding, dashboard, calendar, editor, ranking fixtures; clearly labeled demo data |
+| Private alpha | Real auth, facts, WordPress publication, durable jobs, generation, basic metering, internal adapter tests |
+| Paid beta | Hosted sites, real rankings, GSC, approved GBP/Meta capabilities, audit, basic citations, billing, recovery and support tools |
+| Growth | Citation partner, review workflows, content refreshes, multilingual validation, more templates and CMS adapters |
+| Agency | Multi-location bulk workflows, branded reports, advanced roles and cost allocation |
+| Optional later | Sampled AI visibility, free tools builder, video, custom agent API |
+
+Do not recreate a backlink exchange as a launch shortcut. Prioritize accurate listings, business relationships and useful local resources. Google's spam rules cover link manipulation, doorway pages and low-value scaled content. [Search spam policies](https://developers.google.com/search/docs/essentials/spam-policies).
+
+## 7. Success measurements
+
+Track activation rate, time to first verified publish, integration success/reconnect rates, percentage of jobs completed without owner repair, review workload, content approval rate, per-location variable cost, support time, retained paid locations and owner-confirmed enquiries.
+
+Suggested beta gates: 10 pilot locations, 3 business categories tested, 2 weeks of scheduled publication with no duplicate external posts, all tenant-isolation tests passing, successful backup restoration, understandable failure states, and demonstrated owner value. Ranking growth is observed over appropriate periods; never use it as a guaranteed engineering acceptance condition.
+
+
+========================================================================================
+PART A / 02-ARCHITECTURE.md
+========================================================================================
+
+# Architecture and engineering specification
+
+Everything below is a proposed architecture for LocalPilot, not a claim about Outrank's implementation.
+
+## 1. System structure
+
+Use a modular monolith with independently running web and worker processes. One repository, one migration history, one shared contract library. Split services only when measured workloads or team ownership justify it.
+
+```mermaid
+flowchart LR
+  Owner[Owner / agency browser] --> Web[Next.js application]
+  Visitor[Business website visitor] --> Site[Hosted site renderer]
+  Web --> Auth[Managed authentication]
+  Web --> DB[(PostgreSQL)]
+  Web --> Storage[Object storage]
+  Site --> DB
+  Site --> Storage
+  DB --> Jobs[Durable jobs / outbox]
+  Jobs --> Worker[Node worker]
+  Worker --> AI[Gemini adapter]
+  Worker --> Rank[SERP provider adapter]
+  Worker --> CMS[WordPress / hosted publisher]
+  Worker --> GBP[GBP APIs]
+  Worker --> Meta[Instagram / Facebook APIs]
+  Worker --> DB
+  Worker --> Storage
+  Providers[Provider webhooks] --> Inbox[Verified webhook inbox]
+  Inbox --> DB
+```
+
+### Selected stack
+
+| Layer | Initial choice | Reason / constraint |
+|---|---|---|
+| Language | TypeScript throughout | Shared types and fewer AI-generated integration mismatches |
+| Web | Current stable supported Next.js + React | SSR marketing, dashboard and hosted pages in one codebase |
+| UI | Tailwind, accessible Radix/shadcn-style primitives, Lucide | Fast composition; theme through centralized tokens |
+| Client state | TanStack Query for remote jobs/data; local state for forms | Avoid a global store for every API response |
+| Forms/contracts | React Hook Form + Zod | Shared validation; explicit server-side authorization |
+| Data/auth | Supabase PostgreSQL/Auth initially | Managed identity, relational data and backup options |
+| ORM | Drizzle; SQL migrations for constraints/RLS | Transparent SQL and low worker overhead |
+| Queue | pg-boss or an equivalently proven PostgreSQL job library | No Redis bill at launch; separate job schema and least-privilege role |
+| Editor | TipTap with restricted extensions | Structured content, revisions, safe renderers |
+| Storage | S3-compatible R2 | Media, generated assets, audit artifacts with source-specific retention |
+| Analytics UI | Recharts or equivalent; tables before exotic charts | Owner-friendly charts; accessible tabular alternatives |
+| Maps | Grid-only visualization first; MapLibre with licensed tile source later | Ranking API and basemap licensing are separate costs |
+| Hosting | Containerized web/worker on a small VM | Long-running work and scheduling fit conventional workers |
+| Tests | Vitest, integration DB tests, Playwright E2E | Focus on real failure and permission boundaries |
+
+At Phase 0, pin exact compatible versions and commit lockfiles. Verify queue-library PostgreSQL requirements and privileges against the managed database; do not discover this after building jobs around an unsupported configuration. Use a supported direct/session connection for long-running workers, not a transaction pooler that breaks library assumptions.
+
+Cheapest cash variant: PostgreSQL and authentication hosting can be self-managed, but do not write a custom identity system. Use a maintained auth library with secure session defaults. The recommended route spends more on managed identity/database to reduce launch risk and maintenance.
+
+### Repository layout
+
+```text
+apps/
+  web/                   # marketing, dashboard, HTTP APIs, hosted renderer
+  worker/                # scheduled and queued jobs
+packages/
+  domain/                # business rules, authorization, state transitions
+  db/                    # schema, migrations, query helpers, RLS
+  contracts/             # request/response schemas and event payload versions
+  integrations/          # google, meta, wordpress, dataforseo adapters
+  ai/                    # prompts, providers, generation and evaluation
+  ui/                    # tokens, components, typography
+  site-templates/        # versioned business-site blocks and renderers
+  observability/         # logger, correlation IDs, metrics
+  config/                # typed environment and feature flags
+docs/
+  plan/ adr/ runbooks/ integration-contracts/
+tests/
+  fixtures/ integration/ e2e/ evaluations/
+scripts/
+  imagegen.mjs seed-demo.ts reconcile-jobs.ts
+infra/
+  compose.yaml proxy/ backup/ deploy/
+```
+
+If this layout slows initial work, keep the same module boundaries inside one app and extract packages later. Never import UI code into workers or provider SDKs into domain rules.
+
+## 2. Tenant model and authorization
+
+Organization owns membership and billing. Business owns shared branding and facts. Location owns local facts, profiles, keyword tracking, campaigns and quotas. A single-location business still gets a location record. Every tenant-owned object has `organization_id`; location-bound data also has `location_id`.
+
+Roles: owner (billing, deletion, all permissions), admin (business/integrations/policies), editor (draft and submit), approver (approve scoped content), analyst (read/report), billing manager (financial access), platform operator (separate internal capability).
+
+Permission checks are capabilities plus resource scope, not just role strings. Example: `content:approve` for location A does not grant approval at B. Membership is checked server-side against the authenticated user. Ignore any organization ID supplied as proof of access by the browser.
+
+Use RLS for client-accessible data and tenant-safe server repositories. Use composite foreign keys or equivalent validated constraints to prevent linking a campaign from one organization to another organization's location. Public site read access is limited to published projections, never draft tables.
+
+Workers use an internal role but require explicit organization/location context for each job. Do not run arbitrary user-selected SQL through privileged connections. Cache keys, job keys, object paths and logs include tenant scope. Automated cross-tenant negative tests cover reads, writes, exports, signed URLs and background jobs.
+
+## 3. Data schema blueprint
+
+Use UUID identifiers, `timestamptz`, UTC instants, immutable creation time, and updated/version fields. Money uses integer minor units plus currency; provider usage uses decimal quantities and price snapshots. Avoid floating-point financial calculations.
+
+| Tables | Essential fields and behavior |
+|---|---|
+| organizations, memberships | Name, plan, user role, membership scope and status |
+| businesses, locations | Country, timezone, category, address visibility, owner-confirmed identity |
+| business_facts, fact_sources, fact_revisions | Typed value, location override, source, confidence, confirmation, validity period |
+| brand_profiles, brand_assets | Voice, colors, approved logo/photo references, usage rights |
+| integrations, integration_assets | Provider, auth route, account/page/location IDs, selected assets, capability flags |
+| integration_secrets | Encrypted tokens, key version, expiry; inaccessible to browser |
+| consent_policies, approval_events | Action/channel/location scope, revision hash, actor, policy version, revocation |
+| keywords, keyword_clusters, keyword_targets | Query, locale, service, intent, provider metrics with timestamps, canonical page |
+| content_plans, campaigns | Period, goal, idea, topic cluster, location, approval policy |
+| content_items, content_revisions | Type, structured content, facts version, prompt/model version, status, payload hash |
+| channel_variants | Campaign, destination, caption/media/link, immutable approved revision |
+| schedules, publications, publication_attempts | Due time, timezone rule, external ID/URL, provider state, retries, reconciliation |
+| assets, asset_derivatives | Source rights, prompt/model, checksum, dimensions, MIME, crop, retention |
+| sites, domains, pages, page_revisions | Template version, sections, verified host, preview/published revisions |
+| forms, enquiries | Validated submission, spam state, delivery state, consent fields, retention |
+| crawl_runs, crawled_pages, audit_issues, fix_proposals | URL snapshot, finding, severity, diff, approval, verification and rollback |
+| rank_configs, rank_runs, rank_points, rank_observations | Grid/config version, provider task, coordinate, depth, identity, result state |
+| search_console_metrics | Property, source date, dimensions, impressions/clicks/position; source terms apply |
+| provider_cache_records | Source class, collected/expires timestamps, permitted purpose and deletion job |
+| directory_catalog, citations, citation_checks, submission_tasks | Directory rules, identity, NAP diff, evidence and workflow state |
+| review_work_items | Current source reference and TTL-bound content; persistent owner-authored drafts separately |
+| subscriptions, entitlements, credit_ledger | Provider billing ID, allowance, reservations, charges, refunds, invoice references |
+| jobs, outbox_events, webhook_events | Versioned payload, idempotency key, lease, attempt, due time |
+| notifications, audit_events | Owner action, severity, actor/action metadata; exclude copied provider content where restricted |
+
+### Important uniqueness and indexing
+
+- Membership unique on organization/user.
+- Integration asset unique on organization/provider/external asset ID.
+- Domain host globally unique among active claims; domain ownership must be verified before routing.
+- Content revision unique on content item/revision number.
+- Publication unique on variant revision/destination/scheduled occurrence.
+- Webhook event unique on provider/event ID, with payload digest fallback where necessary.
+- Credit ledger operation unique on organization/idempotency key/operation type.
+- Rank point unique on run/coordinate/keyword/device/locale.
+- Index job state/due time; content tenant/location/status/date; rank location/keyword/time; audit tenant/time.
+- Never use a soft-delete flag as an excuse to retain provider content beyond source terms.
+
+### Retention is source-specific
+
+Do not apply a universal 12-month retention rule to Google/provider data. The current GBP API policy limits temporary storage of API content and restricts manipulation/aggregation. Separate owner-entered facts, owner-authored content, GSC records, paid SERP data, and GBP API content into different retention classes. Default GBP content expiry to at most 30 calendar days, including derived copies and operational logs where applicable; confirm the intended reporting use before shipping persistent GBP history. Do not persist lifetime review text or derived long-term GBP trend aggregates without a permitted basis. Backups containing restricted data need corresponding expiry controls; restoring a backup must replay deletion/expiry records before serving data.
+
+Source: [GBP storage and API policies](https://developers.google.com/my-business/content/policies). Assign an engineering owner to resolve permitted historical reporting and backup handling with the provider; gate affected features until resolved.
+
+## 4. Job execution and publication correctness
+
+### Content state
+
+`idea → brief_ready → generating → draft → checks_failed | needs_review → approved → scheduled → publishing → published`
+
+Additional states: `generation_failed`, `cancelled`, `superseded`. Channel variants and publications have their own states. One failed social destination does not roll back a successful blog.
+
+### Execution sequence
+
+1. Authorize the action and check entitlement.
+2. In one DB transaction, create the command, reserve a bounded credit amount, and write an outbox event.
+3. Dispatcher enqueues the outbox event with a stable unique job ID; replay is safe.
+4. Worker leases the job, reloads current resource state, and checks consent, cancellation, pause, facts version and available token capability.
+5. Generate or publish using a provider adapter; persist each meaningful checkpoint.
+6. Reconcile result using external IDs or a safe provider-supported lookup.
+7. Finalize usage, release unused reservation, update state and notify if actionable.
+
+Design for **at-least-once jobs**. Do not promise exactly-once external side effects. Providers can time out after accepting a post. Mark ambiguous attempts `unknown_outcome`, reconcile first, and never blindly repost. If external lookup cannot resolve it, put it in owner/operator review.
+
+Retry transient network/429/5xx failures with capped exponential backoff and jitter; obey provider retry headers. Authentication/permission errors switch to reconnect/approval states. Validation errors go to repair. Example policy: 1m, 5m, 20m, 1h, 4h, then dead-letter; adapter-specific limits override. A job can be cancelled between steps, but already accepted external writes require a separate compensating action.
+
+An approval binds the exact payload revision, facts version, destination and policy. Before dispatch, a revision/hash mismatch blocks publication. Lock or compare-and-swap the scheduled occurrence so two workers cannot create separate active publication attempts.
+
+### Scheduling
+
+Store user-intended local schedule, IANA timezone, recurrence rule, resolved UTC occurrence and schedule revision. Resolve future occurrences explicitly around DST gaps/duplicates. India has no seasonal DST, but the product model supports other countries. Generate occurrences ahead, select due jobs every minute, and recover missed runs after worker downtime. Mark overdue items and apply an explicit catch-up policy; do not dump a week's social posts at once.
+
+### Queue lanes and fairness
+
+Priorities: due publication, token refresh, reconciliation, draft generation, rank scans, audits, maintenance. Apply per-provider and per-tenant concurrency so one agency cannot exhaust the queue. Initial conservative worker concurrency: 2 AI calls, 1 crawl domain at a time, 2 publication operations per provider account; tune with measurements. Run browser-based audits in a capped separate process to avoid exhausting web memory.
+
+## 5. Provider adapter contracts
+
+```ts
+type Capability = {
+  action: string;
+  supported: boolean;
+  reason?: string;
+  checkedAt: string;
+};
+
+interface PublishingAdapter {
+  capabilities(connectionId: string): Promise<Capability[]>;
+  validate(payload: unknown): Promise<{ valid: boolean; issues: string[] }>;
+  publish(command: {
+    publicationId: string;
+    approvedRevisionId: string;
+    connectionId: string;
+  }): Promise<{
+    state: "accepted" | "published" | "pending" | "unknown_outcome";
+    externalId?: string;
+    externalUrl?: string;
+  }>;
+  reconcile(publicationId: string): Promise<unknown>;
+}
+```
+
+The adapter loads server-side payload and credentials; browsers never send arbitrary provider tokens or external target IDs as authority. Keep capabilities by action and media type; account connected does not imply every publish format is allowed.
+
+### Google Business Profile
+
+Use approved project, OAuth and explicit location selection. Separate account management, business information, performance, posts/reviews and verification surfaces; they do not all share one version/base URL. Verify currently supported operations in a spike. Do not assume historical endpoint examples still work.
+
+Record scopes, selected locations and last capability check. Before profile edits show a field diff and obtain appropriate consent. Never revert Google edits automatically. No generic developer endpoint that forwards arbitrary GBP calls through the platform's credentials. An owner can disconnect and revoke future actions immediately; complete provider disassociation according to policy.
+
+### Meta
+
+Separate Instagram Login tokens/scopes from Facebook Login flows. Facebook Page publishing uses selected authorized Pages. Instagram requires eligible professional accounts. Implement media validation, upload/container creation, readiness polling, publish, and external-ID reconciliation. Stage publicly retrievable media only for the necessary provider fetch window; preview assets remain private. Tokens can be revoked without expiry, so handle auth errors, not just dates. Version the Graph API configuration and track deprecation dates.
+
+### WordPress
+
+Fast path: HTTPS REST API with owner-created application password stored encrypted. Validate user capability and target site identity. Upload media, create/update posts, preserve external post ID and verify the resulting URL. Standard WordPress REST publishing does not guarantee edits to SEO-plugin metadata or root robots.txt; add a narrowly scoped signed companion plugin later for supported technical fixes. Do not request administrator passwords.
+
+Companion plugin, if built: signed timestamped commands, rotating shared secret, allowlisted actions, replay prevention, exact capability checks, diagnostics, version negotiation, backup/diff/restore and uninstall cleanup. Never implement arbitrary PHP execution or filesystem writes.
+
+### Hosted sites
+
+Render structured, sanitized content through trusted templates. Tenant preview requires signed auth and `noindex`, but also actual access control. Public published pages use tenant-aware caches keyed by verified host/site/revision. Reject unknown hosts; never trust raw forwarded-host headers. Domain claim → DNS ownership check → route allocation → TLS issuance → health check → active. DNS/TLS failures are visible recoverable states. Prevent dangling custom-domain takeovers on cancellation and reassignment.
+
+### Ranking provider
+
+Validate geocoordinate behavior, result identity, depth, language/device parameters and costs with a sample before building a map. Keep queued task IDs; poll with bounds or validate callback destinations. Some provider task errors arrive inside a successful HTTP response; inspect task-level status. Treat failed/no-results/not-found distinctly.
+
+## 6. Ranking definitions
+
+Recommended default display depth: 20; record actual provider depth separately if it returns 100. Match target by reliable provider identifiers, then confirmed URL/address fallbacks. Name similarity alone cannot establish identity.
+
+For a scan with N successfully observed points:
+
+- Top-3 coverage = points ranked 1–3 / N × 100.
+- Found-point average rank = sum of observed ranks / found points; always display found-point count.
+- Optional capped rank = use 21 for not found within top 20, clearly labeled as a calculated score, never raw rank.
+- Error points are excluded from rank metrics and shown as missing; zero successful points produces 'scan unavailable', not 0% visibility.
+- Top-3 share among tracked businesses = each tracked business's top-3 appearances divided by all tracked appearances, with definition visible. It is not total market share.
+- Compare identical keyword, grid/config version, depth, device and locale; otherwise explain incompatibility.
+
+Each rank run stores configuration hash, successful/failed points and source timestamp. A lower numerical rank is improvement; a rank of 0 is invalid. A 3×3 grid is a geographic sample, not coverage of all searches in a city.
+
+## 7. AI architecture and quality controls
+
+Use an internal `TextGenerator` and `ImageGenerator` provider interface with configuration aliases (`text_economy`, `text_quality`, `image_economy`). Persist actual provider/model version. No uncontrolled autonomous agent loop is needed for scheduled publication.
+
+Retrieve confirmed business facts and selected source excerpts. Start with PostgreSQL full-text retrieval and structured fact lookup; use embeddings only after a measured retrieval problem. A vector database is unnecessary for ten service pages per business.
+
+Prompts return validated schemas: brief, outline, article blocks, channel variants and a claims manifest. Each business-specific claim references a fact ID or supporting source. Deterministic checks verify names, NAP, hours, links, required disclosures, forbidden claims, media sizes, duplicate topics, unsafe HTML and quota. AI critique adds a signal; it is not proof of factual accuracy.
+
+Keep web pages and user uploads as untrusted content. Extracted text cannot grant tool permissions, change prompts, access other tenants, or authorize account writes. The generator has no direct publish credentials. Limit retrieval size, output length, tool use and attempts.
+
+Evaluation dataset: at least 30 examples across chosen categories, including hidden address, price absent, closed days, multilingual names, misleading source text, conflicting hours, and negative review sensitivity. Score factual correctness, prohibited-claim avoidance, usefulness, repetition, tone, cost and approval rate. Upgrade the model for complex content only when evaluation data warrants it.
+
+## 8. HTTP contracts and client behavior
+
+Use REST route handlers with generated or shared schema definitions. Return commands asynchronously with `202 {jobId, resourceId, statusUrl}`. Poll at a modest interval, pause in background tabs, and back off; realtime infrastructure is optional.
+
+Suggested routes:
+
+```text
+POST /api/onboarding/import
+GET/PATCH /api/locations/:id/facts
+POST /api/integrations/:provider/connect
+GET /api/integrations/:id/capabilities
+POST /api/integrations/:id/disconnect
+POST /api/locations/:id/plans
+POST /api/content/:id/generate
+POST /api/content/:id/revisions
+POST /api/content/:id/approve
+POST /api/variants/:id/schedule
+POST /api/publications/:id/cancel
+POST /api/locations/:id/rank-runs/estimate
+POST /api/locations/:id/rank-runs
+POST /api/sites/:id/publish
+POST /api/audits/:id/fix-proposals
+POST /api/fix-proposals/:id/approve
+GET /api/usage
+GET /api/jobs/:id
+POST /api/webhooks/:provider
+```
+
+Every mutation validates tenant authorization, version, entitlement and idempotency key as applicable. Return standardized error codes such as `RECONNECT_REQUIRED`, `APPROVAL_REQUIRED`, `QUOTA_EXCEEDED`, `REVISION_CONFLICT`, `PROVIDER_PENDING`, `UNSUPPORTED_ACTION`. Owner-facing messages explain next steps without leaking provider secrets.
+
+## 9. Security, privacy and abuse controls
+
+- Secure HttpOnly session cookies; CSRF protection for cookie-authenticated mutations; OAuth state and PKCE where supported.
+- Envelope encryption for refresh/access tokens; secrets outside source control; key version and tested rotation.
+- Verify webhook signatures against raw bodies; deduplicate and durably acknowledge before work.
+- Crawl/import URLs must block loopback/private/link-local/cloud-metadata addresses and unsafe schemes, revalidate redirects/DNS, cap response sizes/time, and prevent DNS rebinding. Disable arbitrary authenticated crawling.
+- Sanitize rich content and SVG; verify uploads by MIME/signature, size and image decoding; strip unnecessary metadata.
+- Rate limit login, imports, preview links, forms, exports and generation. Use storage quotas and per-tenant spend caps.
+- No credentials in frontend env vars, logs, AI prompts, analytics or user exports.
+- Owner deletion/export/disconnect workflow; audit privileged access; separate operator role; require reason for support access.
+- Source-specific deletion cascades across caches, derivative data, object storage and backups according to applicable terms.
+- Jurisdiction-specific privacy, billing and messaging review before public launch. This blueprint is not a legal determination.
+
+## 10. Deployment, operations and scaling
+
+Start with production and staging environments; isolated database/auth projects and provider test assets where possible. Develop on local containers. Use CI to run lint/types, domain tests, DB migrations and critical E2E; build containers in CI so a small production VM does not compile the app.
+
+Deploy versioned images behind Caddy/Nginx with HTTPS. Health endpoints distinguish liveness, DB readiness and worker heartbeat. Expand-and-contract migrations; back up before destructive changes; app rollback must be compatible with the deployed schema. Use runtime flags for each provider capability and a global outbound-action kill switch.
+
+Observe: queue age, overdue publications, failure/retry rate, unknown outcomes, token failures, scan point failures, AI dollars per approved article, credits reserved but not finalized, webhook lag, storage growth, DB connections, memory and slow queries. Alerts should require action; routine success can go into a daily digest.
+
+Recovery goals for beta: target RPO ≤24h and RTO ≤8h for customer-authored data, backed by a restore drill. Managed daily backups are not proof of recoverability; maintain encrypted off-site exports consistent with retention rules. Test restoration, key access, domain routing and scheduler deduplication. Distinguish these targets from a contractual SLA.
+
+Scale when measured: split web/worker resources when heavy jobs affect latency; move DB compute when connections/IO require it; partition high-volume rank data when queries warrant it; add worker lanes for expensive crawls. At 1,000 locations × 20 keywords × 25 points × 4 scans, there are 2 million point observations/month, so establish retention/downsampling and provider rights before reaching that scale. No Kubernetes or microservices are required simply because the product is a SaaS.
+
+
+========================================================================================
+PART A / 03-UI-DESIGN.md
+========================================================================================
+
+# UI design specification
+
+## 1. Evidence and matching approach
+
+The public Outrank homepage was inspected at 1440×1000 using a browser screenshot and computed styles on 27 October 2026. [Reference screenshot](evidence/outrank-home-desktop.png). These measurements are a viewport-specific reference, not a complete responsive specification. The private application was not accessible.
+
+| Element | Observed public desktop value |
+|---|---|
+| Hero heading font | Plus Jakarta Sans |
+| Hero heading | 68px, weight 700, 81.6px line height, −1.2px letter spacing |
+| Hero heading box | 680px wide, approximately 163px tall over two lines |
+| Major section heading | Commonly 56px / 70px, weight 700, approximately −1.44px tracking |
+| Another section heading variant | 44px / 55px, weight 700, −0.8px tracking |
+| Testimonial card heading | 20px / 25px, Plus Jakarta Sans, weight 700 |
+| Feature subheading | 20px / 27.5px, Inter, weight 700, −0.47px tracking |
+| Navigation text | Inter, 14px, weight 600, approximately 23.8px line height |
+| Hero button text | Plus Jakarta Sans, 18px / 28px, weight 600 |
+| Header Google button | Plus Jakarta Sans, 14px / 20px, weight 600; 46px high |
+| Hero Google button | Approximately 237×70px, fully rounded |
+| Hero primary button | Approximately 270×70px, fully rounded |
+| Main ink | `rgb(13,13,18)` / `#0D0D12` |
+| Reference primary | Purple `rgb(136,42,255)`; replace through orange tokens |
+
+Visual observations: wide capsule navigation near the top; white canvas with a very faint square grid; soft colored glows near the sides; centered two-line hero; colored accent words; two large rounded CTAs; small floating UI cards around the headline; compact proof row; large whitespace; rounded white sections. Loaded font families included Inter, Plus Jakarta Sans and Poppins; loading a font does not establish that it is used for a given element. Use the measured family per element above.
+
+Preserve typography and layout rhythm. Use new logo, wording, illustrations and local-business UI previews. Exact private-dashboard fidelity requires authorized dashboard references later. All dashboard dimensions below are proposed specifications.
+
+## 2. Orange design tokens
+
+Use light peach for surfaces, stronger orange for meaningful actions, and dark warm ink for contrast. Pale orange alone is insufficient for primary-button text contrast.
+
+```css
+:root {
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --canvas: #fffdfb;
+  --surface: #ffffff;
+  --surface-soft: #fff6ee;
+  --surface-selected: #ffeddc;
+  --brand-50: #fff7ed;
+  --brand-100: #ffedd5;
+  --brand-200: #fed7aa;
+  --brand-300: #fdba74;
+  --brand-400: #fb923c;
+  --brand-500: #f97316;
+  --brand-600: #ea580c;
+  --brand-700: #c2410c;
+  --action: #c2410c;
+  --action-hover: #9a3412;
+  --ink: #0d0d12;
+  --text-secondary: #57534e;
+  --text-muted: #78716c;
+  --border: #e8e2dc;
+  --focus: #c2410c;
+  --success: #15803d;
+  --warning: #a16207;
+  --danger: #b91c1c;
+  --info: #1d4ed8;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-panel: 24px;
+  --radius-pill: 9999px;
+  --shadow-card: 0 2px 8px rgb(40 24 8 / 4%);
+  --shadow-float: 0 12px 36px rgb(194 65 12 / 10%);
+}
+```
+
+Dark orange with white text for ordinary primary actions; peach with dark orange text for secondary actions; peach glows for marketing. Validate final actual contrast combinations with tooling. Keep semantic success/error distinct from brand orange. A selected orange item also uses an indicator or border, not color alone.
+
+Spacing scale: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 120. Icons: 16px inline, 18–20px navigation, 24px feature cards. Body font weights 400/500/600; display 600/700. Use tabular numerals for financial/ranking tables. Self-host properly licensed font assets through a framework font loader, with fallback and minimal required weights.
+
+### Typography and sizing
+
+| Role | Desktop | Mobile | Notes |
+|---|---|---|---|
+| Marketing hero | 68/81.6, 700 | proposed 38/46, 700 | Same measured desktop type; responsive value is proposed |
+| Marketing section | 56/70, 700 | 32/40 | Max line lengths and deliberate wrapping |
+| Secondary heading | 44/55 | 28/36 | Avoid every section competing with hero |
+| App page title | 28/36, 700 | 24/32 | Display font |
+| App section title | 18/26, 600 | 18/26 | Display font |
+| Body | 14/22 app; 16/26 marketing | 14/22 or 16/24 | Inter |
+| Form labels | 13/20, 500 | 13/20 | Persistent labels |
+| KPI value | 30/38, 700 | 26/34 | Show unit and period |
+| Metadata | 12/18 | 12/18 | Never use tiny text for critical errors |
+
+## 3. Marketing site
+
+Container max width 1232px for major sections; 48px outer desktop margin for the capsule header at 1440px; 20px mobile gutter. Proposed section vertical spacing 96–120px desktop, 56–72px mobile. White/peach backgrounds alternate subtly.
+
+Page order:
+
+1. Capsule header: original logo, How it works, Features, For local businesses, Pricing, sign in, CTA.
+2. Hero: local visibility headline in two lines; orange accent; short explanation; Google sign-in and preview CTA. Decorative real-UI fragments show calendar, a local grid and publishing status.
+3. Product preview: actual product screenshot once available. Before launch, label as product preview/demo.
+4. Three steps: connect your business, confirm your plan, let approved work run.
+5. Feature blocks: local rankings, business profile, content/social, website health, citations.
+6. Local-business scenarios: plumber, salon, auto repair with clearly illustrative examples.
+7. Integration strip with correct platform logos/attribution and only supported capabilities.
+8. Pricing and precise quota explanations.
+9. FAQs on verification, rankings, content review, domains, disconnecting and cancellation.
+10. Final CTA and footer with company/contact/privacy/terms.
+
+Do not copy Outrank's customer avatars, testimonials, metrics or performance promises. Show no numeric customer proof until earned. Keep floating cards decorative and noninteractive if they are not real controls; hide decorative detail on smaller screens and respect reduced motion.
+
+## 4. Application shell
+
+Desktop ≥1280px: 248px left sidebar, 72px top bar, content max 1440px with 32px page padding; ordinary card gaps 20–24px. Tablet 768–1279px: collapsible 76px rail or drawer and 24px padding. Mobile <768px: 56px header, drawer navigation, 16px padding, stacked content, horizontally scrollable data tables only where necessary. No whole-page horizontal overflow.
+
+Sidebar: organization/business/location switcher, Overview, Content calendar, Content studio, Local rankings, Business Profile, Social accounts, Website & SEO, Citations, Reports; bottom Settings, Usage & billing, Help. Reviews appears only when enabled. For a single-location owner, hide unnecessary hierarchy until relevant.
+
+Top bar: breadcrumb, date range where meaningful, connection-status indicator, notifications, profile. Show a persistent 'Autopilot paused' state with a clear resume path; do not rely on a toast to communicate it.
+
+## 5. Page-by-page specification
+
+### 5.1 Onboarding
+
+Centered max-width 960px with left progress column on desktop and compact step count on mobile. Steps: business → facts → accounts → goals → plan → automation. Save progress after each step. Imported values have source chips; conflicting fields show alternatives side by side. Skip available for optional integrations. Background crawl shows stages, partial results and retry/cancel.
+
+### 5.2 Overview
+
+Top: business name, selected location, timeframe, automation status and 'Review pending work' action. Four KPI cards: organic clicks, sampled top-3 grid coverage, verified enquiries, published items. Disconnected sources show 'Connect to measure', not zeros.
+
+Main 8/4 column layout: trend card and 'Needs your attention' queue. Under that: upcoming content, current visibility grid summary, last completed automation actions and usage. Status cards explain source and freshness, e.g. 'Maps scan · 25 Oct · 9/9 points'. A task has action, reason, impact, deadline if any, and a direct CTA.
+
+### 5.3 Content calendar
+
+Toolbar: month/week/list, previous/next/today, channel/location/status filters, create campaign. Desktop month uses seven columns with ≥112px day cells. Items show channel icon, short title, time and explicit state. Use a neutral pending color, green published, yellow needs review, red failed. On mobile default to agenda/list rather than squeezing seven unreadable columns.
+
+Click opens a 480px right drawer: content previews, destination, source facts, schedule/timezone, approval state, usage estimate and activity. Provide keyboard-accessible reschedule controls as an alternative to drag-and-drop. A failed channel has its own retry/reconnect action.
+
+### 5.4 Content studio/editor
+
+Desktop: title/metadata top; editor approximately 60–66% width; right panel with channel previews/checks/facts. Optional 240px content list can collapse. Sticky bottom actions: Save draft, Submit for review, Approve/schedule according to role. Autosave state with last saved time and conflict handling.
+
+Editor tabs: Article, GBP, Instagram, Facebook. AI actions are explicit selection rewrite, tone change, shorten, add grounded FAQ; each shows a diff or new revision. Image selection shows original/generated label and approved-photo restrictions. Character/media limits come from the selected adapter's current validators.
+
+### 5.5 Local rankings
+
+Keyword selector, grid size/spacing, date/run selector, device/locale, target identity, 'Estimate scan' then 'Run scan'. Show monetary/credit cost and current allowance. Grid circles display rank numbers and accessible status labels; table alternative lists coordinates and observations. Add legend for 1–3, 4–10, 11–20, >20 and error.
+
+Right panel: top-3 coverage, found-point average with sample count, competitor observations and scan quality. History compares compatible runs. No 'rank 0'. A failed scan does not show a successful green map. Provider age and incomplete points remain visible.
+
+### 5.6 Business Profile
+
+Tabs: Overview, Business details, Posts, Reviews when supported, Performance. Top connection/verification/capability state. Business details use a side-by-side 'Current provider value / Proposed value' diff with source notes. Sensitive changes require explicit approval and a traceable status. Do not copy Google's own interface or imply Google endorsement.
+
+### 5.7 Social publishing
+
+Connection cards show exact Page/account name and profile image, supported formats, last success, permissions and reconnect action. Composer previews Instagram and Facebook separately. Aspect ratio presets and safe crops are deterministic; captions/hashtags editable. Instagram caption links are not represented as guaranteed clickable outbound links; use appropriate supported link destinations and messaging.
+
+### 5.8 Website and SEO
+
+Tabs: Website, Pages/blog, Audit, Technical settings, Domain, Leads. New website setup: choose one template, confirm facts, choose photos, preview and publish. Page editor uses blocks with constrained reorder controls and editable content.
+
+Audit issue table: severity, affected URL, finding, evidence, fix mode (automatic/approval/manual), last checked, status. Issue drawer shows actual diff and rollback availability. Robots preview has a fixed-width editor, validation, impact summary, backup and explicit apply action. Domain page shows DNS ownership, routing, certificate and final health as separate stages.
+
+### 5.9 Citations
+
+NAP summary at top; directory table with region/category, live URL, match/mismatch fields, ownership, workflow state, next owner step and fees. 'Prepared', 'Submitted', 'Verified live' are visibly different. No unverified count labeled as backlinks built.
+
+### 5.10 Reports
+
+Source/date filters, matched-period comparisons, activity summary and downloadable CSV first. Email/PDF reports later. Show actual enquiries separately from website clicks and direction requests. Plain-language methodology drawer. No claim that a post caused a ranking change solely because it preceded it.
+
+### 5.11 Settings and billing
+
+Organization, team/location permissions, business facts, brand, integrations, automation policies, privacy/export/delete, usage, subscription. Usage meters show included, reserved, spent, remaining and next reset. Upgrade/overage approval uses exact units and no surprise recurring spend.
+
+## 6. Reusable components
+
+### Added screens: competitor intelligence and reputation
+
+Competitors: service/query-cluster and geography filters, owner-entered versus discovered lists, stable entity confirmation, comparable date/window badge, evidence-based comparison table and a useful gap shortlist. Show unavailable data and sample sizes explicitly. Selecting a competitor opens source observations and an action proposal, not an unsupported explanation of Google's algorithm.
+
+Intelligence: weekly priorities with evidence, uncertainty, effort/cost, prerequisites, owner decision, cooldown and outcome status. A recommendation drawer shows the exact proposed change, who approves it, execution verification and observation period. Use internal-priority labels rather than probabilities of ranking success.
+
+Reviews: inbox/list on desktop, readable cards on mobile, filters for location/provider/rating/language/risk/status, accessible review drawer, source freshness, existing reply, draft/diff, classification reasons and assignee. Place policy mode and pause state above the queue. A five-star complaint can be visibly flagged for review. Auto-reply setup includes sample previews, exclusions, language allowlist, caps, consent and revocation; keep its control disabled when provider requirements are unresolved.
+
+Review acquisition: neutral link/QR and separately enabled transaction-request settings, consent/suppression/frequency and delivery status. No happy-customer-only funnel. Service recovery has private notes clearly separated from the exact public reply preview. Verified public changes include a provider link where available.
+
+Build typography, Button variants, TextField, Select, combobox, FormField, status badge, data table, filter bar, KPI card, empty state, integration card, source/freshness badge, cost estimate, confirm diff, right drawer, timeline, calendar item, grid point, media picker, revision diff, approval controls, usage bar and notification banner.
+
+Keep one central status map so published/failed/review states do not drift across screens. Buttons have visible loading state and duplicate-submit prevention. A 44px mobile target is the default. Dialogs trap focus, return focus to trigger, support Escape except during a truly noninterruptible local operation, and have proper names.
+
+## 7. Required screen states
+
+Every integration-driven screen includes: loading, first-use empty, no data yet, disconnected, expired permission, unsupported capability, provider approval pending, partial success, stale data, quota exhausted, unknown publication outcome and offline/retry state. Use seeded fixtures to review all states before wiring real providers.
+
+Never fabricate success data when integration fails. Success feedback includes a verified external URL when available. A queued action is described as queued; provider acceptance is described as pending until publication is verified.
+
+## 8. UI quality gates
+
+- Capture at 1440×1000, 1280×800, 768×1024 and 390×844.
+- Check display fonts actually loaded, heading wraps, primary button size and consistent gaps.
+- Compare the desktop marketing hero to the measured reference; public measurements are the reference, private app screens are original designs.
+- Test keyboard-only navigation, focus visibility, dialog behavior, screen-reader labels, color contrast and reduced motion.
+- Verify no layout shift from fonts/images and reserve chart/media height.
+- Test long business names, Hindi text, large currency values, multi-location switcher and 200-character post titles.
+- Show real or labeled-demo data; never mix fixture metrics into a connected live account.
+- Target good user-perceived performance; evaluate public-site LCP ≤2.5s, CLS ≤0.1 and INP ≤200ms with appropriate field/lab interpretation rather than promising a perfect Lighthouse score.
+- CSS grid, real charts and semantic HTML create product UI. AI image generation is for illustration/photos, never rasterized navigation or text-based dashboard controls.
+
+
+========================================================================================
+PART A / 04-PHASES-AND-ACCEPTANCE.md
+========================================================================================
+
+# Phased implementation and acceptance gates
+
+## 1. Delivery assumptions
+
+Estimate: one experienced full-stack builder using Antigravity, approximately 25–35 focused development hours/week, starting a separate codebase. Durations are engineering estimates, not guarantees. Platform approvals, account eligibility, DNS, business verification and stakeholder review can extend elapsed time.
+
+Build a narrow real workflow early; the entire UI need not be integrated before one location can publish a verified article. UI fixture work and external approval applications can happen alongside implementation without requiring multiple agents.
+
+Critical path: eligibility/approval requests → identity/tenancy → facts → content/revisions → approval/queue → real publishing → metering/recovery → paid pilot. Ranking, hosted sites and provider adapters attach to the same core. GBP/Meta capabilities stay disabled until approved and tested with external-owner accounts.
+
+## Phase 0 — feasibility and decisions (3–5 days, approvals continue)
+
+Deliverables:
+
+- Validate one target vertical with 3–5 owners: current site, profile, accounts, budget, biggest repetitive tasks and definition of a useful lead.
+- Confirm target launch country, initial language, payment business eligibility and privacy requirements.
+- Submit GBP access request if prerequisites are met; otherwise record eligibility date and website-first launch scope.
+- Register/configure Meta application and identify exact login route, permissions, review evidence, test accounts, version and business-verification requirements.
+- Run three technical spikes: WordPress upload/publish/update; rank-provider coordinate accuracy/identity/depth; managed PostgreSQL queue connectivity/privileges.
+- Capture public design measurements and set orange tokens; approve no fake proof/testimonials.
+- Write ADRs for stack, tenant hierarchy, queue, content storage, hosted sites, provider retention and metering.
+- Create spend-rate configuration with source URL, verified date and expiry/review date.
+
+Gate: a demonstrable route exists for each paid-beta capability. Block unsupported operations individually. Do not sell automatic GBP/social posting solely because mocks work. Scope any API ambiguity as a named unresolved risk with an owner.
+
+## Phase 1 — UI foundation and prototype (1–2 weeks)
+
+Build marketing page, auth layouts, shell, onboarding, overview, calendar, editor and rankings page using labeled fixtures. Implement design tokens, typography, responsive shell, component primitives and all critical empty/error states. Add source/freshness and usage components now.
+
+Demo datasets: a service business with existing WordPress/GBP; a new salon requiring a hosted website; an agency with two locations; a hidden-address service-area business. Include failed/revoked integrations and incomplete grid scans.
+
+Gate: design review across four viewport sizes; no overflow; keyboard navigation works; page content matches product vocabulary; fixture mode is visibly labeled. Produce screenshot evidence and a list of reusable components. Do not write elaborate unit tests that merely assert static colors or headings.
+
+## Phase 2 — authentication, tenancy and facts (1–2 weeks)
+
+Implement auth, organization/business/location setup, memberships, RLS, migrations, encrypted-secret interface, ownership-safe asset uploads, business facts/provenance and resumable onboarding. Add crawl import with SSRF protections, limits and a fixed allowlist of extractable fact types. Confirm facts before use.
+
+Gate:
+
+- Tenant A cannot read/write/export tenant B data or assets.
+- A hidden address never appears in a public preview or generation context.
+- Unconfirmed/conflicting fields remain visible and cannot silently overwrite confirmed facts.
+- Import failure is resumable; source text cannot execute instructions or change permissions.
+- Auth recovery and member removal revoke access as expected.
+
+## Phase 3 — first real content-to-WordPress flow (2 weeks)
+
+Implement queue/outbox, credit reservations, AI provider abstraction, brief/draft schemas, deterministic checks, revision history, editor save conflict handling, approval hash binding, schedule occurrences, WordPress integration and verified publish URL. First flow: confirmed facts → one article draft → owner approval → scheduled WordPress publication → verified result.
+
+Gate:
+
+- Worker restart between upload and publish causes no blind duplicate post.
+- Timeout-after-acceptance enters reconciliation instead of reposting.
+- Editing approved content invalidates stale approval.
+- Quota check and reservation are atomic under simultaneous requests.
+- Revoked integration/pause/cancel blocks pending dispatch.
+- Real test publication is demonstrated on an authorized test site; mocks are supplementary.
+
+Private alpha can start here, with honest limited scope.
+
+## Phase 4 — local keyword planning, rankings and GSC (1–2 weeks)
+
+Build keyword clusters, intent/target-page mapping, plan generation, baseline scan estimate, provider task handling, rank identity matching, grid visualization, scan history and GSC OAuth/property selection. Keep GSC source-date timezone separate from location scheduling timezone.
+
+Gate:
+
+- Three keywords at distinct coordinates return reproducible request metadata and correct target identity.
+- Not-found and provider-error points are distinct.
+- Top-3 coverage and found-only average match hand-calculated fixtures.
+- Run comparison rejects incompatible grids/depths.
+- On-demand scans require quota/cost check; repeated click does not duplicate charge.
+- GSC missing/limited rows and data delay are explained, never replaced with invented values.
+
+## Phase 5 — hosted websites and technical audit (2–3 weeks)
+
+Build three constrained templates, block editing, draft/publish revisions, platform subdomains, verified custom domains, HTTPS state, contact forms, sitemap/robots/canonical/structured-data generation, audit crawler and issue/fix workflow. Publish hosting terms, export expectations and cancellation behavior.
+
+Gate:
+
+- Two tenants cannot serve each other's content through host/header/cache confusion.
+- Draft pages require authorization and do not leak through search or public JSON.
+- Domain ownership is verified before routing; expired/cancelled domain claims cannot be hijacked.
+- Forms have abuse controls and observable delivery.
+- Robots/canonical/redirect changes support preview, approval, verification and rollback.
+- Rendered public HTML contains content/metadata without requiring client execution.
+- Sitemap lists only published canonical URLs; 404s and redirects use correct status codes.
+
+## Phase 6 — GBP and Meta publishing (2–3 weeks; approval-dependent)
+
+Implement selected-asset OAuth connections, capability registry, consent UI, explicit field diffs, eligible GBP post publishing, current performance reads subject to policy, Facebook Page posts and Instagram supported image publishing. Defer reels/stories until basic image publishing is reliable. Implement disconnect/reconnect, media processing, signature validation, notification inbox and provider reconciliation.
+
+Gate:
+
+- Approved app works for an external pilot owner's selected assets, not only developer-role assets.
+- Actual scopes and token routes match official current requirements.
+- Owner-specific consent is recorded and enforced immediately before dispatch.
+- Expired/revoked tokens produce an actionable reconnect state.
+- One campaign can have blog success and Instagram failure without duplicate blog publication.
+- Provider-supplied content retention/deletion jobs work, including logs and backups as required.
+- Unsupported categories/formats are blocked with an explanation.
+
+Do not claim this phase is done while app review is pending. If blocked, continue website/ranking/content beta and label channel publishing unavailable.
+
+## Phase 7 — citations, billing and paid-beta hardening (1–2 weeks)
+
+Implement directory catalog, NAP checks, prepared submission packet, owner verification tasks and evidence of live listings. No universal automatic-submission claim. Add subscription integration, per-location entitlements, atomic allowance/credit ledger, usage page, spending limits, grace periods, cancellation and exports. Payment processor selection is confirmed in Phase 0; provider fee rate is configuration, not hardcoded.
+
+Gate:
+
+- Submitted citation cannot count as verified live without evidence.
+- Duplicate/out-of-order billing webhooks do not double-credit or incorrectly reactivate a cancelled plan.
+- Plan changes and time-window resets preserve ledger correctness.
+- Overage is disabled unless explicitly enabled/prepaid.
+- Trial abuse cannot create unlimited AI/rank jobs.
+- End-to-end support runbooks, kill switch, metrics and alerts are operational.
+- Restore drill completed; documented RPO/RTO targets supported by evidence.
+
+Phases 0–7 collectively form the approximately 12–18 week engineering envelope. Do not sum each minimum as an external-approval promise; some UI/spike work overlaps, while unpredictable review waits do not disappear.
+
+## Phase 8 — optimization and reputation (2–4 additional weeks)
+
+Add review reply drafts/approval, neutral review links, lawful outreach only if enabled, content performance candidates, revision comparison and controlled republishing. Refreshes preserve external IDs, slugs, valuable links and owner changes. Add a cooldown and minimum-data threshold before suggesting updates. Validate Hindi generation with reviewers if introducing it.
+
+Gate: candidate selection shows source data and uncertainty; updates cannot erase custom content; owner may reject/restore; no invented attribution or reviews; provider-specific current retention policies still apply.
+
+## Phase 9 — agencies and scale (3–6 additional weeks)
+
+Build scoped team/location groups, bulk policy application with per-location results, agency usage allocation, report branding, partner citation fulfillment, optional more CMS adapters and operational scaling. Add advanced onboarding only after single-location activation is sound.
+
+Gate: bulk actions preserve consent/permissions per location, agency users cannot cross client scopes, queued work is fair, billing reconciles by active locations and measured credits, and load tests meet measured workload targets.
+
+Optional AI-visibility tracking and weekly tool generation need separate evaluation, budgets and product validation. They are not dependencies of a useful local-business launch.
+
+## 2. Engineering task sizing and productivity
+
+Each implementation ticket should fit 0.5–2 development days and contain: owner problem, route/UI entry, schema change, permission requirement, state transitions, provider contract, failure cases, acceptance evidence and migration/rollback notes.
+
+Example ticket: 'Schedule an approved WordPress article'. Scope includes immutable revision, destination authorization, timezone conversion, idempotent command, quota reservation, queued state and verification URL. It excludes AI generation, social publication and billing UI. This prevents a coding agent from implementing shallow versions of six modules simultaneously.
+
+Maintain a progress file with states planned/in-progress/implemented/verified/externally blocked. A screen that works only with fixtures is implemented visually, not verified functionally. Review generated migrations and dependencies before merging. Prefer one editor, one form library and one provider adapter pattern.
+
+## 3. Meaningful testing strategy
+
+| Risk | Required evidence |
+|---|---|
+| Tenant leakage | DB/RLS/API/asset negative tests with two organizations |
+| Duplicate posts | Worker crash, retry, duplicate command, timeout and reconciliation scenarios |
+| Unauthorized publishing | Role, consent revision, resource edit, disconnect and pause tests |
+| Wrong costs | Parallel reservations, repeated webhook, cancelled job, failed attempt and reset tests |
+| Wrong ranks | Failed/missing/censored observations; identity ambiguity; comparison compatibility |
+| Website damage | Host isolation, draft leak, robots diff and rollback, domain takeover scenario |
+| Untrusted crawl | Private IP/redirect/DNS/oversize payload protections |
+| Bad generated claims | Evaluation fixture set and human spot review |
+| Broken integration | Contract fixtures plus a minimal real authorized end-to-end run |
+| UI regressions | Key viewport screenshot comparison and accessibility checks |
+| Recovery | Restore DB, keys, media references and resume schedules without duplicates |
+
+Do not spend the initial budget testing every presentational wrapper. Prioritize the cases that could post the wrong content, expose a tenant, bill incorrectly, or break a customer website.
+
+## 4. Launch pilot and release checklist
+
+Pilot with 5–10 businesses. Week one: owner onboarding, fact confirmation, one reviewed campaign and rank baseline. Week two: scheduled activity and failure handling. Subsequent weeks: usefulness, owner time saved, actual enquiries, content approval rate and operating costs. SEO outcomes need longer observation than a two-week operational pilot.
+
+Before charging for a feature: published scope matches working capabilities; pricing includes actual quotas; terms/privacy/contact and deletion flows exist; provider approvals valid; billing reconciled; no duplicate publication under retry; no demo data in live screens; production/staging isolated; alert routing and restore evidence exist; support owner assigned; deployment rollback tested.
+
+## 5. Release risk register
+
+| Risk | Mitigation / release decision |
+|---|---|
+| GBP eligibility/review delay | Apply immediately; ship website/content/rank path independently |
+| Meta permission/review failure | Keep export/manual delivery as labeled fallback, not fake auto-posting |
+| Public/private UI mismatch | Ship clearly proposed dashboard; refine from authorized references later |
+| Cheap model produces weak content | Evaluation, lower cadence, better facts and quality-tier upgrade |
+| Rank costs spike | Estimates, hard caps, queued mode and bounded scan sizes |
+| Directory lacks API | Owner task or partner fulfillment with explicit fee/status |
+| Queue overload on small VM | Concurrency limits, resource monitoring and separate heavy audit lane |
+| Provider storage restrictions | Source separation, TTL/deletion and gated historical reporting |
+| Website automation breaks SEO | Before/after snapshots, approval, verification and rollback |
+| Owner expects guaranteed rankings | Transparent metrics and product promise tied to work/measurement |
+
+
+========================================================================================
+PART A / 05-COSTS-AND-LIMITS.md
+========================================================================================
+
+# Costs, operating limits and unit economics
+
+Checked 27 October 2026. All estimates in USD unless marked EUR. Exclude taxes, foreign-exchange spreads, labor, payment fees, registrar domains, paid directory/partner work and optional messaging/video. Do not convert USD to INR using an invented current exchange rate; convert at purchase or use a finance-supplied budgeting rate.
+
+## 1. What 'cheapest' should mean
+
+Minimize total operating effort and cost per retained customer, not the number of free-tier logos. A slightly more expensive managed database can cost less overall than outages and recovery work. There is no verified universal cheapest provider for every region/workload; this is a low-cost reference design based on checked inputs and stated allowances.
+
+Use free services for a prototype, paid predictable foundations for paying customers, and meter every external cost. Do not rely on consumer Gemini/Antigravity subscriptions covering production API usage. Development-assistant fees are a separate budget.
+
+## 2. Verified reference prices
+
+| Component | Checked price input | Application |
+|---|---|---|
+| Supabase Pro | From $25/month, base compute credit structure applies | Auth/Postgres reference; additional projects/compute add cost |
+| Hetzner CX23 Europe | €5.49/month excluding IPv4 and VAT | Small pilot reference, subject to availability |
+| Hetzner CX33 Europe | €8.49/month excluding IPv4 and VAT | More RAM for web/worker; check current capacity/region |
+| R2 standard storage | $0.015/GB-month beyond allowance; operation charges apply | Media/storage, not an unlimited free CDN promise |
+| DataForSEO Maps Standard | $0.0006 per SERP up to 100 results in the quoted base mode | Scheduled low-cost grid scans |
+| Maps Priority / Live | $0.0012 / $0.002 base per SERP | Faster scans only when justified |
+| DataForSEO prepaid minimum | $50 top-up; unused balance persists | Cash-flow requirement, not a recurring $50 usage fee |
+| Gemini 3.1 Flash-Lite text | $0.25 input / $1.50 output per million tokens standard | Economy text evaluation candidate |
+| Gemini 3.1 Flash Lite Image | $0.0336 per 1K image standard; $0.0168 batch equivalent | Economy image reference, plus applicable inputs |
+
+Sources: [Supabase](https://supabase.com/pricing), [Hetzner price notice](https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/), [R2](https://developers.cloudflare.com/r2/pricing/), [Maps pricing](https://dataforseo.com/pricing/google-serp/google-maps-serp-api), [minimum top-up](https://dataforseo.com/help-center/minimum-payment), [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing).
+
+Verify the chosen model is available in the production account and region. Price tables do not prove it meets content quality or throughput needs. Current docs show the old `gemini-2.5-flash-image` retirement date has passed; do not build on copied old examples using it.
+
+The SEO provider's base Maps pricing is not the price of every other endpoint. Organic rank, keyword research, review/listing data and technical crawls have different billing. Parameter multipliers, requested depth and retries can change cost. Record the provider-reported cost after each task.
+
+## 3. Ranking arithmetic
+
+```text
+monthly Maps requests = locations × keywords × grid points × scans/month
+base Maps cost = requests × mode price × applicable multipliers
+```
+
+These examples use four scans/month for easy budgeting; a weekly annual schedule averages 4.33, so budget approximately 8.3% more if running every week. They exclude failures/retries, extra result depth and other endpoints.
+
+| Tier example per location | Requests / 4-scan month | Standard base | Live base |
+|---|---:|---:|---:|
+| 5 keywords × 3×3 × 4 | 180 | $0.108 | $0.36 |
+| 10 keywords × 5×5 × 4 | 1,000 | $0.60 | $2.00 |
+| 20 keywords × 7×7 × 4 | 3,920 | $2.352 | $7.84 |
+| 20 keywords × 7×7 × 30 daily | 29,400 | $17.64 | $58.80 |
+
+At 100 locations, the final daily Live example costs $5,880/month in base Maps requests alone. Unlimited daily large grids can destroy an inexpensive subscription's margin.
+
+A provider response may expose more result depth than the product displays. Store actual request configuration, chosen display threshold and billing separately. Multiple competitors from the same query can often be analyzed from one licensed response; don't issue identical paid queries once per competitor. Confirm the provider permits intended reuse/retention.
+
+## 4. Text and image calculation
+
+Illustrative eight-article monthly workflow, counting all drafting/checking/repurposing calls together:
+
+```text
+input = 200,000 tokens / month / location
+output including billable thinking = 100,000 tokens
+economy text base = 0.2 × $0.25 + 0.1 × $1.50 = $0.20
+16 new 1K economy images = 16 × $0.0336 = $0.5376
+```
+
+This is a narrow inference-cost illustration, not a total content bill or a quality guarantee. Retrieval, grounding/search queries, quality-model escalation, rejected attempts, edits, image inputs and human review add cost. Budget **$1–4/location/month for text** and **$0.50–2 for limited images** initially, then replace estimates with observed p50/p95 cost per approved campaign. A premium model/content cadence can exceed those allowances.
+
+Real owner photos and reusable branded templates are cheaper and often more credible than generating new photos for every post. Derive 1:1, 4:5 and 16:9 crops through deterministic image transforms. Add text/logo overlays with a renderer, not a new generation call. Never label a generated sample as a photo of completed customer work.
+
+## 5. Reference monthly operating budgets
+
+### Prototype, no live customers
+
+Local web/database plus free development services and a small paid API allowance: **$0–25 usage/month** is plausible for limited demos. If paid SEO testing exceeds the trial credit, the $50 minimum top-up affects first cash outlay. This stage has no production reliability promise and is not a valid cost model for hundreds of active users.
+
+### Recommended managed pilot: ten active locations
+
+| Line | Planning amount/month | Basis |
+|---|---:|---|
+| Managed auth/Postgres | $25 | Base plan reference; one production project |
+| Web + worker VM | $12–20 | Budget allowance, not an exact regional quote |
+| Backup/storage/email/monitoring | $8–15 | Allowance; verify chosen vendors and staging plan |
+| Text/image/search/rank usage | $30–60 | 10 × $3–6 per location under bounded cadence |
+| Subtotal | $75–120 | Sum above |
+| 15–25% contingency | $11–30 | Retries, early inefficiency, limited headroom |
+| Rounded planning envelope | **$85–150** | Excludes listed non-operating items |
+
+If staging uses another paid managed project or runs continuously, add its actual cost. Do not hide it inside the base plan. First-month cash may exceed expense because unused prepaid SEO credit is an asset balance.
+
+### 100 active locations
+
+Infrastructure/supporting services allowance $70–140 plus $300–600 metered usage; 15% contingency gives approximately **$425–850/month**. This assumes the same limited content/grid cadence. Premium directory fulfillment, daily large scans, frequent grounding and human editing are additional.
+
+### 1,000 active locations
+
+Infrastructure allowance $250–700 plus $3,000–6,000 usage; 15% contingency gives approximately **$3,750–7,700/month**. This is a scenario, not a load-tested capacity claim. Database history, provider throughput, support staffing and retention can dominate at this scale.
+
+### Cheapest cash alternative
+
+Self-host database/web/worker on a VM, with encrypted off-site backups, object storage and transactional email. For a small pilot, estimate $20–45 shared infrastructure plus usage and contingency. Relative savings are roughly the removed managed bill, not free operations. Someone must own OS/database patching, certificate/secret rotation, backup validation, restore and incident response. Use this route only when that work is realistic.
+
+## 6. Proposed commercial packaging
+
+These are test prices, not observed market willingness to pay. Validate with pilot owners before promising a permanent price.
+
+| Included per active location/month | Starter $29 | Growth $59 | Pro $99 |
+|---|---:|---:|---:|
+| Blogs | 4 | 8 | 12 |
+| Campaign ideas | 8 | 12 | 20 |
+| Supported channel publication attempts | 24 | 48 | 80 |
+| New AI images | 8 | 16 | 24 |
+| Tracked keywords | 5 | 10 | 20 |
+| Grid / included scheduled scans | 3×3 / 4 | 5×5 / 4 | 5×5 / 4 |
+| Maps point allowance | 180 | 1,000 | 2,000 |
+| Hosted site | 1 basic | 1 | 1 with expanded templates |
+| Citation checks/tasks | Basic | Expanded | Expanded |
+
+A campaign may generate multiple variants, but the publication cap is an aggregate across connected channels. Word quota definitions carefully: automatic retries are costed internally; customer charging for failed attempts must be explicit and fair. Paid directory fees, registrar domain registration, messaging, large-grid packs, extra manual scans and human editing are separate. Do not sell features before provider approval.
+
+Offer a bounded preview trial, not unlimited anonymous generation. Agencies can buy pooled locations with transparent per-location and per-grid usage; retain each client's isolation and consent.
+
+## 7. Gross-margin example and sensitivity
+
+For 100 Growth customers at $59: revenue $5,900. If infrastructure/usage is $650, infrastructure gross margin is approximately 89%. This excludes payment costs, refunds, support, development, taxes and acquisition, so it is not company profit.
+
+If each customer requires 30 minutes of support/month at an assumed $15/hour internal cost, add $750. If paid directory work costs another $10/location, add $1,000. The business model changes substantially even though AI tokens remain cheap. Track support minutes and fulfillment separately from API cost.
+
+## 8. Mandatory spending controls
+
+1. Price catalog with provider/model/mode/unit/currency/verified date and review reminders.
+2. Atomic credit reservation before external work; finalize actual cost afterward.
+3. Per-tenant daily and monthly caps; provider-wide emergency caps and balance alarms.
+4. Maximum keywords, points, depth, cadence, crawl pages, image variants and AI retries.
+5. Separate scheduled economical scans from user-requested fast scans.
+6. Batch upcoming content when supported and time-safe; cache lawful reusable research.
+7. Do not regenerate unchanged content/assets or repeat scans due to button double-clicks.
+8. Report cost per generated, approved and published item to reveal wasted drafts.
+9. Stop new paid jobs at budget threshold while preserving drafts and existing hosted pages according to policy.
+10. Overage must be prepaid or explicitly enabled with a clear cap; never silently recharge.
+
+## 9. Development cost and procurement
+
+The full build envelope of 12–18 weeks at 25–35 focused hours/week is roughly 300–630 hours. This is a planning range for one experienced builder; learning curves and approval work can increase it. Multiply by the actual builder rate rather than assuming a cheap hourly rate. Antigravity/Gemini developer plans, source hosting and optional design tools are separate development expenses.
+
+Avoid launch subscriptions to several overlapping SEO suites, orchestration platforms and social aggregators. An aggregator can reduce approval/integration work but should be compared against per-connected-account charges and supported actions. Add it only if the saved engineering/support time outweighs its cost. The adapter boundary allows that decision later.
+
+
+========================================================================================
+PART A / 07-SOURCES-AND-OPEN-QUESTIONS.md
+========================================================================================
+
+# Research evidence, sources and decisions to revisit
+
+Research date: 27 October 2026, user timezone Asia/Kolkata. Public web sources can change. Verify prices, policies, endpoint availability and installed SDK versions again at implementation and before launch.
+
+## 1. Evidence standard
+
+**Observed:** public website content, public documentation, actual homepage screenshot and browser-computed styles.
+
+**Advertised:** pricing, performance claims, integrations and customer examples described by Outrank. Feature advertising was not treated as independent proof of effectiveness.
+
+**Proposed:** LocalPilot's architecture, database, quotas, dashboard layout, schedule, cost envelopes, product priorities and acceptance tests.
+
+**Unverified:** Outrank's private application screens and implementation; production account access to GBP/Meta; the new product's future costs, quality, ranking improvements and scale capacity.
+
+## 2. Outrank source register
+
+| Source | Used for |
+|---|---|
+| [Homepage](https://www.outrank.so/) | Product positioning and public feature overview; desktop visual reference |
+| [Pricing](https://www.outrank.so/pricing) | Advertised core subscription and add-on structure |
+| [Sign-in](https://www.outrank.so/signin) | Public authentication entry; authenticated app boundary |
+| [Integrations](https://www.outrank.so/integrations) | Advertised publishing destinations |
+| [WordPress documentation](https://www.outrank.so/docs/wordpress) | Public integration instructions |
+| [Article improvements](https://www.outrank.so/docs/improvements) | Public rewrite/republish workflow |
+| [REST API](https://www.outrank.so/docs/api) | Organization-scoped API and documented product resources |
+| [Free blog product](https://www.outrank.so/free-blog) | Hosted-blog offering and own-domain concept |
+| [AI visibility](https://www.outrank.so/ai-visibility) | Advertised AI-citation positioning |
+
+The public sign-in page was read, but no sign-in, subscription or private-dashboard inspection was performed. No private competitor data or source code was accessed.
+
+## 3. Platform and technical source register
+
+| Source | Implementation check |
+|---|---|
+| [GBP prerequisites](https://developers.google.com/my-business/content/prereqs) | Project eligibility/access application |
+| [GBP setup](https://developers.google.com/my-business/content/basic-setup) | Approved project setup |
+| [GBP API policies](https://developers.google.com/my-business/content/policies) | Integration consent, access and source-data obligations |
+| [GBP REST reference](https://developers.google.com/my-business/reference/rest) | Endpoint discovery; verify actual supported versions |
+| [GBP Performance API](https://developers.google.com/my-business/reference/performance/rest) | Available business-profile measurements |
+| [Google local ranking](https://support.google.com/business/answer/7091?hl=en) | Honest ranking interpretation |
+| [GSC Search Analytics](https://developers.google.com/webmaster-tools/v1/searchanalytics/query) | Observed search data, dimensions and limitations |
+| [Robots introduction](https://developers.google.com/search/docs/crawling-indexing/robots/intro) | Correct crawler controls |
+| [Noindex](https://developers.google.com/search/docs/crawling-indexing/block-indexing) | Correct exclusion mechanisms |
+| [Indexing API](https://developers.google.com/search/apis/indexing-api/v3/using-api) | Avoid unsupported general-blog submissions |
+| [Search spam policies](https://developers.google.com/search/docs/essentials/spam-policies) | Content/link/doorway guardrails |
+| [Meta Instagram documentation on Postman](https://www.postman.com/meta/instagram/documentation/6yqw8pt/instagram-api) | Meta-maintained primary collection and login-route distinction |
+| [Instagram Login documentation](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login) | Must recheck during integration spike |
+| [Instagram publishing](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/content-publishing) | Must recheck currently supported publishing contract |
+| [Facebook Pages posts](https://developers.facebook.com/docs/pages-api/posts/) | Must recheck current permissions and post endpoints |
+| [DataForSEO Maps task posting](https://docs.dataforseo.com/v3/serp/google/maps/task_post/) | Coordinate/task configuration spike |
+| [Maps pricing](https://dataforseo.com/pricing/google-serp/google-maps-serp-api) | Base mode pricing and multipliers |
+| [SEO provider minimum payment](https://dataforseo.com/help-center/minimum-payment) | Initial prepaid cash requirement |
+| [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing) | Text/image model cost reference |
+| [Gemini image generation](https://ai.google.dev/gemini-api/docs/image-generation) | Illustrative SDK utility and image workflow |
+| [Supabase pricing](https://supabase.com/pricing) | Managed database/auth reference |
+| [Hetzner price notice](https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/) | VM cost reference, region/IPv4/tax caveats |
+| [R2 pricing](https://developers.cloudflare.com/r2/pricing/) | Storage and operation reference |
+| [Antigravity rules](https://www.antigravity.google/docs/rules/) | Persistent implementation constraints |
+| [Antigravity workflow documentation](https://antigravity.google/docs/ide/workflows/) | Avoid reliance on stale workflow instructions |
+
+Direct Meta developer pages returned rate-limit/access errors during this research. The primary Meta-maintained Postman collection supplied partial confirmation; exact app-review requirements, API version, permission dependency chains and enabled formats remain explicit Phase 0 verification tasks. Third-party guides were not used as authority for those contracts.
+
+## 4. Visual evidence
+
+Captured public homepage: [1440×1000 screenshot](evidence/outrank-home-desktop.png).
+
+Computed-style observations are recorded in the UI specification. Measurements were taken from visible DOM elements, rather than guessed solely from the screenshot. No mobile breakpoint measurements or private dashboard measurements are claimed. Later implementation should recheck mobile layouts directly or use authorized references.
+
+## 5. Decisions needing owner validation, without blocking this plan
+
+| Decision | Assumption used | When to resolve |
+|---|---|---|
+| Launch geography | India-first, globally capable model | Before provider/payment registration |
+| Business category | Single-location service businesses | Before pilot recruitment |
+| Brand/domain | LocalPilot placeholder | Before public marketing launch |
+| Existing code reuse | New repository; avoid altering outbound system | Before scaffold |
+| Owner budget | Low fixed cost with metered providers | Before purchasing services |
+| Primary CMS | WordPress plus hosted templates | Phase 0 owner interviews |
+| Model choice | Economy model with evaluation-based escalation | Before production content |
+| Publishing consent | Review-first; scoped policies only after validation | Before external writes |
+| Directory coverage | Small relevant country/category catalog | Before citation sales claims |
+| Historical GBP reporting | Gated pending permitted retention/use validation | Before storing long-term profile history |
+| Agency workflows | Deferred UI, tenancy-ready backend | After paid single-location validation |
+| Customer pricing | Proposed test tiers | After willingness-to-pay interviews |
+
+## 6. Definition of this handoff being ready
+
+The planning handoff is ready when the builder can identify what is verified, what is proposed, what to build first, the exact key domain boundaries, how publishing avoids duplicates, how costs are bounded, what each screen should show, and what evidence closes each phase.
+
+The SaaS itself is ready only after those implementation acceptance gates pass. A plan, mockup or generated scaffold does not establish production readiness.
+
+
+========================================================================================
+PART B / EXPANDED LOCAL SEO INTELLIGENCE AND REPUTATION
+========================================================================================
+
+# Local SEO intelligence, competitor research and reputation specification
+
+Added 28 October 2026. This expands the original blueprint. All scoring systems, schedules, thresholds and automation rules below are proposed product designs, not disclosed Google ranking formulas. This document is also embedded in the complete TXT handoff.
+
+## 1. What intelligent operation means
+
+The software should run an evidence-to-action cycle, not generate generic advice repeatedly:
+
+Collect authorized observations → resolve business identity → validate freshness and completeness → detect a specific gap → identify plausible explanations → choose a bounded action → check consent/cost/risk → create or execute work → verify execution → observe later outcomes → retain, revise or stop the tactic.
+
+For every recommendation answer: What did we observe? Where and when? What is missing? Why might this matter? What will change? Who approves? What will it cost? How will successful execution be checked? When will we evaluate outcomes? What else could explain the result?
+
+Example: a plumbing business has a genuine emergency-callout service, but its page does not mention availability or the booking destination. The engine detects the mismatch from confirmed facts and the crawl, proposes a useful service-page edit, obtains approval, publishes a revision, verifies the HTML and booking link, then compares later matched-period search and enquiry observations. It must not claim that adding a keyword guarantees ranking gains.
+
+## 2. Evidence and intelligence architecture
+
+Add modules `local-intelligence`, `competitors`, `reputation`, `recommendations` and `experiments` inside the existing monolith. They call the existing facts, jobs, permissions, integrations and metering services. Do not introduce a new microservice or autonomous agent platform for each module.
+
+New data structures:
+
+- `evidence_records`: organization/location, subject, source class, source resource, observed time, coverage, uncertainty, permitted purpose, expiry, integrity hash and current availability.
+- `entity_matches`: target/provider identity, confidence components, disambiguation reason and owner confirmation.
+- `competitor_sets`: location, query cluster, grid/config version, entity membership and owner exclusions.
+- `comparison_observations`: dimension, comparable sample, observation date and source-specific expiry; no universal permanent history.
+- `recommendations`: rule version, evidence references, action, prerequisites, priority, cost estimate, risk, confidence, expiry, owner decision and suppression reason.
+- `recommendation_runs`: input fingerprint, model/rule version, evidence coverage and output deduplication.
+- `action_plans`, `action_dependencies`, `action_outcomes`: selected work, prerequisites, execution/measurement states and responsible actor.
+- `review_resources`: authorized external reference, source revision, rating/text/reply cache, fetched time and expiry.
+- `review_assessments`: ephemeral classifications tied to the source revision; do not use them to evade source storage restrictions.
+- `review_reply_drafts`, `reply_approvals`, `reply_attempts`: owner-authored response, source revision hash, consent scope, publication/reconciliation state.
+- `review_request_events`: transaction reference, eligibility basis, consent/suppression, delivery state and event deduplication; avoid unnecessary customer data.
+- `experiments`: hypothesis, intervention, exposure window, baseline, matching rules, confounders and conclusion confidence.
+
+Store expiring source payloads separately from long-lived owner decisions. A numeric vector, sentiment label or summary derived from restricted content does not automatically escape provider rules. Recommendations expire or lose their evidence links when the underlying data is no longer available. Validate retention and aggregation rights before enabling historical competitor/review dashboards.
+
+### Evidence contract
+
+```json
+{
+  "subject": "location:example/service:emergency-plumbing",
+  "observation": "confirmed service absent from current service page",
+  "sourceClass": "owner_facts_and_authorized_site_crawl",
+  "observedAt": "2026-10-28T05:00:00Z",
+  "coverage": { "pagesChecked": 12, "pagesExpected": 12 },
+  "confidence": "high",
+  "limitations": ["does not establish Google's ranking cause"],
+  "expiresAt": "2026-11-04T05:00:00Z"
+}
+```
+
+The dates above are illustrative fixture data. Production expiry comes from source policy and freshness configuration.
+
+## 3. Local SEO operating pillars
+
+### A. Accurate business identity
+
+Normalize but preserve original business name, address components, public phone and website. Compare formatting separately from real disagreement: `Road` versus `Rd` need not be an address conflict. Recognize moved locations, departments, practitioners, franchises, hidden-address businesses and genuinely distinct branches. Avoid merging businesses solely by similar names.
+
+The authoritative record contains service availability and exclusions, real-world name, operating/holiday hours, service coverage, booking destination and category evidence. Never invent a physical branch to target a neighborhood. Present identity/category edits as proposals with reasons and owner approval. Google's representation guidance requires accurate real-world business details. [S3]
+
+### B. Search demand and commercial intent
+
+Build keyword families from service, modifier, locality, language and intent: `AC repair`, `AC repair Indiranagar`, `AC repair open Sunday`, `AC repair cost`, and equivalent validated local-language expressions. Distinguish an implied-location query from a query containing a city name.
+
+Use measured demand when available; mark unavailable values as unavailable. Separate branded/nonbranded terms and business-name queries from service discovery. Estimate service relevance from confirmed facts. A high-volume irrelevant keyword is not a useful opportunity.
+
+### C. Geographic visibility
+
+Keep organic website results, Maps grid results, local-pack observations and GBP activity distinct. Track request coordinate, zoom/viewport parameters when applicable, query wording, language, device, depth and provider. Do not equate Maps results with a local-pack position without collecting the relevant result surface.
+
+A heatmap tells where a business appeared in a sample. Compare compatible runs and show error points. Distance is a fundamental factor; poor performance far away does not prove a broken profile. Google's stated factors are relevance, distance and prominence/popularity, not the software's internal health score. [S1]
+
+### D. Helpful website coverage
+
+Map one primary intent to a suitable canonical page. Improve existing pages before generating competing ones. Service pages explain actual service, eligibility, process, coverage, hours, practical next steps and verified proof. Location pages require genuine location/service context and useful differences, not city-name swaps.
+
+Use actual business photos, accessibility information, transport/parking details where relevant, verified case examples and booking links. Do not invent landmarks, work completed, response times, staff credentials or prices. Keep medical/legal/financial claims in a stricter approval workflow.
+
+### E. Reputation and business operations
+
+Reviews inform customer experience and owner action. Detect repeated concerns, create operational tasks and draft appropriate responses. Do not treat keyword-rich replies, posting frequency or image geotags as proven ranking levers. Show a service-quality opportunity separately from a technical SEO problem.
+
+### F. Citations and legitimate authority
+
+Prioritize accurate listings on directories that matter to the selected category/country. Distinguish live verified listings from submitted forms. Compare real identity disagreements; preserve private addresses. Suggest genuine local associations, suppliers, sponsorships or editorial resources with an owner task, without promising paid-link ranking benefits.
+
+### G. Technical accessibility and conversion
+
+Check indexability, correct canonical destination, sitemaps, status codes, internal links, speed samples and usable mobile contact actions. Verify booking/enquiry flow rather than stopping at an SEO score. An authenticated booking tool may need a manual check; a crawler cannot prove a completed appointment.
+
+## 4. Competitor analysis in depth
+
+### 4.1 Discover the right competitors
+
+Use query-cluster and geography-specific competitor sets. A bakery may compete with different businesses for custom cakes and breakfast. Owner-entered competitors are a separate list from businesses repeatedly observed in search results. Directory domains and national publishers may be website-search competitors while not being local service competitors.
+
+Discovery flow: select relevant queries → collect licensed result samples on the owner's chosen grid → extract stable business identities → resolve duplicates/branches → calculate repeated overlap → exclude irrelevant or out-of-area matches → ask owner to confirm ambiguous entities → retain the source and expiry.
+
+Never use owner-authorized GBP account APIs as a general competitor lead-generation database. Competitor observations must come from a source licensed for that purpose. No login-gated scraping or unbounded crawling.
+
+### 4.2 Comparison dimensions
+
+For each dimension show `measured`, `partially observed`, `owner supplied` or `unavailable`:
+
+- Overlap by service/query/location and observed top-3 presence.
+- Genuine categories/services/hours where licensed data exists.
+- Provider-reported rating/count, date and sampling limitations.
+- Review themes from a permitted sample, with sample size and window.
+- Existing service/area pages and content usefulness on authorized public pages.
+- Visible booking/contact journeys and mobile usability samples.
+- Technical page observations and relevant publicly discoverable citations.
+- Content update observations only when a reliable date exists; never infer a publishing date from a crawler visit.
+- Backlinks only from an appropriate licensed data source; `Domain Rating` is not a Google metric and cannot be fabricated internally.
+
+### 4.3 Explainable competitor opportunity
+
+Do not conclude 'competitor ranks higher because it has more reviews'. That is correlation with many confounders. A good recommendation is: 'Three comparable observed competitors explain emergency availability clearly; your confirmed emergency service is missing from your service page. Improve that page and verify the outcome.'
+
+Opportunity card includes evidence coverage, geography, comparable competitors, exact gap, confidence, estimated effort, action dependencies, owner approval and outcome measurement. Provide at most a manageable shortlist, such as five prioritized actions/week, rather than 100 repetitive suggestions.
+
+### 4.4 Metrics and safeguards
+
+Weighted top-3 coverage = sum of owner-selected keyword weights at successful comparable top-3 points divided by sum of weights at all successful comparable points. Weights express business importance, not Google ranking weight. Show denominator and missing coverage.
+
+Competitor overlap = shared query-point appearances divided by relevant successful query-point samples under an explicit definition. Never label it total market share.
+
+Review comparison uses the same available date window/source where possible. An API exposing only a sample cannot support a claim about all review themes. A sudden increase is an anomaly for investigation, not proof of fake reviews.
+
+## 5. Recommendation engine and controlled execution
+
+Use deterministic detection first, AI explanation second. Detection rules identify a broken booking link, conflicting holiday hours, missing confirmed service page, stale facts in a draft, declining compatible scan coverage, or an unanswered review. AI can group and explain evidence; it cannot invent missing measurements.
+
+Proposed priority, with each input on 0–1 scale:
+
+`priority = 100 × confidence × (0.30 customerImpact + 0.25 businessRelevance + 0.20 observedGap + 0.15 urgency + 0.10 strategicFit) / (1 + 0.5 effort + 0.5 incrementalCost)`
+
+Risk, consent and source validity are hard eligibility gates outside this score. Score is an internal ordering heuristic, not a statistical probability of ranking improvement. Unknown inputs remain visible; avoid mechanically treating missing measurements as zero business value. Store the rule version and reasons.
+
+Dependencies: confirm holiday hours before publishing an opening-hours update; fix robots blockage before creating additional SEO content; resolve location identity before sending review requests; obtain real case-study evidence before generating a case-study page. Collapse duplicate recommendations by location, action target, evidence fingerprint and cooldown.
+
+Action lifecycle: candidate → evidence_ready → proposed → approved/policy_eligible → executing → execution_verified → observing → inconclusive/improved/worsened → retained/rolled_back/closed. Technical publication success is separate from business impact.
+
+Run experiments conservatively. Record other concurrent changes, seasonality, holidays, outages and search updates. Prefer matched day-of-week windows and enough observations; expose uncertainty. A before/after chart does not establish causal lift. No repeated automatic rewriting every time rankings fluctuate.
+
+## 6. Review system: end-to-end workflow
+
+### 6.1 Scope and ingestion
+
+Launch with authorized Google reviews; add other providers only after verifying their current APIs and permissions. Facebook recommendations, Instagram comments, private messages and website feedback are different resource types and must not be presented as interchangeable star reviews.
+
+Use a bounded initial sync with pagination, stable IDs, update timestamps and source expiry. Google documents Cloud Pub/Sub-based notifications for supported profile events; implement authenticated delivery and periodic reconciliation so dropped/out-of-order notifications do not lose work. [S4]
+
+A notification is a signal to refresh the authorized current review, not trusted reply text. Deduplicate by resource/revision. Handle changed ratings/text, removed reviews, existing owner replies, connection loss and deleted accounts. Show freshness and sync health in the UI.
+
+### 6.2 Review inbox
+
+Filters: location, provider, rating, response state, sentiment/topic, risk, language, assignee and age. Separate `unanswered`, `draft`, `needs_approval`, `scheduled`, `sending`, `verified_replied`, `changed_since_review`, `unknown_outcome` and `no_longer_available`.
+
+Drawer: source review, provider link, available public author name, rating, timestamps, existing reply, suggested draft, classification reasons, business facts used, permission status and activity. Redact unnecessary personal data from AI contexts and logs. Never merge anonymous reviewers into a CRM identity by guesswork.
+
+### 6.3 Classification before drafting
+
+Proposed schema: language, star rating, positive/mixed/negative/unclear sentiment, topics, factual questions, privacy indicators, threats/abuse flags, health/legal/safety/refund dispute flags, sarcasm uncertainty, existing-reply state, confidence and recommended handling.
+
+Use text plus rating. A five-star review saying 'Great if you enjoy being scammed' is not a positive auto-reply candidate. A blank rating can receive an owner-approved generic template, but not an invented service-specific response. Review text is untrusted content and cannot authorize tools or override system instructions.
+
+### 6.4 Reply policy modes
+
+Modes: off; draft only; approve each reply; narrowly scoped automatic positive replies. Start every business in draft/review mode. Enabling automatic mode requires a business owner to review sample responses, select location/provider/action, choose eligibility/rate/delay limits and accept a recorded, revocable policy. Verify the actual implementation meets current Google requirements before enabling recurring writes. [S2]
+
+Proposed automatic eligibility requires ALL: currently connected approved capability; specific current consent; unchanged source revision; no existing reply needing protection; 4–5 stars AND clearly positive uncomplicated text; non-sensitive business/context; supported language validated for this tenant; no risk/privacy/uncertainty flags; no promises/compensation; business facts current; spending/rate limits; duplicate and novelty checks passed.
+
+Low confidence, contradictory sentiment, 1–3 stars, complaints at any rating, refund disputes, allegations, emergencies, legal/medical matters and owner-flagged topics go to human review. Star rating alone never permits a public response. Business-specific stricter policies can override the default.
+
+### 6.5 Reply generation
+
+Reply should be brief, natural, relevant, use the business's approved voice and preferably the review's validated language. It may acknowledge the reviewer's actual words without inventing a transaction or repeating sensitive details. Use a public business support contact only when useful. No keyword stuffing, repetitive city/service insertion, promotional deals, requests to remove a negative review or invented refunds.
+
+Examples, all illustrative:
+
+Positive review 'Friendly team and quick repair': 'Thank you for the kind feedback. We’re glad you had a good experience with the team.' Do not add an unverified repair type or timeline.
+
+Mixed review 'Good work but a long wait': draft 'Thank you for your feedback. We’re glad you were pleased with the work, and we’d like to understand the wait you experienced. Please contact our team using the support details on our profile.' Owner checks any operational commitment before posting.
+
+Sensitive complaint: create an internal case and a conservative draft for review. Do not confirm the person is a patient/client, reveal order details, accept legal liability or promise an outcome the system cannot authorize.
+
+### 6.6 Safe delivery and races
+
+Google documents listing/getting reviews and creating/updating/deleting the business's reply; deleting a reply does not delete the customer's review. Verify currently supported permissions and endpoint contracts before production. [S5]
+
+At dispatch: reload policy/connection/current review, compare review and reply hashes, check for a manual provider-side reply, acquire per-review publication lease, and preserve a pending operation ID. If anything changed, pause for re-review. Use local compare-and-swap to coordinate workers; where a provider lacks conditional writes, acknowledge residual external races and minimize the read-to-write interval.
+
+On timeout, fetch the provider reply and compare normalized content before retry. A successful HTTP write is followed by verification. Do not overwrite a different manual reply. Edits, deletion and replacement require explicit control; record what the software changed. Pause/revocation cancels unsent operations immediately.
+
+Suggested initial limits: configurable 5–15 minute owner-edit window, maximum five automatic replies/day/location, digest of actions and a one-click pause. These are product defaults, not provider rules. An edit window prevents some mistakes; it does not replace consent.
+
+### 6.7 Quality evaluation and rollout
+
+Create at least 60 labeled review examples: praise, rating-only, mixed, sarcastic, multilingual/code-switched, competitor allegations, personal data, refund, health/safety, threatening, edited review, removed review, existing reply and prompt injection. Critical criterion: no sensitive/complaint case should be auto-published in the acceptance set. Zero errors on the test set is not a production guarantee; start with shadow mode and monitor real owner corrections.
+
+Rollout: draft-only → 20 owner-reviewed replies → shadow eligibility decisions → opt-in limited auto mode → periodic sampling and policy review. Keep provider approval/retention dependencies visible. Do not silently enable automation after a subscription upgrade.
+
+## 7. Review acquisition and service recovery
+
+Offer a neutral Google review link/QR and optional transaction-triggered invitations. Apply the same objective eligibility rules regardless of expected satisfaction. Separate private service feedback from the public review link without routing only happy customers to Google. No rewards, fabricated reviews or pressure for specific text. [S6]
+
+Eligibility examples: genuine completed service, valid contact/consent, not opted out, not a duplicate transaction, reasonable frequency cap. Define how cancelled/refunded transactions are treated by objective rules rather than selectively suppressing unhappy customers. Keep logs proving the rule applied uniformly.
+
+Delivery adapters are disabled until the business authorizes the channel and the launch market's requirements are checked. Do not infer outreach permission from a public review or an imported phone number. Implement opt-out/suppression, idempotency, quiet hours and limited reminders. Customer-created reviews cannot be automatically linked back to a particular invitation unless the provider supplies a valid permitted basis; report clicks separately from verified new reviews.
+
+Service recovery queue: recognize an operational issue, assign owner, record internal follow-up and mark resolved only on owner evidence. Do not ask for a better rating as a condition of resolving a complaint. Suspected policy violations generate an evidence packet and provider-reporting guidance, never a promised removal service.
+
+## 8. Review analytics with honest methodology
+
+Metrics: current provider rating/count, current unanswered count, response coverage in the accessible set, median response time for known events, owner edit/approval rate, automatic eligibility/rejection reasons, delivery/verification failures and permitted theme samples. Show sample sizes and unavailable timestamps.
+
+Do not present sampled-review averages as the platform's official overall rating. Avoid long-term derived GBP review trends unless retention/aggregation use has been cleared. Expose the selected allowed observation window and its limitations.
+
+An optional private arithmetic simulator can explain averages using owner-provided aggregate values: current average R across N reviews plus x hypothetical reviews at score s gives (R×N+s×x)/(N+x). Mark as mathematical illustration, not a target, prediction, invitation selection rule or instruction to obtain only high ratings. Do not derive a precise original star sum from a rounded public average.
+
+Review insight example: 'Wait time appears in 7 of 24 accessible reviews in this window; owner review suggested.' This is a sample observation, not a claim about every customer or causal ranking explanation. A suspicious spike is flagged as an anomaly, not an accusation of fraud.
+
+## 9. Website, schema and content additions
+
+Add service/area coverage matrix, useful local content briefs, internal-link opportunities and crawl-diff detection. Verify visible page content agrees with generated JSON-LD. Use a stable entity @id, appropriate business subtype, accurate hours/contact details and verified links. Schema validity does not guarantee rich results. [S7]
+
+Do not expose a hidden residential address simply to satisfy rich-result requirements. Keep honest public information; if required properties cannot appropriately be published, explain reduced eligibility rather than fabricating data.
+
+Displaying a testimonial widget does not make a business eligible for self-serving review stars in Google Search. Keep testimonial display, rights/source requirements and review-rich-result eligibility separate. [S8]
+
+Business updates should use confirmed photos/offers/events. Expire stale offers and show rejected posts as rejected. Maintain a calendar with campaign intent and channel variants, not forced daily posts with repeated generic text.
+
+## 10. Operational schedules and cost controls
+
+Proposed defaults, adjusted for volume and source terms:
+
+- Review notifications: event-driven with bounded reconciliation; do not promise instant delivery.
+- Review drafts: after a valid new/changed review; deduplicate by source revision.
+- Facts/hours conflicts: lightweight daily checks where permitted; ask owner before changes.
+- Rank scans: weekly small-grid baseline; owner estimates cost before extra scans.
+- Competitor refresh: weekly sampled metrics, monthly broader page-gap analysis where licensed.
+- Crawl: weekly bounded crawl plus checks after a published technical fix.
+- Recommendations: weekly shortlist and event-driven urgent technical/customer issues; suppress duplicates.
+- Content planning: monthly plan, weekly adjustment; no mass churn from daily rank noise.
+- Retention cleanup: daily or more frequently to meet source expiry.
+- Provider capability/policy audit: recurring owned engineering task before version deadlines.
+
+Add unit budgets for review assessment/drafting, competitor evidence collection and AI explanations to the existing ledger. High-volume reviews and third-party review analysis can cost more than ordinary text generation because of data collection and support. Use cached lawful evidence, bounded samples and no paid model call when a deterministic rule suffices. New modules increase scope beyond the original basic beta; schedule 3–6 additional focused weeks for intelligence/reputation hardening, adjusted after spikes, without treating this as an approval-time guarantee.
+
+## 11. Example owner journey
+
+An AC service business in Bengaluru connects WordPress and an authorized GBP, confirms a hidden address, service coverage, Sunday hours and public contact. The baseline finds weak sampled visibility for repair queries in one nearby cluster. Competitor research identifies missing repair-cost/process information on the existing service page, not a need for 30 new city pages.
+
+The weekly shortlist proposes: repair a broken booking link; clarify confirmed Sunday availability; expand the repair page with grounded FAQs; review two unanswered complaints; prepare one genuine local-directory correction. It prioritizes the broken customer journey over more articles.
+
+The owner approves page changes and review drafts. Straightforward positive reviews remain in shadow mode until explicit opt-in. One five-star sarcastic complaint is held. The software verifies published HTML and replies, logs spend, and measures later search/enquiry observations without claiming a guaranteed ranking lift.
+
+## 12. Acceptance conditions
+
+Competitor comparisons share defined surfaces/geography/time windows or disclose differences; unavailable data is never invented. Every recommendation links to valid evidence, explains confidence, has a bounded next step and respects source expiry. Review automation cannot run on rating alone, stale consent, edited source, existing manual reply, sensitive content or an unsupported language. Duplicate/replayed events and ambiguous external outcomes do not cause blind reposts. Review acquisition is neutral and permission-aware. UI retains the existing light-orange design system and clearly distinguishes drafts, proposals, scheduled actions and verified public changes.
+
+## Sources checked 28 October 2026
+
+[S1] https://support.google.com/business/answer/7091?hl=en
+[S2] https://developers.google.com/my-business/content/policies
+[S3] https://support.google.com/business/answer/3038177?hl=en
+[S4] https://developers.google.com/my-business/content/notification-setup
+[S5] https://developers.google.com/my-business/content/review-data
+[S6] https://support.google.com/contributionpolicy/answer/7400114?hl=en and https://support.google.com/business/answer/3474122?hl=en
+[S7] https://developers.google.com/search/docs/appearance/structured-data/local-business
+[S8] https://developers.google.com/search/docs/appearance/structured-data/review-snippet
+
+Sources establish platform behavior/boundaries; module designs, thresholds, formulas and proposed schedules are this blueprint's recommendations.
+
+
+========================================================================================
+PART C / EXACTLY 100 ORDERED ANTIGRAVITY PROMPTS
+========================================================================================
+
+LOCALPILOT: EXACTLY 100 IMPLEMENTATION PROMPTS
+Updated: 28 October 2026
+
+HOW TO USE
+Create a separate repository. Load the complete TXT handoff as project context,
+or copy the numbered blueprint documents into docs/plan/. Give Antigravity ONE
+numbered prompt at a time, in order. The sequence includes initial setup through
+launch; earlier Prompt 0-8 examples in document 06 are superseded by this sequence.
+Prompts are implementation tickets; complex tickets can require several sessions.
+Exactly 100 prompts does not mean 100 automatic steps or a fixed delivery time.
+
+COMMON INSTRUCTIONS APPLY TO EVERY PROMPT
+Read the relevant plan sections and current repository instructions first. Inspect
+existing work and continue it; do not recreate completed modules. Keep TypeScript
+modular monolith boundaries and separate web/worker processes. Use Plus Jakarta
+Sans/Inter, peach/orange tokens and accessible UI. All external writes require
+server authorization, valid consent, current revision, capability and budget.
+Never invent rankings, customers, provider success, data access or approval.
+Do not expose secrets to client code, AI contexts, screenshots or logs. Respect
+source-specific retention; derived data is not a loophole. Paid/live operations
+stay gated until explicitly configured for an authorized test account and budget.
+Do not damage an existing application or run destructive production migrations.
+Deliver working behavior, meaningful verification and updated docs/progress.md.
+Report changed files, commands/check results, screenshots for UI changes, and
+externally blocked behavior. Mocks alone do not verify a real integration.
+No whole-platform rewrite, arbitrary provider proxy or unbounded agent loops.
+
+PHASE A: PROJECT AND SECURE FOUNDATIONS — PROMPTS 001-010
+
+PROMPT 001 — Establish the project and implementation contract
+Dependency: none; start in the new repository.
+Read the full LocalPilot handoff and inspect the repository before changing it.
+Create a concise product brief covering local-business onboarding, website/GBP,
+content/social, rankings, competitor intelligence, citations and reputation.
+Create docs/progress.md with 100 numbered ticket slots, implemented/verified/
+externally-blocked states, and evidence links. Record assumptions about India-first
+launch, business vertical and branding. Document that private Outrank UI was not
+inspected. Deliver a scoped repository plan and a safe initial structure, without
+generating every module. Acceptance: the next ticket and scope boundaries are clear.
+
+PROMPT 002 — Validate external capabilities before building against them
+Dependency: 001.
+Create an integration feasibility register using current primary documentation:
+GBP eligibility/access/consent/storage, Meta login routes/permissions, WordPress,
+GSC, ranking coordinates and payment eligibility. Record verified date, required
+owner action, approval state, supported actions, version and fallback. Prepare
+application/review checklists without submitting or spending through unidentified
+accounts. Recheck any price before incorporating it. Acceptance: unavailable
+capabilities are explicitly blocked rather than simulated as working; uncertainty
+around review automation and historical GBP data has an assigned decision owner.
+
+PROMPT 003 — Record architecture decisions and module boundaries
+Dependency: 001-002.
+Write ADRs for TypeScript/Next.js, managed PostgreSQL/auth, Drizzle migrations,
+PostgreSQL durable jobs, web/worker split, R2-style storage, provider adapters,
+revision-bound approvals and per-location metering. Define organization/business/
+location ownership and internal modules for intelligence and reviews. Validate
+queue privileges/connection mode in a minimal spike before committing to the
+library. Acceptance: chosen versions and alternatives are justified, modules
+cannot bypass domain permissions, and no unnecessary microservice is introduced.
+
+PROMPT 004 — Scaffold the workspace and quality commands
+Dependency: 003.
+Create web and worker applications plus shared domain, contracts, DB, UI and
+integration packages as appropriate. Pin compatible stable dependencies, lockfile,
+format/lint/type checks and CI. Add validated environment loading and local-only
+development configuration. Build scripts should compile in CI rather than on the
+small production VM. Acceptance: a clean checkout installs, typechecks, builds
+and runs a simple web/worker health check using documented commands. No provider
+keys or paid calls are needed for this foundation.
+
+PROMPT 005 — Define shared domain contracts and error semantics
+Dependency: 004.
+Implement validated identifiers, tenant context, money/credits, source timestamps,
+freshness, paginated responses and versioned async command schemas. Define errors
+for reconnect, unsupported action, approval required, quota exceeded, stale
+revision and unknown external outcome. Standardize 202 job responses and UI-safe
+error messages. Keep provider SDK objects out of public contracts. Acceptance:
+invalid requests fail before domain work, callers receive actionable errors, and
+timestamps/currencies cannot silently become inconsistent across integrations.
+
+PROMPT 006 — Create the tenant and business data model
+Dependency: 005.
+Add organizations, memberships, businesses, locations and scoped relationships.
+Store country, IANA timezone, language, currency, address visibility and public
+contact separately from private account details. Use constraints to prevent
+cross-organization foreign-key associations. Add indexes for tenant/location
+queries and versioned migrations. Acceptance: single-location and multi-location
+fixtures both work; hidden residential data remains private; invalid tenant links
+are rejected at a dependable boundary rather than only hidden in the UI.
+
+PROMPT 007 — Implement managed authentication and account recovery
+Dependency: 006.
+Add supported Google/email authentication, secure sessions, callback validation,
+sign-out, recovery and first-organization setup. Avoid writing a new password
+system. Protect cookie-authenticated mutations and validate redirect targets.
+Create visibly labeled demo mode separately from real sessions. Acceptance:
+unauthenticated users cannot enter tenant APIs, sign-out invalidates access as
+designed, failed auth has usable recovery, and no identity/token information
+appears in client logs or tracking events.
+
+PROMPT 008 — Implement roles and location-scoped capabilities
+Dependency: 007.
+Implement owner, admin, editor, approver, analyst and billing capabilities with
+optional location scopes. Centralize authorization in domain services, including
+worker entry points. Add invite/accept/revoke flows with safe expiration and
+owner-transfer constraints. Acceptance: an editor cannot approve their way around
+policy, an analyst cannot mutate, billing access does not reveal tokens, and a
+member restricted to one location cannot act on another by changing a request ID.
+
+PROMPT 009 — Enforce and test tenant isolation
+Dependency: 008.
+Implement RLS and tenant-safe repositories for all existing tenant data. Separate
+published-site read projections from private draft tables. Build negative tests
+with two organizations across reads, writes, membership changes and export-like
+queries. Ensure worker payloads are reauthorized with explicit tenant context.
+Acceptance: forged browser organization IDs grant no access, malformed associations
+fail, and documented privileged server roles cannot accidentally bypass required
+resource checks through ordinary repository helpers.
+
+PROMPT 010 — Protect secrets, uploads and untrusted imports
+Dependency: 009.
+Build encrypted integration-secret storage with key versions and rotation hooks,
+private object paths and short-lived signed access. Implement URL validation for
+imports blocking private/loopback/link-local/metadata destinations, unsafe schemes,
+redirect bypass and oversized responses. Validate MIME/signatures and sanitize
+renderable content. Acceptance: tests cover unsafe URL redirects and foreign-tenant
+assets; secret values never appear in exported DTOs, AI inputs or diagnostic logs.
+
+PHASE B: DESIGN AND BUSINESS ONBOARDING — PROMPTS 011-020
+
+PROMPT 011 — Implement the orange visual system
+Dependency: 010.
+Read the measured Outrank typography and proposed UI specification. Implement
+Plus Jakarta Sans display/button typography, Inter body/nav, centralized peach/
+orange tokens, accessible dark-orange actions, spacing, radii, shadows and semantic
+statuses. Use 68/81.6px desktop hero type and measured reference proportions where
+specified; responsive dimensions remain proposed. Acceptance: fonts load, contrast
+passes for real text/control combinations, styles are reusable, and original
+branding/copy replaces competitor identity and fabricated proof.
+
+PROMPT 012 — Build accessible reusable application components
+Dependency: 011.
+Create buttons, fields, comboboxes, forms, status badges, data tables, KPI cards,
+integration cards, empty states, cost/freshness indicators, drawers, confirmation
+diffs and usage bars. Include loading, error, disabled and keyboard states. Centralize
+status styling and provide semantic labels. Acceptance: representative component
+screens support keyboard-only use, dialogs restore focus, mobile targets are
+usable, and pending/failed/published meanings remain consistent across the system.
+
+PROMPT 013 — Build the responsive application shell
+Dependency: 012.
+Implement organization/business/location switching, sidebar, top bar, breadcrumbs,
+notifications and mobile drawer. Include navigation for overview, calendar, studio,
+rankings, profile, reviews, social, website, citations, intelligence and reports,
+with unavailable modules labeled honestly. Add a persistent automation-pause
+indicator. Acceptance: inspect at 1440, 1280, 768 and 390px widths; long names do
+not break layout, tenant switching clears stale view state, and authorization
+continues to be enforced server-side.
+
+PROMPT 014 — Build the public product and pricing pages
+Dependency: 013.
+Implement original local-business landing copy using the reference's capsule
+navigation, centered hero, subtle grid/glow, rounded CTAs and whitespace rhythm.
+Show labeled product previews, supported integrations, precise quota explanations,
+FAQs and contact/legal placeholders requiring completion before launch. Use no
+invented customer metrics, testimonials or guaranteed rankings. Acceptance: mobile
+layout and reduced motion work, primary CTAs lead to real onboarding, and marketing
+claims match the current capability register.
+
+PROMPT 015 — Finish account and first-run UX
+Dependency: 014.
+Connect auth screens to real sessions and first-run routing. Add invitation
+acceptance, expired-link recovery, organization creation, empty workspace and
+accessible validation. Make demo mode visually explicit and isolated. Preserve
+intended destinations safely after sign-in. Acceptance: a new owner reaches an
+empty authenticated workspace, a returning user resumes correctly, failed login
+has a useful next action, and no public marketing screen leaks private tenant data.
+
+PROMPT 016 — Build resumable business and location onboarding
+Dependency: 015.
+Implement existing-website, GBP-first and starting-from-scratch paths. Collect
+services, country, hours/timezone, public/hidden address, service coverage, booking
+goal, language and brand inputs. Save progress after each stage; integrations can
+be skipped. Enforce required facts without blocking optional enrichment.
+Acceptance: an owner can leave/resume, a service-area business keeps its private
+address hidden, and unsupported business or account assumptions are surfaced
+before generating marketing claims.
+
+PROMPT 017 — Import website facts with provenance
+Dependency: 016 and URL protections.
+Build a bounded authorized public-site crawl/extraction flow for names, contact,
+hours, services, photos and existing pages. Track source URLs, observed time,
+confidence and extraction errors. Imported content is untrusted data, never agent
+instructions. Acceptance: progress is async/resumable, conflicts remain unconfirmed,
+no site credentials are requested, crawl limits are enforced, and prompt-injection
+text cannot trigger account changes or read other tenants.
+
+PROMPT 018 — Implement fact confirmation and conflict resolution
+Dependency: 017.
+Create versioned business facts, location overrides, confirmation history and a
+side-by-side conflict UI. Distinguish harmless formatting from actual NAP/hour
+disagreement. Confirmed changes flag scheduled content using outdated facts.
+Acceptance: publication cannot silently use a superseded critical phone/hour fact,
+conflicting imports never overwrite owner-confirmed values, and the UI explains
+which downstream drafts and proposals need review after an update.
+
+PROMPT 019 — Build the brand and approved-asset library
+Dependency: 018.
+Add owner voice preferences, approved terminology, forbidden claims, logos,
+real-business photos, source/rights records, generation labels and derivative
+crops. Separate portfolio evidence from generic illustrations. Use private previews
+and validated dimensions/MIME. Acceptance: hidden metadata is removed where
+appropriate, another tenant cannot access originals, and generated illustrative
+images cannot be mislabeled as actual premises, customers or completed work.
+
+PROMPT 020 — Build the honest overview dashboard
+Dependency: 019.
+Implement the proposed KPI layout, upcoming work, attention queue, source/freshness
+badges, automation status and usage. Use labeled fixtures only until live sources
+are attached, with separate loading/disconnected/stale/partial states. Separate
+organic clicks, sampled Maps coverage, enquiries and publication counts.
+Acceptance: missing connections display a connection action rather than zero,
+metrics name the source/window, and clicking an action opens the correct scoped
+workflow without implying guaranteed marketing outcomes.
+
+PHASE C: DURABLE AUTOMATION AND CONNECTIONS — PROMPTS 021-035
+
+PROMPT 021 — Implement durable background jobs
+Dependency: 020 and queue spike.
+Install the chosen PostgreSQL queue with supported connectivity, migrations,
+worker leases, concurrency limits, heartbeat and job-status APIs. Create lanes
+for publication, reconciliation, generation, rankings and crawl maintenance.
+Acceptance: a worker restart resumes queued work, failed jobs retain actionable
+diagnostics without secrets, and a busy tenant cannot starve all other tenants.
+Do not use browser timers or a server request's lifetime as the scheduler.
+
+PROMPT 022 — Add transactional commands and outbox delivery
+Dependency: 021.
+Create durable commands and outbox events committed alongside resource changes.
+Implement replay-safe dispatch, event payload versions and pending/processed states.
+Connect job status to UI polling with backoff. Acceptance: a crash after DB commit
+but before queue dispatch does not lose work; repeated dispatcher runs do not
+create duplicate logical jobs; and resource mutation/event creation cannot become
+inconsistent through separate uncoordinated writes.
+
+PROMPT 023 — Implement idempotency and external-outcome states
+Dependency: 022.
+Add unique operation keys, logical occurrence identity, attempt history, retry
+classification and unknown-outcome/reconciliation contracts. Distinguish validation,
+authorization, rate-limit, transient and ambiguous accepted-write failures.
+Acceptance: duplicate user requests return the existing command, transient retries
+are capped with jitter, and a timed-out provider write is never blindly repeated.
+Test task-level provider errors even when HTTP transport reports success.
+
+PROMPT 024 — Implement atomic usage reservations and budgets
+Dependency: 023.
+Build credit ledger, allowance periods, reserve/finalize/release operations,
+idempotent charges, provider-cost snapshots and per-tenant/provider hard caps.
+Money uses precise units and currency. Add estimates to commands before external
+work. Acceptance: simultaneous requests cannot overspend the same allowance,
+failed/cancelled work follows documented charging rules, repeated finalization
+does not double-charge, and owner-visible usage separates reserved from spent.
+
+PROMPT 025 — Build versioned consent and approval policies
+Dependency: 024.
+Create per-location/provider/action consent records, approved payload hashes,
+facts versions, actor/timestamp, exclusions and revocation. Default to review-first.
+Add explicit sensitive-change approval and global/per-channel pause controls.
+Acceptance: stale approval, revoked consent, edited content, disconnection or pause
+blocks dispatch; a subscription upgrade never silently enables automation.
+Keep GBP recurring-action features disabled until the actual consent design is
+validated against current provider requirements.
+
+PROMPT 026 — Build timezone-aware scheduling and catch-up rules
+Dependency: 025.
+Implement local intended time, IANA timezone, recurrence, resolved UTC occurrence,
+blackouts, quiet periods, schedule revisions and recovery after downtime. Handle
+DST gaps/duplicates even for an India-first launch. Acceptance: a schedule produces
+one logical occurrence, rescheduling cancels superseded work safely, and missed
+social posts follow a visible catch-up policy instead of dumping a week's content
+onto public accounts at once.
+
+PROMPT 027 — Implement owner notifications and actionable alerts
+Dependency: 026.
+Create in-app notices and configurable digests for approvals, reconnects, failures,
+unknown outcomes, budget limits and urgent operational tasks. Deduplicate related
+alerts and respect notification preferences. Account-owner operational notifications
+are separate from customer marketing outreach. Acceptance: pause and unresolved
+public-write states remain visible beyond a disappearing toast, routine success
+does not flood users, and alert records contain no raw secrets or unnecessary
+restricted provider payloads.
+
+PROMPT 028 — Implement provider adapter interfaces
+Dependency: 027.
+Create typed contracts for connect/capabilities/validate/publish/reconcile and
+read-only evidence adapters. Keep SDKs, endpoint versions and token handling
+inside provider modules. Add deterministic contract fixtures and standardized
+error translation. Acceptance: domain services can swap adapters without importing
+provider response objects, unsupported media/action combinations are explicit,
+and the API cannot forward arbitrary user-selected provider requests with our
+privileged credentials.
+
+PROMPT 029 — Implement secure OAuth and connection management
+Dependency: 028.
+Build OAuth state, supported PKCE, safe callbacks, encrypted refresh/access token
+handling, asset selection, expiry/revocation detection and disconnect. Each route
+records provider product/version and granted scopes. Acceptance: cross-tenant
+callback binding and forged state fail, only selected assets become writable,
+disconnect cancels future operations, and server-side connection health explains
+reconnect versus provider-approval versus unsupported-action failures.
+
+PROMPT 030 — Connect WordPress with a verified publish spike
+Dependency: 029.
+Implement HTTPS WordPress REST connection using an owner-authorized application
+password, capability checks, media upload and create/update/readback. Store external
+post IDs and verify the published URL. Do not assume REST can change every SEO
+plugin or robots setting. Acceptance: publish and update an authorized test draft
+through the adapter, redact credentials, preserve target identity, and document
+recovery if upload succeeds but post creation has an unknown outcome.
+
+PROMPT 031 — Connect GBP and select authorized locations
+Dependency: 029 and approved project access.
+Implement the verified current GBP account/location discovery flow, explicit
+selection and capability status. Keep business information, performance, posts,
+reviews and verification surfaces separate. Do not use owner account access for
+general competitor discovery. Acceptance: only authorized selected locations can
+be acted on, unavailable approval is shown honestly, verification requires the
+appropriate owner request, and no generic programmatic proxy to our GBP project
+is exposed.
+
+PROMPT 032 — Connect Search Console and ingest observed metrics
+Dependency: 029.
+Implement OAuth/property selection and bounded Search Analytics collection with
+source dates, dimensions, pagination/coverage limitations and freshness. Keep GSC
+average position separate from coordinate-based Maps ranks. Acceptance: owner
+property authorization is checked, missing rows are not invented, source-specific
+time boundaries remain accurate, and the dashboard labels clicks/impressions/CTR
+as observed search data with the actual selected period and available coverage.
+
+PROMPT 033 — Connect Meta Pages and professional Instagram accounts
+Dependency: 029 and current verified app capabilities.
+Implement the chosen Instagram authentication route and Facebook Page flow with
+correct distinct scope/token contracts. Add explicit asset selection, account
+eligibility, granted permissions and app-review states. Do not mix Instagram Login
+with Facebook Login assumptions. Acceptance: personal accounts and unsupported
+formats receive useful guidance, selected Page/account identity is clear, and
+developer-role-only success is not represented as proof of public SaaS access.
+
+PROMPT 034 — Expose capability-aware integration UX
+Dependency: 030-033; unavailable adapters may remain disabled.
+Build connection cards and a shared capability service showing action/media support,
+last verification, granted scope, provider approval, reconnect reason and next
+owner step. Cache with bounded freshness and refresh before critical writes.
+Acceptance: connected does not imply every action works, disabled buttons explain
+why, and current revoked permission prevents publication even if an earlier UI
+snapshot showed the feature available.
+
+PROMPT 035 — Build authenticated webhook and event ingestion
+Dependency: 034.
+Implement provider signature/auth verification on original payloads, event identity,
+durable inbox, replay deduplication, out-of-order handling and short acknowledgement.
+Use provider-specific contracts; do not assume Google Pub/Sub uses Meta-style
+signatures. Acceptance: forged/replayed events cannot mutate tenant data, crashes
+after acknowledgement do not lose durably stored work, and raw payload retention
+matches each provider rather than an unlimited debug archive.
+
+PHASE D: CONTENT AND PUBLISHING — PROMPTS 036-050
+
+PROMPT 036 — Implement configurable AI providers and usage accounting
+Dependency: 035.
+Create economy/quality text and image interfaces, typed output validation,
+model/prompt version records, token/cost capture, bounded retries and feature flags.
+Use confirmed tenant facts and allowed sources, never direct publish credentials.
+Acceptance: malformed output is handled, maximum token/tool/attempt limits apply,
+paid calls obey reservations, and model changes require configuration/evaluation
+rather than edits scattered through application routes.
+
+PROMPT 037 — Create AI evaluation datasets and grounded-output rules
+Dependency: 036.
+Create labeled fixtures for business facts, conflicting hours, unknown prices,
+hidden addresses, unsupported credentials, multilingual content and malicious source
+instructions. Define a claims manifest linking business claims to fact/evidence
+IDs, deterministic validators and human review rubric. Acceptance: invented local
+proof/availability is rejected, restricted data does not leak into prompts, and
+an AI critique is treated as a quality signal rather than proof that facts are true.
+
+PROMPT 038 — Implement local keyword research inputs
+Dependency: 037 and search adapters.
+Generate service/modifier/locality/language/intent candidates from confirmed facts
+and real GSC/provider observations. Separate measured volume/difficulty from AI
+suggestions and unavailable values. Add branded/nonbranded and explicit/implied
+location labels. Acceptance: irrelevant services are excluded, source/date is shown
+for measured fields, budget limits apply to enrichment, and the system cannot
+invent keyword volumes to make a recommendation appear data-driven.
+
+PROMPT 039 — Cluster intent and map canonical target pages
+Dependency: 038.
+Build service/intent clusters, existing-page matching and cannibalization warnings.
+Suggest improving a current canonical page before making redundant location/blog
+pages. Include owner-confirmed service coverage and useful local differences.
+Acceptance: city-name-swapped doorway proposals are blocked, one intent does not
+spawn uncontrolled competing pages, and every proposed page has an explicit
+customer purpose, source facts and chosen canonical destination.
+
+PROMPT 040 — Generate reviewable campaign briefs and monthly plans
+Dependency: 039.
+Create bounded 30-day proposed plans with business goal, service/query cluster,
+channel mix, source facts, needed owner evidence, estimated cost and cadence.
+Permit fewer useful items instead of forced daily content. Add owner remove/edit/
+approve actions and dependency checks. Acceptance: no offer, photo, event or case
+study is invented; planned work fits quotas and the owner can see why each topic
+was selected and which prerequisites block it.
+
+PROMPT 041 — Generate structured drafts with deterministic checks
+Dependency: 040.
+Implement brief/outline/article blocks, claims references, source links, internal
+links, title/meta and local CTA. Validate names, NAP, hours, prices, service scope,
+link safety, unsupported claims and repeated filler. Persist intermediate checkpoints
+and failures for repair. Acceptance: unknown prices stay unknown, sensitive claims
+route to review, prompt injection cannot publish, and rejected output does not
+silently consume unlimited retries or become approved content.
+
+PROMPT 042 — Build the revision-aware content editor
+Dependency: 041.
+Connect the editor to structured revisions, autosave, conflict detection, preview,
+AI selection edits, before/after diff and restore. Bind approval to revision and
+facts version; preserve author changes and links. Acceptance: concurrent edits
+cannot silently overwrite each other, an AI rewrite creates a reviewable revision,
+and modifying approved content prevents the old approval from authorizing the
+new payload. Verify mobile editing and keyboard behavior.
+
+PROMPT 043 — Add approved imagery and deterministic social templates
+Dependency: 042 and assets library.
+Implement real-photo selection, configurable Gemini illustration generation,
+source/rights labels, alt text and reusable crops/brand overlays. Use the documented
+current SDK through the image adapter; no imagined CLI flags. Acceptance: generated
+graphics remain labeled illustrations, actual portfolio posts require approved
+real images, aspect-ratio/media validation is deterministic, and unchanged assets
+are reused instead of repeatedly billed generations.
+
+PROMPT 044 — Create independently editable channel variants
+Dependency: 043.
+Generate blog, eligible GBP, Instagram and Facebook variants from a campaign or
+genuine update. Keep each payload, media, destination, approval and state separate.
+Wait for a verified blog URL before publishing variants that depend on it.
+Acceptance: one failed social destination does not erase a published blog,
+unsupported formats are blocked, and a campaign can exist without a blog when
+the business update is useful on its own.
+
+PROMPT 045 — Wire the content calendar and review queues
+Dependency: 044 and scheduling.
+Implement month/week/agenda, filters, create/edit, accessible rescheduling,
+timezone display, collision checks, blackout dates and right-side previews.
+Show source facts, cost estimate, approvals and per-channel failure recovery.
+Acceptance: drag-and-drop has a keyboard alternative, mobile defaults to readable
+agenda, superseded schedules do not publish, and users can distinguish planned,
+draft, approved, scheduled, provider-pending and verified-published states.
+
+PROMPT 046 — Complete the first scheduled WordPress vertical slice
+Dependency: 045 and WordPress test connection.
+Connect confirmed facts through draft, approval, schedule, budget reservation,
+worker publish and external readback. Freeze the exact approved revision and
+recheck authorization/consent before dispatch. Acceptance: an authorized test site
+receives the correct post once under duplicate logical commands; later edits use
+the stored external ID; pause/cancel/revoke blocks unsent work. Record real
+integration evidence alongside contract fixtures.
+
+PROMPT 047 — Implement publication recovery and owner intervention
+Dependency: 046.
+Build reconciler and UI for partial uploads, accepted-but-pending writes, timeout
+after acceptance, revoked permissions, validation failures and dead-letter jobs.
+Recover by external IDs or safe supported lookup before retrying. Acceptance:
+unknown outcomes never display successful publication, a different provider-side
+manual edit is protected, and an operator can inspect/retry a bounded step without
+duplicating completed side effects or billing.
+
+PROMPT 048 — Add approved GBP updates and sensitive field proposals
+Dependency: 047 and enabled GBP capabilities.
+Implement supported GBP post payloads and business-detail before/after proposals.
+Validate category restrictions, offer dates, media, consent and selected location.
+Sensitive name/address/category/hour changes require explicit appropriate approval.
+Acceptance: unsupported operations remain blocked, rejected posts remain visible,
+expired offers are not reused, and a successful post or profile change is verified
+and logged without claiming it causes a ranking increase.
+
+PROMPT 049 — Add supported Instagram and Facebook publishing
+Dependency: 047 and enabled Meta capabilities.
+Implement media/container processing, readiness polling, per-platform validation,
+publish/readback and ambiguous-outcome handling. Respect current API route/version,
+account formats and publicly retrievable media-fetch requirements. Acceptance:
+an authorized external-owner test account works after required approvals,
+revoked permission creates reconnect tasks, and repeated worker delivery cannot
+blindly duplicate a post. Avoid pretending Instagram caption URLs are universally
+clickable outbound links.
+
+PROMPT 050 — Build the automation control center
+Dependency: 046-049, allowing blocked providers to remain disabled.
+Show active policies, consent scope, daily/monthly caps, scheduled jobs, pause,
+owner edit windows, upcoming cost and last verified activity. Add selective/global
+kill switches and a preview of what changing a policy affects. Acceptance: policy
+revocation blocks queued dispatch immediately, upgrade/plan changes do not broaden
+consent, and each owner can understand exactly which actions are automatic and
+which still await approval.
+
+PHASE E: RANKINGS, COMPETITORS AND INTELLIGENCE — PROMPTS 051-065
+
+PROMPT 051 — Validate ranking-provider geography and identity
+Dependency: 050 and configured read-only provider budget.
+Run a minimal authorized spike for coordinates, query wording, language/device,
+requested depth and stable target identifiers. Record task-level errors and
+actual cost. Distinguish Maps/local-pack/organic result surfaces. Acceptance:
+sample requests establish which parameters the adapter supports, ambiguous name
+matches require confirmation, and no Maps observation is mislabeled as a universal
+current rank or a local-pack measurement collected from a different surface.
+
+PROMPT 052 — Build versioned grid and keyword tracking configurations
+Dependency: 051.
+Create center/spacing/grid geometry, keywords, locale/device, result depth,
+target identity and configuration hash. Show sampled area and query meaning,
+including explicit versus implied locality. Acceptance: edits create a new config
+version, private addresses are not exposed by default, unsupported coordinates
+are validated, and historical comparisons can determine whether two runs used
+the same meaningful sampling conditions.
+
+PROMPT 053 — Implement scan estimates and bounded scheduling
+Dependency: 052 and usage ledger.
+Calculate keywords times points times occurrences times actual provider mode/
+parameter multipliers. Show estimate, remaining allowance, queued versus fast
+mode and four-scans versus true-weekly distinction. Acceptance: over-budget scans
+cannot start, double-clicks reuse a command, extra depth is costed, and daily
+large-grid requests cannot silently expand a starter subscription's provider bill.
+Keep price inputs dated and configurable.
+
+PROMPT 054 — Collect rank observations reliably
+Dependency: 053.
+Implement queued tasks, polling or verified callbacks, bounded retries, task IDs,
+request metadata and per-point success/error/not-found states. Persist evidence
+only under source rights/retention. Acceptance: transport success with task failure
+does not become rank data, partial runs are recoverable, target identity is checked,
+and the collector reuses an allowed result sample for competitor extraction
+without issuing the same paid query separately for every business.
+
+PROMPT 055 — Implement transparent visibility calculations
+Dependency: 054.
+Calculate top-3 coverage over successful points, found-only average with found
+count, explicit not-found-within-depth and optional labeled capped score. Add
+weighted coverage only with visible business-importance weights. Acceptance:
+hand-calculated fixtures match, error points are missing rather than rank zero,
+zero successful points yields unavailable, and the denominator/coverage/depth
+are available wherever a summary metric is displayed.
+
+PROMPT 056 — Build the accessible ranking grid interface
+Dependency: 055.
+Wire keyword/run selection, rank circles, meaningful color legend, point details,
+table alternative, competitor panel, freshness and partial-failure display. Begin
+without a paid map background; add licensed tiles only if useful and budgeted.
+Acceptance: keyboard and non-color interpretation work, failed points are visibly
+distinct, scan cost is reviewable before dispatch, and the dashboard never shows
+a successful green map for missing or stale provider observations.
+
+PROMPT 057 — Add compatible history and anomaly investigation
+Dependency: 056.
+Compare runs only under compatible query/grid/surface/depth/device/locale settings.
+Annotate reconfigurations, incomplete scans and source freshness. Flag large changes
+for investigation using minimum coverage and cooldowns, without declaring penalties
+or algorithm causes. Acceptance: changed footprints cannot produce misleading
+growth charts, unavailable comparisons explain why, and an anomaly creates a
+bounded evidence task rather than triggering automatic mass page rewrites.
+
+PROMPT 058 — Discover service- and geography-specific competitors
+Dependency: 057.
+Build competitor sets from repeated licensed search observations and a separate
+owner-supplied list. Resolve branches/entities, allow exclusions and confirmation,
+and distinguish directories/national sites from local service competitors.
+Acceptance: each set records query cluster and geographic sample, similar names
+do not auto-merge, unrelated companies do not dominate recommendations, and
+owner-authorized GBP account data is not repurposed into a competitor prospecting
+database.
+
+PROMPT 059 — Build comparable competitor evidence profiles
+Dependency: 058.
+Collect permitted rating/count/category/service/site observations with source,
+date, coverage and expiry. Clearly label unavailable, sampled and owner-supplied
+fields. Compare the same windows/surfaces where possible. Acceptance: sampled
+reviews are not represented as all reviews, missing backlink/volume data is not
+invented, and competitor overlap/top-3 appearance metrics expose definitions
+instead of being called total market share.
+
+PROMPT 060 — Identify useful competitor content and journey gaps
+Dependency: 059.
+Analyze bounded permitted public service pages, booking/contact journeys, local
+proof and useful topic coverage. Link gaps to confirmed owner services and existing
+canonical pages. Acceptance: recommendations explain exact evidence and practical
+customer benefit, avoid copying competitor wording, and do not claim that a
+competitor's review count or word count proves the cause of a ranking difference.
+Favor fixing an existing useful page over creating redundant locality pages.
+
+PROMPT 061 — Implement evidence records and expiring references
+Dependency: 060.
+Create evidence schema, source class, captured/expiry timestamps, permitted purpose,
+coverage, integrity reference and confidence. Separate owner facts from GSC, SERP,
+GBP and crawl content. Add cleanup and evidence-unavailable behavior. Acceptance:
+recommendations cannot keep restricted source payloads alive through summaries,
+embeddings or logs, source expiry is enforced, and missing evidence makes a
+proposal stale rather than silently replacing the source with invented reasoning.
+
+PROMPT 062 — Implement deterministic local SEO detection rules
+Dependency: 061.
+Add versioned rules for confirmed service gaps, broken booking links, inconsistent
+hours, stale draft facts, indexability problems, citation mismatches and eligible
+unanswered reviews. Emit facts, prerequisites and explanations before AI wording.
+Acceptance: findings can be reproduced from evidence, harmless address formatting
+is not a false alarm, unavailable data does not imply failure, and rules identify
+customer/technical problems without pretending to disclose Google's ranking weights.
+
+PROMPT 063 — Rank recommendations with explainable priorities
+Dependency: 062.
+Implement the proposed confidence/impact/relevance/gap/urgency/effort/cost heuristic
+as configuration with reason breakdown. Apply consent, risk, source validity and
+capability as hard gates. Deduplicate by target/action/evidence and use cooldowns.
+Acceptance: a small useful weekly shortlist replaces repetitive advice, unknown
+inputs remain visible, high scores do not bypass approval, and the number is
+labeled internal priority rather than probability of ranking success.
+
+PROMPT 064 — Turn recommendations into controlled action plans
+Dependency: 063.
+Create action dependencies, owner assignment, proposed diffs, approvals, cost
+estimates, execution verification and observation windows. Examples: confirm
+hours before updating posts; fix blockage before generating pages. Acceptance:
+blocked prerequisites prevent dispatch, stale evidence prompts revalidation,
+technical execution success remains separate from marketing impact, and owners
+can reject/snooze without the same recommendation immediately returning under
+different wording.
+
+PROMPT 065 — Add conservative outcome measurement and experiments
+Dependency: 064.
+Implement hypothesis/intervention/baseline/observation records with matched periods,
+compatible samples, confounder annotations, cooldown and inconclusive outcomes.
+Compare search/enquiry observations without assuming causation. Acceptance:
+seasonality, simultaneous edits and small samples are disclosed; incomplete data
+cannot be labeled proven lift; and the engine does not repeatedly rewrite pages
+because of ordinary daily ranking noise. Owner-reviewed learning should influence
+later priority without creating uncontrolled autonomous changes.
+
+PHASE F: REVIEWS AND REPUTATION — PROMPTS 066-080
+
+PROMPT 066 — Model review resources, drafts and restricted retention
+Dependency: 065 and review-capability register.
+Create separate review cache, ephemeral assessments, owner-authored reply drafts,
+approval records and publication attempts. Track provider/resource ID, source
+revision, fetched/expiry time, existing reply and selected location. Do not assume
+derived classifications are exempt from source policies. Acceptance: expiry/deletion
+cascades cover copied content, logs and backup strategy as applicable, while
+permitted owner-authored work remains distinguishable from provider content.
+
+PROMPT 067 — Implement bounded authorized review synchronization
+Dependency: 066.
+Add current supported Google list/get review operations with pagination, quotas,
+updates, removals and sync checkpoints. Protect existing replies and track partial
+access. Acceptance: an edited rating/text creates a new revision, duplicate pages
+do not create duplicate work, missing/removed resources are handled, and the UI
+does not show a sampled or partially synced set as the complete lifetime review
+history. Record actual authorized integration evidence when access exists.
+
+PROMPT 068 — Add review notifications and reconciliation
+Dependency: 067 and verified event inbox.
+Implement current Google Notifications/PubSub flow with proper push identity or
+supported pull authentication, selected-account binding and deduplication. Refresh
+the authorized current review after a notification; do not trust the notification
+as final review text. Add bounded polling reconciliation. Acceptance: out-of-order
+or missed events recover safely, foreign account references are rejected, and
+provider delivery latency is visible rather than promised as instant review handling.
+
+PROMPT 069 — Build the reputation inbox and review detail UX
+Dependency: 068.
+Add location/provider/rating/language/risk/assignee/status filters and a detail
+drawer with source review, existing reply, freshness, draft, classification reasons
+and action history. Use distinct states for draft, approval, sending, verified,
+changed source, unavailable and unknown outcome. Acceptance: keyboard/mobile use
+works, sensitive personal details are minimized, permissions control reply actions,
+and a queued draft never appears to the owner as an already public response.
+
+PROMPT 070 — Classify review meaning, language and risk
+Dependency: 069 and AI evaluation infrastructure.
+Implement schema-validated sentiment/topics, language confidence, sarcasm/contradiction,
+privacy, complaint, refund, safety/legal/medical and malicious-instruction flags.
+Treat both rating and text as signals. Acceptance: a sarcastic five-star complaint
+is held, rating-only reviews do not invent service details, unsupported/code-switched
+language routes conservatively, and review text cannot change system permissions
+or instruct the AI to publish unrelated content.
+
+PROMPT 071 — Generate grounded, natural review reply drafts
+Dependency: 070.
+Use approved voice and minimum necessary facts to create short relevant replies.
+Avoid repetitive marketing, keyword stuffing, invented transactions, private
+customer information, compensation promises and requests to remove criticism.
+Negative/sensitive cases remain drafts for human review. Acceptance: response
+examples are specific only where evidence supports them, factual/public-contact
+checks pass, and owner edits create a new revision instead of mutating an already
+approved payload invisibly.
+
+PROMPT 072 — Build reply approval, assignment and escalation
+Dependency: 071.
+Implement review revision/reply hash binding, reviewer roles, assignment, internal
+notes, deadlines and escalation categories. Show source changes and existing
+manual provider replies before approval. Acceptance: stale source or edited draft
+invalidates approval, private support notes are excluded from public payloads,
+complaints get an owner task rather than a forced automatic apology, and a user
+cannot reply at an unassigned location through a forged resource ID.
+
+PROMPT 073 — Implement narrowly scoped automatic-reply policies
+Dependency: 072 and validated provider consent design.
+Build off/draft/approve-each/eligible-positive-auto modes with recorded owner consent,
+sample previews, exclusions, language allowlist, delay and daily caps. Require
+positive uncomplicated text plus rating and all risk/freshness checks; rating
+alone never authorizes publication. Acceptance: complaint/sarcasm/privacy/sensitive
+cases and unsupported language always require review, policy changes are revocable,
+and automatic mode stays disabled until current provider requirements are met.
+
+PROMPT 074 — Implement safe review reply publication and readback
+Dependency: 073 and approved review API access.
+Before sending, reload current review/reply, consent, role, capability, draft hash,
+budget and pause state. Write through the supported reply endpoint and verify
+readback. Distinguish the business reply from the customer's review. Acceptance:
+timeouts enter reconciliation, an existing different owner reply is not overwritten,
+and delete/replace actions are explicit controls over our reply, never advertised
+as deleting the customer's negative review.
+
+PROMPT 075 — Handle review edits, races, removals and disconnects
+Dependency: 074.
+Add per-review leases and local compare-and-swap plus minimum read-to-write delay.
+Test worker races, manual provider-side replies, changed reviews during the wait,
+removed resources, policy revoke and token loss. Acknowledge external race limits
+where provider conditional writes are unavailable. Acceptance: stale jobs pause,
+replayed events do not blindly repost, unknown outcomes are investigated before
+retry, and disconnect cancels unsent automatic replies immediately.
+
+PROMPT 076 — Evaluate replies and roll out in shadow mode
+Dependency: 075.
+Create at least 60 labeled review cases spanning praise, mixed/sarcastic, blank,
+multilingual, personal data, threats, disputes, edited/removed resources and prompt
+injection. Compare eligibility decisions and generated replies with reviewer labels.
+Acceptance: critical sensitive/complaint cases are never auto-published in this
+set; shadow decisions precede opt-in limited production; owner correction rate,
+false eligibility and unknown outcomes are monitored. Test success is not marketed
+as a guarantee of perfect automatic behavior.
+
+PROMPT 077 — Build neutral review links and QR assets
+Dependency: 076.
+Add verified selected-business review link, printable/downloadable QR assets and
+neutral invitation copy. Separate public review solicitation from private feedback
+without gating Google access by satisfaction. Acceptance: link identity is confirmed,
+QRs do not leak internal IDs, copy contains no incentives or demand for a high
+rating/specific keywords, and the feature never generates customer reviews or
+posts on a customer's behalf.
+
+PROMPT 078 — Add permission-aware review request workflows
+Dependency: 077 and separately validated messaging capability.
+Model completed-transaction triggers, objective eligibility, contact consent,
+suppression/opt-out, frequency caps, quiet hours, delivery status and deduplication.
+Keep outbound adapters disabled until business authorization and launch-market
+requirements are satisfied. Acceptance: eligibility does not selectively remove
+unhappy customers, repeated transaction events send at most the allowed invitation,
+and clicks are not falsely attributed as verified customer-authored Google reviews.
+
+PROMPT 079 — Build service recovery and review-policy reporting tasks
+Dependency: 078.
+Turn unresolved complaints into private operational cases with assignment,
+owner-confirmed resolution and cautious public draft. Add suspected policy-violation
+evidence packets and provider-report guidance. Acceptance: no fraud accusation is
+automatically published, negative reviews are not promised removal, resolving a
+complaint is not conditioned on changing a rating, and no private customer/order
+details are inserted into a public response or unnecessary AI context.
+
+PROMPT 080 — Build transparent reputation analytics
+Dependency: 079.
+Show current official rating/count, accessible-set response coverage, known-event
+response times, approval/edit rate, auto eligibility reasons and permitted sampled
+themes. Expose window/source/sample size and enforce retention restrictions on
+history/aggregation. Acceptance: a sample average is not the official overall
+rating, sparse data stays uncertain, anomaly flags do not accuse competitors of
+fraud, and any private rating arithmetic illustration is not used to gate which
+customers receive invitations.
+
+PHASE G: WEBSITES AND TECHNICAL SEO — PROMPTS 081-088
+
+PROMPT 081 — Build the constrained hosted-site renderer
+Dependency: 080 and existing site contracts.
+Implement three versioned templates for service, appointment and storefront
+businesses using trusted structured blocks and confirmed public facts. Render
+published HTML server-side; keep drafts authenticated. Acceptance: hidden addresses
+stay hidden, tenant code cannot execute arbitrary scripts, public read projections
+exclude drafts/secrets, and template migrations preserve owner content rather
+than overwriting it with a fresh AI-generated website.
+
+PROMPT 082 — Build page/block editing and revision previews
+Dependency: 081.
+Add service/about/contact/gallery/FAQ/blog blocks, constrained reorder, real-photo
+selection, responsive preview, edit conflicts, revision compare and restore.
+Generate useful local pages only from confirmed differentiated facts. Acceptance:
+preview access is protected, approval binds the published revision, mobile layouts
+are usable, and the editor cannot create fake local branches or hundreds of
+near-duplicate city pages as a shortcut to search visibility.
+
+PROMPT 083 — Implement subdomains, verified domains and HTTPS states
+Dependency: 082.
+Build globally unique active host claims, DNS ownership verification, routing,
+certificate issuance, health check and reversible activation. Validate forwarded
+headers and tenant cache keys. Acceptance: unknown hosts cannot select arbitrary
+sites, two tenants cannot claim the same live host, DNS/TLS failures have recovery,
+and cancellation/reassignment prevents dangling-domain takeover. Domain registration
+costs are distinguished from custom-domain connection support.
+
+PROMPT 084 — Implement canonical, sitemap and robots governance
+Dependency: 083.
+Generate canonical URLs, published-only sitemaps, correct 404/redirect behavior,
+robots controls and protected/noindex previews. Build before/after validation for
+site-wide indexing changes. Acceptance: noindex is not written inside robots.txt,
+private content is not protected merely by crawler directives, ordinary blog pages
+are not sent through Google's restricted Indexing API, and a mistaken public
+indexing change has a verified rollback path.
+
+PROMPT 085 — Generate accurate local-business structured data
+Dependency: 084.
+Build stable entity IDs, appropriate schema subtype, hours/contact/verified links
+and page-content parity checks. Preserve private addresses; do not fabricate required
+properties just to pass a rich-result test. Separate testimonial display from
+self-serving review-star eligibility. Acceptance: JSON-LD matches visible confirmed
+facts, schema validation errors are actionable, and UI/marketing never guarantees
+rich results or stars merely because markup was added.
+
+PROMPT 086 — Build a bounded technical and conversion audit
+Dependency: 085.
+Check status/indexability, canonicals, sitemap, titles/headings, broken/internal
+links, images, performance samples, mobile contact/booking destinations and content
+coverage. Distinguish crawl observations from authenticated completion checks.
+Acceptance: findings include URL/evidence/freshness and limits, crawler resource
+budgets apply, a score is explainable, and an inaccessible booking backend is
+marked manual verification rather than falsely declared a completed conversion.
+
+PROMPT 087 — Implement safe SEO fix proposals and rollback
+Dependency: 086.
+Create issue-to-diff proposals, permission/consent, snapshots, apply, readback
+verification and restore for supported hosted fixes. External WordPress changes
+use supported APIs or a narrow signed plugin only if implemented securely;
+otherwise provide manual steps. Acceptance: no arbitrary filesystem/PHP command
+channel exists, owner content is preserved, technical failures do not claim
+successful fixes, and robots/canonical/redirect changes can be reviewed and reversed.
+
+PROMPT 088 — Add lead capture and honest attribution
+Dependency: 087.
+Build secure hosted enquiry forms, anti-abuse limits, consent fields, delivery
+status, owner inbox/export and optional validated analytics events. Store minimum
+necessary customer data with retention/deletion. Acceptance: calls-button clicks,
+directions, form submissions and owner-confirmed qualified leads remain separate,
+duplicate/spam forms do not inflate lead totals, and a booked job or review cannot
+be attributed to a campaign without an actual permitted measurement basis.
+
+PHASE H: CITATIONS AND LOCAL PRESENCE — PROMPTS 089-093
+
+PROMPT 089 — Build the country/category directory catalog
+Dependency: 088.
+Create curated directory records with region, vertical relevance, supported
+submission/update/delete method, fees, ownership requirements, automation permission
+and last verification. Start with a small relevant catalog, not a universal
+100-directory promise. Acceptance: unsupported directories produce owner tasks,
+fees are explicit, and APIs/partners are used only when their current contracts
+permit the intended business-management action.
+
+PROMPT 090 — Implement citation identity and NAP comparison
+Dependency: 089.
+Match listings using verified identifiers/address/phone/domain evidence, with
+owner confirmation for ambiguity. Normalize formatting without erasing meaningful
+differences or exposing hidden addresses. Produce field-level mismatch evidence,
+live URL and freshness. Acceptance: similarly named businesses do not merge,
+harmless abbreviations are not always errors, and a discovered listing is not
+automatically counted as an owned accurate live citation.
+
+PROMPT 091 — Build citation fulfillment and owner verification tasks
+Dependency: 090.
+Implement prepared/submitted/verification-needed/live-verified/rejected/update-needed
+states, permitted partner/API submissions and manual packets. Support OTP/ownership
+steps as owner work; no CAPTCHA bypass. Acceptance: submission never implies live
+publication, partner fees require explicit authorization/budget, retries do not
+duplicate paid fulfillment, and evidence confirms the correct business before a
+listing enters the verified count.
+
+PROMPT 092 — Suggest legitimate local authority opportunities
+Dependency: 091 and intelligence engine.
+Create evidence-backed owner tasks for relevant trade associations, suppliers,
+community resources and genuine local relationships. Separate citations, editorial
+links, paid placements and AI citations. Acceptance: opportunities are relevant
+and sourced, no backlink exchange or mass outreach launches automatically,
+unmeasured authority values remain unavailable, and advice avoids guaranteed
+ranking claims or manipulative city-page/link tactics.
+
+PROMPT 093 — Implement presence freshness and conflict monitoring
+Dependency: 092.
+Coordinate permitted refreshes for hours, services, website/citation identity,
+offers and provider changes. Queue owner-confirmed corrections rather than
+automatically reverting Google or directory edits. Add source-expiry cleanup,
+duplicate-task suppression and cost-aware refresh cadence. Acceptance: stale offers
+are not republished, changed facts invalidate dependent drafts, provider storage
+limits remain enforced across caches/derivatives, and temporary data loss does
+not trigger destructive public changes.
+
+PHASE I: COMMERCIAL OPERATIONS AND LAUNCH — PROMPTS 094-100
+
+PROMPT 094 — Integrate subscriptions and billing webhooks
+Dependency: 093 and selected eligible payment provider.
+Build per-location plans, customer/subscription mapping, invoices/portal links,
+grace/cancellation and signed idempotent webhook handling. Use current verified
+processor terms/fees through configuration. Acceptance: duplicate/out-of-order
+events do not double-credit or reactivate incorrectly, cancellation pauses future
+paid jobs while honoring hosting/export policy, and sandbox success is distinguished
+from an enabled production payment account.
+
+PROMPT 095 — Finish entitlements, usage UX and margin controls
+Dependency: 094.
+Connect subscription allowances to actual blogs, variants, images, map points,
+review/intelligence work and directory fulfillment. Show used/reserved/remaining,
+reset date, estimates and explicit capped/prepaid overages. Add per-tenant p50/p95
+cost reporting. Acceptance: plan changes preserve ledger integrity, concurrent
+spend cannot overshoot, no surprise auto-recharge occurs, and observed support/
+fulfillment expenses can be tracked separately from AI inference cost.
+
+PROMPT 096 — Build owner reports and scoped agency workflows
+Dependency: 095.
+Create source-aware matched-period reports, activity/approval summaries, CSV exports,
+location groups and delegated access. Agency bulk actions must show per-location
+permission, consent, cost and result; brand report styling without hiding sources.
+Acceptance: cross-client access is denied, unavailable data stays explicit,
+reports separate execution from outcome and correlation from attribution, and
+restricted provider history is not exported as an unlimited archive.
+
+PROMPT 097 — Run an independent security and policy verification pass
+Dependency: 096.
+Inspect tenant boundaries, SSRF/imports, OAuth callbacks, encryption, webhook auth,
+upload/content sanitization, hidden-address handling, review privacy, source TTLs,
+consent revocation and public-site routing. Use realistic negative tests and
+document findings/fixes. Acceptance: unresolved material issues block affected
+features, secrets are absent from outputs, and claimed provider approvals/formats
+are checked against the current production application rather than inferred
+from fixtures or a developer's account.
+
+PROMPT 098 — Verify complete journeys and realistic workloads
+Dependency: 097.
+Run end-to-end onboarding, facts, draft/review/schedule/publish, rank/competitor,
+recommendation, review-reply, site/citation and billing journeys. Include crashes,
+partial failures, duplicate events and revoke/pause races. Check four viewport
+sizes/accessibility and load-test the expected tenant/job mix with capped heavy
+tasks. Acceptance: results include evidence and limits, demo data never mixes
+with live tenants, and no capacity claim exceeds what was actually measured.
+
+PROMPT 099 — Deploy with observability, restore and rollback evidence
+Dependency: 098.
+Prepare isolated staging/production, CI-built images, compatible migrations,
+health/worker checks, queue-age/cost/auth/failure alerts, kill switches and support
+runbooks. Execute a restore drill for DB, keys/media references and scheduled jobs,
+including source-expiry handling. Acceptance: restoration does not blindly resend
+completed work, deployment rollback is schema-compatible, RPO/RTO targets have
+evidence, and an operator can stop external writes quickly during an incident.
+
+PROMPT 100 — Run the pilot and produce the launch decision
+Dependency: 099.
+Prepare a 5-10 business pilot with owner-authorized real accounts, confirmed facts,
+bounded spend and review-first defaults. Measure activation, useful enquiries,
+owner approval/edit effort, publication reliability, auto-reply false eligibility,
+support time and variable cost. Compile readiness evidence, unresolved external
+dependencies and go/no-go per capability. Acceptance: charge only for verified
+working features, no guaranteed ranking promises, clear support/cancellation/export
+paths, and a prioritized next-release backlog based on actual pilot observations.
+
+END OF EXACTLY 100 PROMPTS
+
+FINAL USAGE NOTE
+After every prompt, review the actual evidence before marking it verified.
+If an API permission is unavailable, keep that capability disabled, document
+the missing requirement and continue independent work; never substitute fake
+success. Re-run affected checks when later tickets change a dependency. These
+prompts describe the complete implementation order, not permission to spend
+unbounded money, modify unrelated repositories or contact customers without
+the business's authorization and applicable channel requirements.
+
+
+========================================================================================
+APPENDIX / GEMINI IMAGE AND DEVELOPMENT COMMANDS
+========================================================================================
+
+## Gemini image-generation commands
+
+Use image generation for original decorative illustrations and approved illustrative content. Use HTML/CSS/SVG for the actual interface, maps, icons and charts. Do not generate fake premises, reviews, completed projects or customer results.
+
+The companion [examples/generate-image.mjs](examples/generate-image.mjs) follows the current documented Gemini JavaScript Interactions example with a configurable model. It is an illustrative handoff utility; no paid generation was run or SDK integration tested during this planning task. Confirm the current SDK/API and model availability before production use. [Official image generation documentation](https://ai.google.dev/gemini-api/docs/image-generation).
+
+After creating a NEW project and installing the current SDK there:
+
+```powershell
+# Run from the new project's root, after copying the example into scripts/.
+npm install @google/genai
+# Set GEMINI_API_KEY through your local secret manager or an untracked env file.
+# The example reads the existing process environment; never paste a real key into Git.
+node scripts/generate-image.mjs --prompt-file assets/prompts/hero.txt --out assets/generated/hero.png
+```
+
+No special `gemini --generate-image` flag is assumed. The Node script is a real command interface defined by the included example. `GEMINI_IMAGE_MODEL` defaults to the model shown in the current official example; the cheaper image adapter/model should be validated independently before switching production workloads.
+
+Prompt: marketing illustration
+
+```text
+Create an original minimal editorial illustration for a local-business growth
+platform. A small neighborhood shop, a subtle location pin, a calendar and
+abstract connection lines. Warm white background, peach #FFEDD5 and orange
+#FB923C, dark warm details. Soft daylight, restrained depth, generous whitespace.
+No text, no logos, no customer names, no testimonial or performance figures.
+This is a decorative illustration, not an interface screenshot.
+```
+
+Prompt: onboarding empty state
+
+```text
+An original simple warm-orange illustration of a storefront waiting to be
+connected to a map and calendar. Clean white background, rounded geometric
+forms, friendly professional style, low visual noise. No text or brand logos.
+```
+
+Prompt: illustrative local maintenance blog
+
+```text
+Create an editorial illustration explaining routine home plumbing maintenance,
+with clean pipes, a wrench and a simple water droplet motif. No emergency scene,
+no identifiable technician, no business logo, no before-and-after claims.
+Warm neutral palette with subtle orange accents. Leave safe crop space.
+```
+
+For social designs, place approved owner photos in reusable 1080×1350, 1080×1080 or appropriate validated templates. Generate background illustration once, then render brand text/logo and crops deterministically. Store prompt, model, rights/approval state, dimensions and cost with the asset.
+
+## 15. Proposed development scripts
+
+Ask Antigravity to add these only when the corresponding workspace targets exist:
+
+```text
+pnpm dev                 # local web and worker
+pnpm lint
+pnpm typecheck
+pnpm test:domain         # business invariants
+pnpm test:integration    # DB, tenant isolation, queue and provider contracts
+pnpm test:e2e            # critical owner flows
+pnpm db:migrate
+pnpm seed:demo           # visibly labeled fixture tenant
+pnpm jobs:reconcile      # controlled operator reconciliation
+pnpm build
+```
+
+Keep secrets in environment configuration and separate provider sandbox/test assets from production. A development command must not post to a real business or consume unbounded credits by default.
+
+
+ILLUSTRATIVE SCRIPT: scripts/generate-image.mjs
+Copy into the NEW repository only. Not executed against a paid API in this task.
+
+// Illustrative Antigravity handoff utility. Requires @google/genai in the NEW project.
+// Not run against a paid provider during preparation of this plan.
+import { GoogleGenAI } from '@google/genai';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import path from 'node:path';
+
+const args = process.argv.slice(2);
+const value = (flag) => {
+  const index = args.indexOf(flag);
+  return index >= 0 ? args[index + 1] : undefined;
+};
+const promptFile = value('--prompt-file');
+const outputFile = value('--out');
+if (!promptFile || !outputFile || !process.env.GEMINI_API_KEY) {
+  throw new Error('Set GEMINI_API_KEY and pass --prompt-file <file> --out <file>.');
+}
+const prompt = (await readFile(promptFile, 'utf8')).trim();
+if (!prompt || prompt.length > 12000) throw new Error('Prompt must be 1–12000 characters.');
+const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const response = await client.interactions.create({
+  model: process.env.GEMINI_IMAGE_MODEL || 'gemini-nano-banana-2.1',
+  input: prompt,
+});
+const generated = response.output_image;
+if (!generated?.data) throw new Error('No image returned; inspect provider status without logging secrets.');
+const destination = path.resolve(outputFile);
+await mkdir(path.dirname(destination), { recursive: true });
+// Preserve the provider MIME type: the output extension should match actual bytes.
+const mime = generated.mime_type || 'image/png';
+const extensions = { 'image/png': '.png', 'image/jpeg': '.jpg', 'image/webp': '.webp' };
+const extension = extensions[mime];
+if (!extension) throw new Error(`Unsupported output MIME type: ${mime}`);
+const actualDestination = destination.replace(/\.[^/.\\]+$/, '') + extension;
+await writeFile(actualDestination, Buffer.from(generated.data, 'base64'), { flag: 'wx' });
+console.log(`Saved ${actualDestination}`);

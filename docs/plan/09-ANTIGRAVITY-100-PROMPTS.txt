@@ -1,0 +1,984 @@
+LOCALPILOT: EXACTLY 100 IMPLEMENTATION PROMPTS
+Updated: 28 October 2026
+
+HOW TO USE
+Create a separate repository. Load the complete TXT handoff as project context,
+or copy the numbered blueprint documents into docs/plan/. Give Antigravity ONE
+numbered prompt at a time, in order. The sequence includes initial setup through
+launch; earlier Prompt 0-8 examples in document 06 are superseded by this sequence.
+Prompts are implementation tickets; complex tickets can require several sessions.
+Exactly 100 prompts does not mean 100 automatic steps or a fixed delivery time.
+
+COMMON INSTRUCTIONS APPLY TO EVERY PROMPT
+Read the relevant plan sections and current repository instructions first. Inspect
+existing work and continue it; do not recreate completed modules. Keep TypeScript
+modular monolith boundaries and separate web/worker processes. Use Plus Jakarta
+Sans/Inter, peach/orange tokens and accessible UI. All external writes require
+server authorization, valid consent, current revision, capability and budget.
+Never invent rankings, customers, provider success, data access or approval.
+Do not expose secrets to client code, AI contexts, screenshots or logs. Respect
+source-specific retention; derived data is not a loophole. Paid/live operations
+stay gated until explicitly configured for an authorized test account and budget.
+Do not damage an existing application or run destructive production migrations.
+Deliver working behavior, meaningful verification and updated docs/progress.md.
+Report changed files, commands/check results, screenshots for UI changes, and
+externally blocked behavior. Mocks alone do not verify a real integration.
+No whole-platform rewrite, arbitrary provider proxy or unbounded agent loops.
+
+PHASE A: PROJECT AND SECURE FOUNDATIONS — PROMPTS 001-010
+
+PROMPT 001 — Establish the project and implementation contract
+Dependency: none; start in the new repository.
+Read the full LocalPilot handoff and inspect the repository before changing it.
+Create a concise product brief covering local-business onboarding, website/GBP,
+content/social, rankings, competitor intelligence, citations and reputation.
+Create docs/progress.md with 100 numbered ticket slots, implemented/verified/
+externally-blocked states, and evidence links. Record assumptions about India-first
+launch, business vertical and branding. Document that private Outrank UI was not
+inspected. Deliver a scoped repository plan and a safe initial structure, without
+generating every module. Acceptance: the next ticket and scope boundaries are clear.
+
+PROMPT 002 — Validate external capabilities before building against them
+Dependency: 001.
+Create an integration feasibility register using current primary documentation:
+GBP eligibility/access/consent/storage, Meta login routes/permissions, WordPress,
+GSC, ranking coordinates and payment eligibility. Record verified date, required
+owner action, approval state, supported actions, version and fallback. Prepare
+application/review checklists without submitting or spending through unidentified
+accounts. Recheck any price before incorporating it. Acceptance: unavailable
+capabilities are explicitly blocked rather than simulated as working; uncertainty
+around review automation and historical GBP data has an assigned decision owner.
+
+PROMPT 003 — Record architecture decisions and module boundaries
+Dependency: 001-002.
+Write ADRs for TypeScript/Next.js, managed PostgreSQL/auth, Drizzle migrations,
+PostgreSQL durable jobs, web/worker split, R2-style storage, provider adapters,
+revision-bound approvals and per-location metering. Define organization/business/
+location ownership and internal modules for intelligence and reviews. Validate
+queue privileges/connection mode in a minimal spike before committing to the
+library. Acceptance: chosen versions and alternatives are justified, modules
+cannot bypass domain permissions, and no unnecessary microservice is introduced.
+
+PROMPT 004 — Scaffold the workspace and quality commands
+Dependency: 003.
+Create web and worker applications plus shared domain, contracts, DB, UI and
+integration packages as appropriate. Pin compatible stable dependencies, lockfile,
+format/lint/type checks and CI. Add validated environment loading and local-only
+development configuration. Build scripts should compile in CI rather than on the
+small production VM. Acceptance: a clean checkout installs, typechecks, builds
+and runs a simple web/worker health check using documented commands. No provider
+keys or paid calls are needed for this foundation.
+
+PROMPT 005 — Define shared domain contracts and error semantics
+Dependency: 004.
+Implement validated identifiers, tenant context, money/credits, source timestamps,
+freshness, paginated responses and versioned async command schemas. Define errors
+for reconnect, unsupported action, approval required, quota exceeded, stale
+revision and unknown external outcome. Standardize 202 job responses and UI-safe
+error messages. Keep provider SDK objects out of public contracts. Acceptance:
+invalid requests fail before domain work, callers receive actionable errors, and
+timestamps/currencies cannot silently become inconsistent across integrations.
+
+PROMPT 006 — Create the tenant and business data model
+Dependency: 005.
+Add organizations, memberships, businesses, locations and scoped relationships.
+Store country, IANA timezone, language, currency, address visibility and public
+contact separately from private account details. Use constraints to prevent
+cross-organization foreign-key associations. Add indexes for tenant/location
+queries and versioned migrations. Acceptance: single-location and multi-location
+fixtures both work; hidden residential data remains private; invalid tenant links
+are rejected at a dependable boundary rather than only hidden in the UI.
+
+PROMPT 007 — Implement managed authentication and account recovery
+Dependency: 006.
+Add supported Google/email authentication, secure sessions, callback validation,
+sign-out, recovery and first-organization setup. Avoid writing a new password
+system. Protect cookie-authenticated mutations and validate redirect targets.
+Create visibly labeled demo mode separately from real sessions. Acceptance:
+unauthenticated users cannot enter tenant APIs, sign-out invalidates access as
+designed, failed auth has usable recovery, and no identity/token information
+appears in client logs or tracking events.
+
+PROMPT 008 — Implement roles and location-scoped capabilities
+Dependency: 007.
+Implement owner, admin, editor, approver, analyst and billing capabilities with
+optional location scopes. Centralize authorization in domain services, including
+worker entry points. Add invite/accept/revoke flows with safe expiration and
+owner-transfer constraints. Acceptance: an editor cannot approve their way around
+policy, an analyst cannot mutate, billing access does not reveal tokens, and a
+member restricted to one location cannot act on another by changing a request ID.
+
+PROMPT 009 — Enforce and test tenant isolation
+Dependency: 008.
+Implement RLS and tenant-safe repositories for all existing tenant data. Separate
+published-site read projections from private draft tables. Build negative tests
+with two organizations across reads, writes, membership changes and export-like
+queries. Ensure worker payloads are reauthorized with explicit tenant context.
+Acceptance: forged browser organization IDs grant no access, malformed associations
+fail, and documented privileged server roles cannot accidentally bypass required
+resource checks through ordinary repository helpers.
+
+PROMPT 010 — Protect secrets, uploads and untrusted imports
+Dependency: 009.
+Build encrypted integration-secret storage with key versions and rotation hooks,
+private object paths and short-lived signed access. Implement URL validation for
+imports blocking private/loopback/link-local/metadata destinations, unsafe schemes,
+redirect bypass and oversized responses. Validate MIME/signatures and sanitize
+renderable content. Acceptance: tests cover unsafe URL redirects and foreign-tenant
+assets; secret values never appear in exported DTOs, AI inputs or diagnostic logs.
+
+PHASE B: DESIGN AND BUSINESS ONBOARDING — PROMPTS 011-020
+
+PROMPT 011 — Implement the orange visual system
+Dependency: 010.
+Read the measured Outrank typography and proposed UI specification. Implement
+Plus Jakarta Sans display/button typography, Inter body/nav, centralized peach/
+orange tokens, accessible dark-orange actions, spacing, radii, shadows and semantic
+statuses. Use 68/81.6px desktop hero type and measured reference proportions where
+specified; responsive dimensions remain proposed. Acceptance: fonts load, contrast
+passes for real text/control combinations, styles are reusable, and original
+branding/copy replaces competitor identity and fabricated proof.
+
+PROMPT 012 — Build accessible reusable application components
+Dependency: 011.
+Create buttons, fields, comboboxes, forms, status badges, data tables, KPI cards,
+integration cards, empty states, cost/freshness indicators, drawers, confirmation
+diffs and usage bars. Include loading, error, disabled and keyboard states. Centralize
+status styling and provide semantic labels. Acceptance: representative component
+screens support keyboard-only use, dialogs restore focus, mobile targets are
+usable, and pending/failed/published meanings remain consistent across the system.
+
+PROMPT 013 — Build the responsive application shell
+Dependency: 012.
+Implement organization/business/location switching, sidebar, top bar, breadcrumbs,
+notifications and mobile drawer. Include navigation for overview, calendar, studio,
+rankings, profile, reviews, social, website, citations, intelligence and reports,
+with unavailable modules labeled honestly. Add a persistent automation-pause
+indicator. Acceptance: inspect at 1440, 1280, 768 and 390px widths; long names do
+not break layout, tenant switching clears stale view state, and authorization
+continues to be enforced server-side.
+
+PROMPT 014 — Build the public product and pricing pages
+Dependency: 013.
+Implement original local-business landing copy using the reference's capsule
+navigation, centered hero, subtle grid/glow, rounded CTAs and whitespace rhythm.
+Show labeled product previews, supported integrations, precise quota explanations,
+FAQs and contact/legal placeholders requiring completion before launch. Use no
+invented customer metrics, testimonials or guaranteed rankings. Acceptance: mobile
+layout and reduced motion work, primary CTAs lead to real onboarding, and marketing
+claims match the current capability register.
+
+PROMPT 015 — Finish account and first-run UX
+Dependency: 014.
+Connect auth screens to real sessions and first-run routing. Add invitation
+acceptance, expired-link recovery, organization creation, empty workspace and
+accessible validation. Make demo mode visually explicit and isolated. Preserve
+intended destinations safely after sign-in. Acceptance: a new owner reaches an
+empty authenticated workspace, a returning user resumes correctly, failed login
+has a useful next action, and no public marketing screen leaks private tenant data.
+
+PROMPT 016 — Build resumable business and location onboarding
+Dependency: 015.
+Implement existing-website, GBP-first and starting-from-scratch paths. Collect
+services, country, hours/timezone, public/hidden address, service coverage, booking
+goal, language and brand inputs. Save progress after each stage; integrations can
+be skipped. Enforce required facts without blocking optional enrichment.
+Acceptance: an owner can leave/resume, a service-area business keeps its private
+address hidden, and unsupported business or account assumptions are surfaced
+before generating marketing claims.
+
+PROMPT 017 — Import website facts with provenance
+Dependency: 016 and URL protections.
+Build a bounded authorized public-site crawl/extraction flow for names, contact,
+hours, services, photos and existing pages. Track source URLs, observed time,
+confidence and extraction errors. Imported content is untrusted data, never agent
+instructions. Acceptance: progress is async/resumable, conflicts remain unconfirmed,
+no site credentials are requested, crawl limits are enforced, and prompt-injection
+text cannot trigger account changes or read other tenants.
+
+PROMPT 018 — Implement fact confirmation and conflict resolution
+Dependency: 017.
+Create versioned business facts, location overrides, confirmation history and a
+side-by-side conflict UI. Distinguish harmless formatting from actual NAP/hour
+disagreement. Confirmed changes flag scheduled content using outdated facts.
+Acceptance: publication cannot silently use a superseded critical phone/hour fact,
+conflicting imports never overwrite owner-confirmed values, and the UI explains
+which downstream drafts and proposals need review after an update.
+
+PROMPT 019 — Build the brand and approved-asset library
+Dependency: 018.
+Add owner voice preferences, approved terminology, forbidden claims, logos,
+real-business photos, source/rights records, generation labels and derivative
+crops. Separate portfolio evidence from generic illustrations. Use private previews
+and validated dimensions/MIME. Acceptance: hidden metadata is removed where
+appropriate, another tenant cannot access originals, and generated illustrative
+images cannot be mislabeled as actual premises, customers or completed work.
+
+PROMPT 020 — Build the honest overview dashboard
+Dependency: 019.
+Implement the proposed KPI layout, upcoming work, attention queue, source/freshness
+badges, automation status and usage. Use labeled fixtures only until live sources
+are attached, with separate loading/disconnected/stale/partial states. Separate
+organic clicks, sampled Maps coverage, enquiries and publication counts.
+Acceptance: missing connections display a connection action rather than zero,
+metrics name the source/window, and clicking an action opens the correct scoped
+workflow without implying guaranteed marketing outcomes.
+
+PHASE C: DURABLE AUTOMATION AND CONNECTIONS — PROMPTS 021-035
+
+PROMPT 021 — Implement durable background jobs
+Dependency: 020 and queue spike.
+Install the chosen PostgreSQL queue with supported connectivity, migrations,
+worker leases, concurrency limits, heartbeat and job-status APIs. Create lanes
+for publication, reconciliation, generation, rankings and crawl maintenance.
+Acceptance: a worker restart resumes queued work, failed jobs retain actionable
+diagnostics without secrets, and a busy tenant cannot starve all other tenants.
+Do not use browser timers or a server request's lifetime as the scheduler.
+
+PROMPT 022 — Add transactional commands and outbox delivery
+Dependency: 021.
+Create durable commands and outbox events committed alongside resource changes.
+Implement replay-safe dispatch, event payload versions and pending/processed states.
+Connect job status to UI polling with backoff. Acceptance: a crash after DB commit
+but before queue dispatch does not lose work; repeated dispatcher runs do not
+create duplicate logical jobs; and resource mutation/event creation cannot become
+inconsistent through separate uncoordinated writes.
+
+PROMPT 023 — Implement idempotency and external-outcome states
+Dependency: 022.
+Add unique operation keys, logical occurrence identity, attempt history, retry
+classification and unknown-outcome/reconciliation contracts. Distinguish validation,
+authorization, rate-limit, transient and ambiguous accepted-write failures.
+Acceptance: duplicate user requests return the existing command, transient retries
+are capped with jitter, and a timed-out provider write is never blindly repeated.
+Test task-level provider errors even when HTTP transport reports success.
+
+PROMPT 024 — Implement atomic usage reservations and budgets
+Dependency: 023.
+Build credit ledger, allowance periods, reserve/finalize/release operations,
+idempotent charges, provider-cost snapshots and per-tenant/provider hard caps.
+Money uses precise units and currency. Add estimates to commands before external
+work. Acceptance: simultaneous requests cannot overspend the same allowance,
+failed/cancelled work follows documented charging rules, repeated finalization
+does not double-charge, and owner-visible usage separates reserved from spent.
+
+PROMPT 025 — Build versioned consent and approval policies
+Dependency: 024.
+Create per-location/provider/action consent records, approved payload hashes,
+facts versions, actor/timestamp, exclusions and revocation. Default to review-first.
+Add explicit sensitive-change approval and global/per-channel pause controls.
+Acceptance: stale approval, revoked consent, edited content, disconnection or pause
+blocks dispatch; a subscription upgrade never silently enables automation.
+Keep GBP recurring-action features disabled until the actual consent design is
+validated against current provider requirements.
+
+PROMPT 026 — Build timezone-aware scheduling and catch-up rules
+Dependency: 025.
+Implement local intended time, IANA timezone, recurrence, resolved UTC occurrence,
+blackouts, quiet periods, schedule revisions and recovery after downtime. Handle
+DST gaps/duplicates even for an India-first launch. Acceptance: a schedule produces
+one logical occurrence, rescheduling cancels superseded work safely, and missed
+social posts follow a visible catch-up policy instead of dumping a week's content
+onto public accounts at once.
+
+PROMPT 027 — Implement owner notifications and actionable alerts
+Dependency: 026.
+Create in-app notices and configurable digests for approvals, reconnects, failures,
+unknown outcomes, budget limits and urgent operational tasks. Deduplicate related
+alerts and respect notification preferences. Account-owner operational notifications
+are separate from customer marketing outreach. Acceptance: pause and unresolved
+public-write states remain visible beyond a disappearing toast, routine success
+does not flood users, and alert records contain no raw secrets or unnecessary
+restricted provider payloads.
+
+PROMPT 028 — Implement provider adapter interfaces
+Dependency: 027.
+Create typed contracts for connect/capabilities/validate/publish/reconcile and
+read-only evidence adapters. Keep SDKs, endpoint versions and token handling
+inside provider modules. Add deterministic contract fixtures and standardized
+error translation. Acceptance: domain services can swap adapters without importing
+provider response objects, unsupported media/action combinations are explicit,
+and the API cannot forward arbitrary user-selected provider requests with our
+privileged credentials.
+
+PROMPT 029 — Implement secure OAuth and connection management
+Dependency: 028.
+Build OAuth state, supported PKCE, safe callbacks, encrypted refresh/access token
+handling, asset selection, expiry/revocation detection and disconnect. Each route
+records provider product/version and granted scopes. Acceptance: cross-tenant
+callback binding and forged state fail, only selected assets become writable,
+disconnect cancels future operations, and server-side connection health explains
+reconnect versus provider-approval versus unsupported-action failures.
+
+PROMPT 030 — Connect WordPress with a verified publish spike
+Dependency: 029.
+Implement HTTPS WordPress REST connection using an owner-authorized application
+password, capability checks, media upload and create/update/readback. Store external
+post IDs and verify the published URL. Do not assume REST can change every SEO
+plugin or robots setting. Acceptance: publish and update an authorized test draft
+through the adapter, redact credentials, preserve target identity, and document
+recovery if upload succeeds but post creation has an unknown outcome.
+
+PROMPT 031 — Connect GBP and select authorized locations
+Dependency: 029 and approved project access.
+Implement the verified current GBP account/location discovery flow, explicit
+selection and capability status. Keep business information, performance, posts,
+reviews and verification surfaces separate. Do not use owner account access for
+general competitor discovery. Acceptance: only authorized selected locations can
+be acted on, unavailable approval is shown honestly, verification requires the
+appropriate owner request, and no generic programmatic proxy to our GBP project
+is exposed.
+
+PROMPT 032 — Connect Search Console and ingest observed metrics
+Dependency: 029.
+Implement OAuth/property selection and bounded Search Analytics collection with
+source dates, dimensions, pagination/coverage limitations and freshness. Keep GSC
+average position separate from coordinate-based Maps ranks. Acceptance: owner
+property authorization is checked, missing rows are not invented, source-specific
+time boundaries remain accurate, and the dashboard labels clicks/impressions/CTR
+as observed search data with the actual selected period and available coverage.
+
+PROMPT 033 — Connect Meta Pages and professional Instagram accounts
+Dependency: 029 and current verified app capabilities.
+Implement the chosen Instagram authentication route and Facebook Page flow with
+correct distinct scope/token contracts. Add explicit asset selection, account
+eligibility, granted permissions and app-review states. Do not mix Instagram Login
+with Facebook Login assumptions. Acceptance: personal accounts and unsupported
+formats receive useful guidance, selected Page/account identity is clear, and
+developer-role-only success is not represented as proof of public SaaS access.
+
+PROMPT 034 — Expose capability-aware integration UX
+Dependency: 030-033; unavailable adapters may remain disabled.
+Build connection cards and a shared capability service showing action/media support,
+last verification, granted scope, provider approval, reconnect reason and next
+owner step. Cache with bounded freshness and refresh before critical writes.
+Acceptance: connected does not imply every action works, disabled buttons explain
+why, and current revoked permission prevents publication even if an earlier UI
+snapshot showed the feature available.
+
+PROMPT 035 — Build authenticated webhook and event ingestion
+Dependency: 034.
+Implement provider signature/auth verification on original payloads, event identity,
+durable inbox, replay deduplication, out-of-order handling and short acknowledgement.
+Use provider-specific contracts; do not assume Google Pub/Sub uses Meta-style
+signatures. Acceptance: forged/replayed events cannot mutate tenant data, crashes
+after acknowledgement do not lose durably stored work, and raw payload retention
+matches each provider rather than an unlimited debug archive.
+
+PHASE D: CONTENT AND PUBLISHING — PROMPTS 036-050
+
+PROMPT 036 — Implement configurable AI providers and usage accounting
+Dependency: 035.
+Create economy/quality text and image interfaces, typed output validation,
+model/prompt version records, token/cost capture, bounded retries and feature flags.
+Use confirmed tenant facts and allowed sources, never direct publish credentials.
+Acceptance: malformed output is handled, maximum token/tool/attempt limits apply,
+paid calls obey reservations, and model changes require configuration/evaluation
+rather than edits scattered through application routes.
+
+PROMPT 037 — Create AI evaluation datasets and grounded-output rules
+Dependency: 036.
+Create labeled fixtures for business facts, conflicting hours, unknown prices,
+hidden addresses, unsupported credentials, multilingual content and malicious source
+instructions. Define a claims manifest linking business claims to fact/evidence
+IDs, deterministic validators and human review rubric. Acceptance: invented local
+proof/availability is rejected, restricted data does not leak into prompts, and
+an AI critique is treated as a quality signal rather than proof that facts are true.
+
+PROMPT 038 — Implement local keyword research inputs
+Dependency: 037 and search adapters.
+Generate service/modifier/locality/language/intent candidates from confirmed facts
+and real GSC/provider observations. Separate measured volume/difficulty from AI
+suggestions and unavailable values. Add branded/nonbranded and explicit/implied
+location labels. Acceptance: irrelevant services are excluded, source/date is shown
+for measured fields, budget limits apply to enrichment, and the system cannot
+invent keyword volumes to make a recommendation appear data-driven.
+
+PROMPT 039 — Cluster intent and map canonical target pages
+Dependency: 038.
+Build service/intent clusters, existing-page matching and cannibalization warnings.
+Suggest improving a current canonical page before making redundant location/blog
+pages. Include owner-confirmed service coverage and useful local differences.
+Acceptance: city-name-swapped doorway proposals are blocked, one intent does not
+spawn uncontrolled competing pages, and every proposed page has an explicit
+customer purpose, source facts and chosen canonical destination.
+
+PROMPT 040 — Generate reviewable campaign briefs and monthly plans
+Dependency: 039.
+Create bounded 30-day proposed plans with business goal, service/query cluster,
+channel mix, source facts, needed owner evidence, estimated cost and cadence.
+Permit fewer useful items instead of forced daily content. Add owner remove/edit/
+approve actions and dependency checks. Acceptance: no offer, photo, event or case
+study is invented; planned work fits quotas and the owner can see why each topic
+was selected and which prerequisites block it.
+
+PROMPT 041 — Generate structured drafts with deterministic checks
+Dependency: 040.
+Implement brief/outline/article blocks, claims references, source links, internal
+links, title/meta and local CTA. Validate names, NAP, hours, prices, service scope,
+link safety, unsupported claims and repeated filler. Persist intermediate checkpoints
+and failures for repair. Acceptance: unknown prices stay unknown, sensitive claims
+route to review, prompt injection cannot publish, and rejected output does not
+silently consume unlimited retries or become approved content.
+
+PROMPT 042 — Build the revision-aware content editor
+Dependency: 041.
+Connect the editor to structured revisions, autosave, conflict detection, preview,
+AI selection edits, before/after diff and restore. Bind approval to revision and
+facts version; preserve author changes and links. Acceptance: concurrent edits
+cannot silently overwrite each other, an AI rewrite creates a reviewable revision,
+and modifying approved content prevents the old approval from authorizing the
+new payload. Verify mobile editing and keyboard behavior.
+
+PROMPT 043 — Add approved imagery and deterministic social templates
+Dependency: 042 and assets library.
+Implement real-photo selection, configurable Gemini illustration generation,
+source/rights labels, alt text and reusable crops/brand overlays. Use the documented
+current SDK through the image adapter; no imagined CLI flags. Acceptance: generated
+graphics remain labeled illustrations, actual portfolio posts require approved
+real images, aspect-ratio/media validation is deterministic, and unchanged assets
+are reused instead of repeatedly billed generations.
+
+PROMPT 044 — Create independently editable channel variants
+Dependency: 043.
+Generate blog, eligible GBP, Instagram and Facebook variants from a campaign or
+genuine update. Keep each payload, media, destination, approval and state separate.
+Wait for a verified blog URL before publishing variants that depend on it.
+Acceptance: one failed social destination does not erase a published blog,
+unsupported formats are blocked, and a campaign can exist without a blog when
+the business update is useful on its own.
+
+PROMPT 045 — Wire the content calendar and review queues
+Dependency: 044 and scheduling.
+Implement month/week/agenda, filters, create/edit, accessible rescheduling,
+timezone display, collision checks, blackout dates and right-side previews.
+Show source facts, cost estimate, approvals and per-channel failure recovery.
+Acceptance: drag-and-drop has a keyboard alternative, mobile defaults to readable
+agenda, superseded schedules do not publish, and users can distinguish planned,
+draft, approved, scheduled, provider-pending and verified-published states.
+
+PROMPT 046 — Complete the first scheduled WordPress vertical slice
+Dependency: 045 and WordPress test connection.
+Connect confirmed facts through draft, approval, schedule, budget reservation,
+worker publish and external readback. Freeze the exact approved revision and
+recheck authorization/consent before dispatch. Acceptance: an authorized test site
+receives the correct post once under duplicate logical commands; later edits use
+the stored external ID; pause/cancel/revoke blocks unsent work. Record real
+integration evidence alongside contract fixtures.
+
+PROMPT 047 — Implement publication recovery and owner intervention
+Dependency: 046.
+Build reconciler and UI for partial uploads, accepted-but-pending writes, timeout
+after acceptance, revoked permissions, validation failures and dead-letter jobs.
+Recover by external IDs or safe supported lookup before retrying. Acceptance:
+unknown outcomes never display successful publication, a different provider-side
+manual edit is protected, and an operator can inspect/retry a bounded step without
+duplicating completed side effects or billing.
+
+PROMPT 048 — Add approved GBP updates and sensitive field proposals
+Dependency: 047 and enabled GBP capabilities.
+Implement supported GBP post payloads and business-detail before/after proposals.
+Validate category restrictions, offer dates, media, consent and selected location.
+Sensitive name/address/category/hour changes require explicit appropriate approval.
+Acceptance: unsupported operations remain blocked, rejected posts remain visible,
+expired offers are not reused, and a successful post or profile change is verified
+and logged without claiming it causes a ranking increase.
+
+PROMPT 049 — Add supported Instagram and Facebook publishing
+Dependency: 047 and enabled Meta capabilities.
+Implement media/container processing, readiness polling, per-platform validation,
+publish/readback and ambiguous-outcome handling. Respect current API route/version,
+account formats and publicly retrievable media-fetch requirements. Acceptance:
+an authorized external-owner test account works after required approvals,
+revoked permission creates reconnect tasks, and repeated worker delivery cannot
+blindly duplicate a post. Avoid pretending Instagram caption URLs are universally
+clickable outbound links.
+
+PROMPT 050 — Build the automation control center
+Dependency: 046-049, allowing blocked providers to remain disabled.
+Show active policies, consent scope, daily/monthly caps, scheduled jobs, pause,
+owner edit windows, upcoming cost and last verified activity. Add selective/global
+kill switches and a preview of what changing a policy affects. Acceptance: policy
+revocation blocks queued dispatch immediately, upgrade/plan changes do not broaden
+consent, and each owner can understand exactly which actions are automatic and
+which still await approval.
+
+PHASE E: RANKINGS, COMPETITORS AND INTELLIGENCE — PROMPTS 051-065
+
+PROMPT 051 — Validate ranking-provider geography and identity
+Dependency: 050 and configured read-only provider budget.
+Run a minimal authorized spike for coordinates, query wording, language/device,
+requested depth and stable target identifiers. Record task-level errors and
+actual cost. Distinguish Maps/local-pack/organic result surfaces. Acceptance:
+sample requests establish which parameters the adapter supports, ambiguous name
+matches require confirmation, and no Maps observation is mislabeled as a universal
+current rank or a local-pack measurement collected from a different surface.
+
+PROMPT 052 — Build versioned grid and keyword tracking configurations
+Dependency: 051.
+Create center/spacing/grid geometry, keywords, locale/device, result depth,
+target identity and configuration hash. Show sampled area and query meaning,
+including explicit versus implied locality. Acceptance: edits create a new config
+version, private addresses are not exposed by default, unsupported coordinates
+are validated, and historical comparisons can determine whether two runs used
+the same meaningful sampling conditions.
+
+PROMPT 053 — Implement scan estimates and bounded scheduling
+Dependency: 052 and usage ledger.
+Calculate keywords times points times occurrences times actual provider mode/
+parameter multipliers. Show estimate, remaining allowance, queued versus fast
+mode and four-scans versus true-weekly distinction. Acceptance: over-budget scans
+cannot start, double-clicks reuse a command, extra depth is costed, and daily
+large-grid requests cannot silently expand a starter subscription's provider bill.
+Keep price inputs dated and configurable.
+
+PROMPT 054 — Collect rank observations reliably
+Dependency: 053.
+Implement queued tasks, polling or verified callbacks, bounded retries, task IDs,
+request metadata and per-point success/error/not-found states. Persist evidence
+only under source rights/retention. Acceptance: transport success with task failure
+does not become rank data, partial runs are recoverable, target identity is checked,
+and the collector reuses an allowed result sample for competitor extraction
+without issuing the same paid query separately for every business.
+
+PROMPT 055 — Implement transparent visibility calculations
+Dependency: 054.
+Calculate top-3 coverage over successful points, found-only average with found
+count, explicit not-found-within-depth and optional labeled capped score. Add
+weighted coverage only with visible business-importance weights. Acceptance:
+hand-calculated fixtures match, error points are missing rather than rank zero,
+zero successful points yields unavailable, and the denominator/coverage/depth
+are available wherever a summary metric is displayed.
+
+PROMPT 056 — Build the accessible ranking grid interface
+Dependency: 055.
+Wire keyword/run selection, rank circles, meaningful color legend, point details,
+table alternative, competitor panel, freshness and partial-failure display. Begin
+without a paid map background; add licensed tiles only if useful and budgeted.
+Acceptance: keyboard and non-color interpretation work, failed points are visibly
+distinct, scan cost is reviewable before dispatch, and the dashboard never shows
+a successful green map for missing or stale provider observations.
+
+PROMPT 057 — Add compatible history and anomaly investigation
+Dependency: 056.
+Compare runs only under compatible query/grid/surface/depth/device/locale settings.
+Annotate reconfigurations, incomplete scans and source freshness. Flag large changes
+for investigation using minimum coverage and cooldowns, without declaring penalties
+or algorithm causes. Acceptance: changed footprints cannot produce misleading
+growth charts, unavailable comparisons explain why, and an anomaly creates a
+bounded evidence task rather than triggering automatic mass page rewrites.
+
+PROMPT 058 — Discover service- and geography-specific competitors
+Dependency: 057.
+Build competitor sets from repeated licensed search observations and a separate
+owner-supplied list. Resolve branches/entities, allow exclusions and confirmation,
+and distinguish directories/national sites from local service competitors.
+Acceptance: each set records query cluster and geographic sample, similar names
+do not auto-merge, unrelated companies do not dominate recommendations, and
+owner-authorized GBP account data is not repurposed into a competitor prospecting
+database.
+
+PROMPT 059 — Build comparable competitor evidence profiles
+Dependency: 058.
+Collect permitted rating/count/category/service/site observations with source,
+date, coverage and expiry. Clearly label unavailable, sampled and owner-supplied
+fields. Compare the same windows/surfaces where possible. Acceptance: sampled
+reviews are not represented as all reviews, missing backlink/volume data is not
+invented, and competitor overlap/top-3 appearance metrics expose definitions
+instead of being called total market share.
+
+PROMPT 060 — Identify useful competitor content and journey gaps
+Dependency: 059.
+Analyze bounded permitted public service pages, booking/contact journeys, local
+proof and useful topic coverage. Link gaps to confirmed owner services and existing
+canonical pages. Acceptance: recommendations explain exact evidence and practical
+customer benefit, avoid copying competitor wording, and do not claim that a
+competitor's review count or word count proves the cause of a ranking difference.
+Favor fixing an existing useful page over creating redundant locality pages.
+
+PROMPT 061 — Implement evidence records and expiring references
+Dependency: 060.
+Create evidence schema, source class, captured/expiry timestamps, permitted purpose,
+coverage, integrity reference and confidence. Separate owner facts from GSC, SERP,
+GBP and crawl content. Add cleanup and evidence-unavailable behavior. Acceptance:
+recommendations cannot keep restricted source payloads alive through summaries,
+embeddings or logs, source expiry is enforced, and missing evidence makes a
+proposal stale rather than silently replacing the source with invented reasoning.
+
+PROMPT 062 — Implement deterministic local SEO detection rules
+Dependency: 061.
+Add versioned rules for confirmed service gaps, broken booking links, inconsistent
+hours, stale draft facts, indexability problems, citation mismatches and eligible
+unanswered reviews. Emit facts, prerequisites and explanations before AI wording.
+Acceptance: findings can be reproduced from evidence, harmless address formatting
+is not a false alarm, unavailable data does not imply failure, and rules identify
+customer/technical problems without pretending to disclose Google's ranking weights.
+
+PROMPT 063 — Rank recommendations with explainable priorities
+Dependency: 062.
+Implement the proposed confidence/impact/relevance/gap/urgency/effort/cost heuristic
+as configuration with reason breakdown. Apply consent, risk, source validity and
+capability as hard gates. Deduplicate by target/action/evidence and use cooldowns.
+Acceptance: a small useful weekly shortlist replaces repetitive advice, unknown
+inputs remain visible, high scores do not bypass approval, and the number is
+labeled internal priority rather than probability of ranking success.
+
+PROMPT 064 — Turn recommendations into controlled action plans
+Dependency: 063.
+Create action dependencies, owner assignment, proposed diffs, approvals, cost
+estimates, execution verification and observation windows. Examples: confirm
+hours before updating posts; fix blockage before generating pages. Acceptance:
+blocked prerequisites prevent dispatch, stale evidence prompts revalidation,
+technical execution success remains separate from marketing impact, and owners
+can reject/snooze without the same recommendation immediately returning under
+different wording.
+
+PROMPT 065 — Add conservative outcome measurement and experiments
+Dependency: 064.
+Implement hypothesis/intervention/baseline/observation records with matched periods,
+compatible samples, confounder annotations, cooldown and inconclusive outcomes.
+Compare search/enquiry observations without assuming causation. Acceptance:
+seasonality, simultaneous edits and small samples are disclosed; incomplete data
+cannot be labeled proven lift; and the engine does not repeatedly rewrite pages
+because of ordinary daily ranking noise. Owner-reviewed learning should influence
+later priority without creating uncontrolled autonomous changes.
+
+PHASE F: REVIEWS AND REPUTATION — PROMPTS 066-080
+
+PROMPT 066 — Model review resources, drafts and restricted retention
+Dependency: 065 and review-capability register.
+Create separate review cache, ephemeral assessments, owner-authored reply drafts,
+approval records and publication attempts. Track provider/resource ID, source
+revision, fetched/expiry time, existing reply and selected location. Do not assume
+derived classifications are exempt from source policies. Acceptance: expiry/deletion
+cascades cover copied content, logs and backup strategy as applicable, while
+permitted owner-authored work remains distinguishable from provider content.
+
+PROMPT 067 — Implement bounded authorized review synchronization
+Dependency: 066.
+Add current supported Google list/get review operations with pagination, quotas,
+updates, removals and sync checkpoints. Protect existing replies and track partial
+access. Acceptance: an edited rating/text creates a new revision, duplicate pages
+do not create duplicate work, missing/removed resources are handled, and the UI
+does not show a sampled or partially synced set as the complete lifetime review
+history. Record actual authorized integration evidence when access exists.
+
+PROMPT 068 — Add review notifications and reconciliation
+Dependency: 067 and verified event inbox.
+Implement current Google Notifications/PubSub flow with proper push identity or
+supported pull authentication, selected-account binding and deduplication. Refresh
+the authorized current review after a notification; do not trust the notification
+as final review text. Add bounded polling reconciliation. Acceptance: out-of-order
+or missed events recover safely, foreign account references are rejected, and
+provider delivery latency is visible rather than promised as instant review handling.
+
+PROMPT 069 — Build the reputation inbox and review detail UX
+Dependency: 068.
+Add location/provider/rating/language/risk/assignee/status filters and a detail
+drawer with source review, existing reply, freshness, draft, classification reasons
+and action history. Use distinct states for draft, approval, sending, verified,
+changed source, unavailable and unknown outcome. Acceptance: keyboard/mobile use
+works, sensitive personal details are minimized, permissions control reply actions,
+and a queued draft never appears to the owner as an already public response.
+
+PROMPT 070 — Classify review meaning, language and risk
+Dependency: 069 and AI evaluation infrastructure.
+Implement schema-validated sentiment/topics, language confidence, sarcasm/contradiction,
+privacy, complaint, refund, safety/legal/medical and malicious-instruction flags.
+Treat both rating and text as signals. Acceptance: a sarcastic five-star complaint
+is held, rating-only reviews do not invent service details, unsupported/code-switched
+language routes conservatively, and review text cannot change system permissions
+or instruct the AI to publish unrelated content.
+
+PROMPT 071 — Generate grounded, natural review reply drafts
+Dependency: 070.
+Use approved voice and minimum necessary facts to create short relevant replies.
+Avoid repetitive marketing, keyword stuffing, invented transactions, private
+customer information, compensation promises and requests to remove criticism.
+Negative/sensitive cases remain drafts for human review. Acceptance: response
+examples are specific only where evidence supports them, factual/public-contact
+checks pass, and owner edits create a new revision instead of mutating an already
+approved payload invisibly.
+
+PROMPT 072 — Build reply approval, assignment and escalation
+Dependency: 071.
+Implement review revision/reply hash binding, reviewer roles, assignment, internal
+notes, deadlines and escalation categories. Show source changes and existing
+manual provider replies before approval. Acceptance: stale source or edited draft
+invalidates approval, private support notes are excluded from public payloads,
+complaints get an owner task rather than a forced automatic apology, and a user
+cannot reply at an unassigned location through a forged resource ID.
+
+PROMPT 073 — Implement narrowly scoped automatic-reply policies
+Dependency: 072 and validated provider consent design.
+Build off/draft/approve-each/eligible-positive-auto modes with recorded owner consent,
+sample previews, exclusions, language allowlist, delay and daily caps. Require
+positive uncomplicated text plus rating and all risk/freshness checks; rating
+alone never authorizes publication. Acceptance: complaint/sarcasm/privacy/sensitive
+cases and unsupported language always require review, policy changes are revocable,
+and automatic mode stays disabled until current provider requirements are met.
+
+PROMPT 074 — Implement safe review reply publication and readback
+Dependency: 073 and approved review API access.
+Before sending, reload current review/reply, consent, role, capability, draft hash,
+budget and pause state. Write through the supported reply endpoint and verify
+readback. Distinguish the business reply from the customer's review. Acceptance:
+timeouts enter reconciliation, an existing different owner reply is not overwritten,
+and delete/replace actions are explicit controls over our reply, never advertised
+as deleting the customer's negative review.
+
+PROMPT 075 — Handle review edits, races, removals and disconnects
+Dependency: 074.
+Add per-review leases and local compare-and-swap plus minimum read-to-write delay.
+Test worker races, manual provider-side replies, changed reviews during the wait,
+removed resources, policy revoke and token loss. Acknowledge external race limits
+where provider conditional writes are unavailable. Acceptance: stale jobs pause,
+replayed events do not blindly repost, unknown outcomes are investigated before
+retry, and disconnect cancels unsent automatic replies immediately.
+
+PROMPT 076 — Evaluate replies and roll out in shadow mode
+Dependency: 075.
+Create at least 60 labeled review cases spanning praise, mixed/sarcastic, blank,
+multilingual, personal data, threats, disputes, edited/removed resources and prompt
+injection. Compare eligibility decisions and generated replies with reviewer labels.
+Acceptance: critical sensitive/complaint cases are never auto-published in this
+set; shadow decisions precede opt-in limited production; owner correction rate,
+false eligibility and unknown outcomes are monitored. Test success is not marketed
+as a guarantee of perfect automatic behavior.
+
+PROMPT 077 — Build neutral review links and QR assets
+Dependency: 076.
+Add verified selected-business review link, printable/downloadable QR assets and
+neutral invitation copy. Separate public review solicitation from private feedback
+without gating Google access by satisfaction. Acceptance: link identity is confirmed,
+QRs do not leak internal IDs, copy contains no incentives or demand for a high
+rating/specific keywords, and the feature never generates customer reviews or
+posts on a customer's behalf.
+
+PROMPT 078 — Add permission-aware review request workflows
+Dependency: 077 and separately validated messaging capability.
+Model completed-transaction triggers, objective eligibility, contact consent,
+suppression/opt-out, frequency caps, quiet hours, delivery status and deduplication.
+Keep outbound adapters disabled until business authorization and launch-market
+requirements are satisfied. Acceptance: eligibility does not selectively remove
+unhappy customers, repeated transaction events send at most the allowed invitation,
+and clicks are not falsely attributed as verified customer-authored Google reviews.
+
+PROMPT 079 — Build service recovery and review-policy reporting tasks
+Dependency: 078.
+Turn unresolved complaints into private operational cases with assignment,
+owner-confirmed resolution and cautious public draft. Add suspected policy-violation
+evidence packets and provider-report guidance. Acceptance: no fraud accusation is
+automatically published, negative reviews are not promised removal, resolving a
+complaint is not conditioned on changing a rating, and no private customer/order
+details are inserted into a public response or unnecessary AI context.
+
+PROMPT 080 — Build transparent reputation analytics
+Dependency: 079.
+Show current official rating/count, accessible-set response coverage, known-event
+response times, approval/edit rate, auto eligibility reasons and permitted sampled
+themes. Expose window/source/sample size and enforce retention restrictions on
+history/aggregation. Acceptance: a sample average is not the official overall
+rating, sparse data stays uncertain, anomaly flags do not accuse competitors of
+fraud, and any private rating arithmetic illustration is not used to gate which
+customers receive invitations.
+
+PHASE G: WEBSITES AND TECHNICAL SEO — PROMPTS 081-088
+
+PROMPT 081 — Build the constrained hosted-site renderer
+Dependency: 080 and existing site contracts.
+Implement three versioned templates for service, appointment and storefront
+businesses using trusted structured blocks and confirmed public facts. Render
+published HTML server-side; keep drafts authenticated. Acceptance: hidden addresses
+stay hidden, tenant code cannot execute arbitrary scripts, public read projections
+exclude drafts/secrets, and template migrations preserve owner content rather
+than overwriting it with a fresh AI-generated website.
+
+PROMPT 082 — Build page/block editing and revision previews
+Dependency: 081.
+Add service/about/contact/gallery/FAQ/blog blocks, constrained reorder, real-photo
+selection, responsive preview, edit conflicts, revision compare and restore.
+Generate useful local pages only from confirmed differentiated facts. Acceptance:
+preview access is protected, approval binds the published revision, mobile layouts
+are usable, and the editor cannot create fake local branches or hundreds of
+near-duplicate city pages as a shortcut to search visibility.
+
+PROMPT 083 — Implement subdomains, verified domains and HTTPS states
+Dependency: 082.
+Build globally unique active host claims, DNS ownership verification, routing,
+certificate issuance, health check and reversible activation. Validate forwarded
+headers and tenant cache keys. Acceptance: unknown hosts cannot select arbitrary
+sites, two tenants cannot claim the same live host, DNS/TLS failures have recovery,
+and cancellation/reassignment prevents dangling-domain takeover. Domain registration
+costs are distinguished from custom-domain connection support.
+
+PROMPT 084 — Implement canonical, sitemap and robots governance
+Dependency: 083.
+Generate canonical URLs, published-only sitemaps, correct 404/redirect behavior,
+robots controls and protected/noindex previews. Build before/after validation for
+site-wide indexing changes. Acceptance: noindex is not written inside robots.txt,
+private content is not protected merely by crawler directives, ordinary blog pages
+are not sent through Google's restricted Indexing API, and a mistaken public
+indexing change has a verified rollback path.
+
+PROMPT 085 — Generate accurate local-business structured data
+Dependency: 084.
+Build stable entity IDs, appropriate schema subtype, hours/contact/verified links
+and page-content parity checks. Preserve private addresses; do not fabricate required
+properties just to pass a rich-result test. Separate testimonial display from
+self-serving review-star eligibility. Acceptance: JSON-LD matches visible confirmed
+facts, schema validation errors are actionable, and UI/marketing never guarantees
+rich results or stars merely because markup was added.
+
+PROMPT 086 — Build a bounded technical and conversion audit
+Dependency: 085.
+Check status/indexability, canonicals, sitemap, titles/headings, broken/internal
+links, images, performance samples, mobile contact/booking destinations and content
+coverage. Distinguish crawl observations from authenticated completion checks.
+Acceptance: findings include URL/evidence/freshness and limits, crawler resource
+budgets apply, a score is explainable, and an inaccessible booking backend is
+marked manual verification rather than falsely declared a completed conversion.
+
+PROMPT 087 — Implement safe SEO fix proposals and rollback
+Dependency: 086.
+Create issue-to-diff proposals, permission/consent, snapshots, apply, readback
+verification and restore for supported hosted fixes. External WordPress changes
+use supported APIs or a narrow signed plugin only if implemented securely;
+otherwise provide manual steps. Acceptance: no arbitrary filesystem/PHP command
+channel exists, owner content is preserved, technical failures do not claim
+successful fixes, and robots/canonical/redirect changes can be reviewed and reversed.
+
+PROMPT 088 — Add lead capture and honest attribution
+Dependency: 087.
+Build secure hosted enquiry forms, anti-abuse limits, consent fields, delivery
+status, owner inbox/export and optional validated analytics events. Store minimum
+necessary customer data with retention/deletion. Acceptance: calls-button clicks,
+directions, form submissions and owner-confirmed qualified leads remain separate,
+duplicate/spam forms do not inflate lead totals, and a booked job or review cannot
+be attributed to a campaign without an actual permitted measurement basis.
+
+PHASE H: CITATIONS AND LOCAL PRESENCE — PROMPTS 089-093
+
+PROMPT 089 — Build the country/category directory catalog
+Dependency: 088.
+Create curated directory records with region, vertical relevance, supported
+submission/update/delete method, fees, ownership requirements, automation permission
+and last verification. Start with a small relevant catalog, not a universal
+100-directory promise. Acceptance: unsupported directories produce owner tasks,
+fees are explicit, and APIs/partners are used only when their current contracts
+permit the intended business-management action.
+
+PROMPT 090 — Implement citation identity and NAP comparison
+Dependency: 089.
+Match listings using verified identifiers/address/phone/domain evidence, with
+owner confirmation for ambiguity. Normalize formatting without erasing meaningful
+differences or exposing hidden addresses. Produce field-level mismatch evidence,
+live URL and freshness. Acceptance: similarly named businesses do not merge,
+harmless abbreviations are not always errors, and a discovered listing is not
+automatically counted as an owned accurate live citation.
+
+PROMPT 091 — Build citation fulfillment and owner verification tasks
+Dependency: 090.
+Implement prepared/submitted/verification-needed/live-verified/rejected/update-needed
+states, permitted partner/API submissions and manual packets. Support OTP/ownership
+steps as owner work; no CAPTCHA bypass. Acceptance: submission never implies live
+publication, partner fees require explicit authorization/budget, retries do not
+duplicate paid fulfillment, and evidence confirms the correct business before a
+listing enters the verified count.
+
+PROMPT 092 — Suggest legitimate local authority opportunities
+Dependency: 091 and intelligence engine.
+Create evidence-backed owner tasks for relevant trade associations, suppliers,
+community resources and genuine local relationships. Separate citations, editorial
+links, paid placements and AI citations. Acceptance: opportunities are relevant
+and sourced, no backlink exchange or mass outreach launches automatically,
+unmeasured authority values remain unavailable, and advice avoids guaranteed
+ranking claims or manipulative city-page/link tactics.
+
+PROMPT 093 — Implement presence freshness and conflict monitoring
+Dependency: 092.
+Coordinate permitted refreshes for hours, services, website/citation identity,
+offers and provider changes. Queue owner-confirmed corrections rather than
+automatically reverting Google or directory edits. Add source-expiry cleanup,
+duplicate-task suppression and cost-aware refresh cadence. Acceptance: stale offers
+are not republished, changed facts invalidate dependent drafts, provider storage
+limits remain enforced across caches/derivatives, and temporary data loss does
+not trigger destructive public changes.
+
+PHASE I: COMMERCIAL OPERATIONS AND LAUNCH — PROMPTS 094-100
+
+PROMPT 094 — Integrate subscriptions and billing webhooks
+Dependency: 093 and selected eligible payment provider.
+Build per-location plans, customer/subscription mapping, invoices/portal links,
+grace/cancellation and signed idempotent webhook handling. Use current verified
+processor terms/fees through configuration. Acceptance: duplicate/out-of-order
+events do not double-credit or reactivate incorrectly, cancellation pauses future
+paid jobs while honoring hosting/export policy, and sandbox success is distinguished
+from an enabled production payment account.
+
+PROMPT 095 — Finish entitlements, usage UX and margin controls
+Dependency: 094.
+Connect subscription allowances to actual blogs, variants, images, map points,
+review/intelligence work and directory fulfillment. Show used/reserved/remaining,
+reset date, estimates and explicit capped/prepaid overages. Add per-tenant p50/p95
+cost reporting. Acceptance: plan changes preserve ledger integrity, concurrent
+spend cannot overshoot, no surprise auto-recharge occurs, and observed support/
+fulfillment expenses can be tracked separately from AI inference cost.
+
+PROMPT 096 — Build owner reports and scoped agency workflows
+Dependency: 095.
+Create source-aware matched-period reports, activity/approval summaries, CSV exports,
+location groups and delegated access. Agency bulk actions must show per-location
+permission, consent, cost and result; brand report styling without hiding sources.
+Acceptance: cross-client access is denied, unavailable data stays explicit,
+reports separate execution from outcome and correlation from attribution, and
+restricted provider history is not exported as an unlimited archive.
+
+PROMPT 097 — Run an independent security and policy verification pass
+Dependency: 096.
+Inspect tenant boundaries, SSRF/imports, OAuth callbacks, encryption, webhook auth,
+upload/content sanitization, hidden-address handling, review privacy, source TTLs,
+consent revocation and public-site routing. Use realistic negative tests and
+document findings/fixes. Acceptance: unresolved material issues block affected
+features, secrets are absent from outputs, and claimed provider approvals/formats
+are checked against the current production application rather than inferred
+from fixtures or a developer's account.
+
+PROMPT 098 — Verify complete journeys and realistic workloads
+Dependency: 097.
+Run end-to-end onboarding, facts, draft/review/schedule/publish, rank/competitor,
+recommendation, review-reply, site/citation and billing journeys. Include crashes,
+partial failures, duplicate events and revoke/pause races. Check four viewport
+sizes/accessibility and load-test the expected tenant/job mix with capped heavy
+tasks. Acceptance: results include evidence and limits, demo data never mixes
+with live tenants, and no capacity claim exceeds what was actually measured.
+
+PROMPT 099 — Deploy with observability, restore and rollback evidence
+Dependency: 098.
+Prepare isolated staging/production, CI-built images, compatible migrations,
+health/worker checks, queue-age/cost/auth/failure alerts, kill switches and support
+runbooks. Execute a restore drill for DB, keys/media references and scheduled jobs,
+including source-expiry handling. Acceptance: restoration does not blindly resend
+completed work, deployment rollback is schema-compatible, RPO/RTO targets have
+evidence, and an operator can stop external writes quickly during an incident.
+
+PROMPT 100 — Run the pilot and produce the launch decision
+Dependency: 099.
+Prepare a 5-10 business pilot with owner-authorized real accounts, confirmed facts,
+bounded spend and review-first defaults. Measure activation, useful enquiries,
+owner approval/edit effort, publication reliability, auto-reply false eligibility,
+support time and variable cost. Compile readiness evidence, unresolved external
+dependencies and go/no-go per capability. Acceptance: charge only for verified
+working features, no guaranteed ranking promises, clear support/cancellation/export
+paths, and a prioritized next-release backlog based on actual pilot observations.
+
+END OF EXACTLY 100 PROMPTS
+
+FINAL USAGE NOTE
+After every prompt, review the actual evidence before marking it verified.
+If an API permission is unavailable, keep that capability disabled, document
+the missing requirement and continue independent work; never substitute fake
+success. Re-run affected checks when later tickets change a dependency. These
+prompts describe the complete implementation order, not permission to spend
+unbounded money, modify unrelated repositories or contact customers without
+the business's authorization and applicable channel requirements.

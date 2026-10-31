@@ -1,0 +1,48 @@
+:root {
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --canvas: #fffdfb;
+  --surface: #ffffff;
+  --surface-soft: #fff6ee;
+  --surface-selected: #ffeddc;
+  --brand-50: #fff7ed;
+  --brand-100: #ffedd5;
+  --brand-200: #fed7aa;
+  --brand-300: #fdba74;
+  --brand-400: #fb923c;
+  --brand-500: #f97316;
+  --brand-600: #ea580c;
+  --brand-700: #c2410c;
+  --action: #c2410c;
+  --action-hover: #9a3412;
+  --ink: #0d0d12;
+  --text-secondary: #57534e;
+  --text-muted: #78716c;
+  --border: #e8e2dc;
+  --focus: #c2410c;
+  --success: #15803d;
+  --warning: #a16207;
+  --danger: #b91c1c;
+  --info: #1d4ed8;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-panel: 24px;
+  --radius-pill: 9999px;
+  --shadow-card: 0 2px 8px rgb(40 24 8 / 4%);
+  --shadow-float: 0 12px 36px rgb(194 65 12 / 10%);
+}
+
+body {
+  margin: 0;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  margin-top: 0;
+}
