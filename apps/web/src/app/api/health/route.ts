@@ -1,5 +1,8 @@
+export const dynamic = 'force-static';
+
 import { NextResponse } from 'next/server';
 import { HealthCheckResponse } from '@localpilot/contracts';
+
 
 const startTime = Date.now();
 
